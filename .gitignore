@@ -1,0 +1,9 @@
+*.ipr
+*.iws
+/node_modules
+/bower-components
+npm-debug.log
+.DS_Store
+/temp
+Thumbs.db
+/bin/
