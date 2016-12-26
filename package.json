@@ -6,9 +6,6 @@
   "homepage": "https://github.com/b-strauss/clulib",
   "bugs": "https://github.com/b-strauss/clulib/issues",
   "license": "MIT",
-  "engines": {
-    "node": ">= 6.6.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/b-strauss/clulib.git"
