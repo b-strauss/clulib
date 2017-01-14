@@ -1,3 +1,5 @@
+!.placeholder
+
 *.ipr
 *.iws
 /node_modules
@@ -7,3 +9,19 @@ npm-debug.log
 /temp
 Thumbs.db
 /bin/
+
+*~
+*.bak
+*.idea
+*.iml
+*.project
+*.swp
+*.DS_Store
+*.buildpath
+*.cache
+*.sass-cache
+*.session
+*.settings
+*.TemporaryItems
+*.webprj
+*.phpintel
