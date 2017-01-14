@@ -1,7 +1,6 @@
 {
   "name": "clulib",
   "version": "1.0.0",
-  "private": true,
   "description": "closure-library utilities",
   "homepage": "https://github.com/b-strauss/clulib",
   "bugs": "https://github.com/b-strauss/clulib/issues",
