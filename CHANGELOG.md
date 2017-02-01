@@ -1,3 +1,12 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/b-strauss/clulib/compare/1.0.2...1.1.0) (2017-02-02)
+
+### Features
+
+* feature: add queryComponent/queryComponentAll on ComponentManager ([debdcca](https://github.com/b-strauss/clulib/commit/debdcca))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/b-strauss/clulib/compare/1.0.1...1.0.2) (2017-01-25)
 
