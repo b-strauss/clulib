@@ -1,3 +1,18 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/b-strauss/clulib/compare/1.1.0...1.1.1) (2017-02-09)
+
+### Bug Fixes
+
+* fix(cm): make private apis package private ([9232679](https://github.com/b-strauss/clulib/commit/9232679))
+* fix Element.prototype.closest fallback calling hasAttribute on non Elements ([0f04bca](https://github.com/b-strauss/clulib/commit/0f04bca))
+
+### Misc
+
+* perf(cm): compiler optimizations ([e4ec400](https://github.com/b-strauss/clulib/commit/e4ec400))
+* perf: more const usages ([aafd248](https://github.com/b-strauss/clulib/commit/aafd248))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/b-strauss/clulib/compare/1.0.2...1.1.0) (2017-02-02)
 
