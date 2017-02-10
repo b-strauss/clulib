@@ -1,3 +1,12 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/b-strauss/clulib/compare/1.1.1...1.1.2) (2017-02-10)
+
+### Bug Fixes
+
+* fix(cm): call addChild before decorate to prevent goog.ui.Component's repositioning ([97d49e9](https://github.com/b-strauss/clulib/commit/97d49e9))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/b-strauss/clulib/compare/1.1.0...1.1.1) (2017-02-09)
 
