@@ -1,3 +1,21 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/b-strauss/clulib/compare/1.1.2...1.2.0) (2017-02-26)
+
+### Features
+
+* feat(array): add clulib.array.removeHoles ([61a698a](https://github.com/b-strauss/clulib/commit/61a698a))
+* feat(async): clulib.async.forEach + clulib.async.forEachRight ([a9fc7df](https://github.com/b-strauss/clulib/commit/a9fc7df))
+* feat(dom): clulib.dom.matches + clulib.dom.closest ([f674dba](https://github.com/b-strauss/clulib/commit/f674dba))
+
+### Bug Fixes
+
+* fix(ui): ToggleButton setChecked not being callable if disabled ([1fd15cf](https://github.com/b-strauss/clulib/commit/1fd15cf))
+
+### Misc
+
+* docs(cm): clarify forbidden method calls on Component ([a617175](https://github.com/b-strauss/clulib/commit/a617175))
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/b-strauss/clulib/compare/1.1.1...1.1.2) (2017-02-10)
 
