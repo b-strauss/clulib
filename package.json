@@ -8,5 +8,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/b-strauss/clulib.git"
+  },
+  "devDependencies": {
+    "google-closure-library": "v20170218.0.1",
+    "google-closure-compiler": "20170218.0.0"
   }
 }
