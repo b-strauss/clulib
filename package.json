@@ -10,7 +10,9 @@
     "url": "https://github.com/b-strauss/clulib.git"
   },
   "devDependencies": {
-    "google-closure-library": "v20170218.0.1",
-    "google-closure-compiler": "20170218.0.0"
+    "google-closure-compiler": "20170626.0.0",
+    "google-closure-library": "20170626.0.0",
+    "jasmine": "2.6.0",
+    "jasmine-core": "2.6.4"
   }
 }
