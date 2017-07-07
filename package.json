@@ -12,6 +12,7 @@
   "devDependencies": {
     "google-closure-compiler": "20170626.0.0",
     "google-closure-library": "20170626.0.0",
+    "gulp": "3.9.1",
     "jasmine": "2.6.0",
     "jasmine-core": "2.6.4"
   }
