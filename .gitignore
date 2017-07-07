@@ -1,19 +1,16 @@
 !.placeholder
 
-*.ipr
-*.iws
-/node_modules
-/bower-components
 npm-debug.log
 .DS_Store
 /temp
-/bin
 Thumbs.db
 
 *~
 *.bak
 *.idea
 *.iml
+*.ipr
+*.iws
 *.project
 *.swp
 *.DS_Store
@@ -25,3 +22,7 @@ Thumbs.db
 *.TemporaryItems
 *.webprj
 *.phpintel
+
+/bin
+/node_modules
+/tools/jasmine_runner/dev_deps.js

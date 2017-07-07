@@ -1,8 +1,10 @@
 'use strict';
 
-const gulp = require('gulp');
+const exec = require('child_process').exec;
 const path = require('path');
+
 const closureCompiler = require('google-closure-compiler').gulp();
+const gulp = require('gulp');
 
 const testFiles = [
   'node_modules/google-closure-library/closure/goog/**.js',
@@ -12,23 +14,42 @@ const testFiles = [
   'test_main.js'
 ];
 
-const externs = [
-  'node_modules/google-closure-compiler/contrib/externs/jasmine-2.0.js'
-];
+const depsRoots = {
+  './': '../../../..'
+};
 
-gulp.task('compile-test', () => compile(testFiles, externs, 'test_main', 'test.js'));
+/**
+ * @param {Function} callback
+ * @param {Object<string, string>} roots
+ */
+function deps(callback, roots) {
+  let command = 'python ' + path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py');
+
+  for (let key in roots) {
+    if (roots.hasOwnProperty(key))
+      command += ' --root_with_prefix="' + path.normalize(key) + ' ' + path.normalize(roots[key]) + '"';
+  }
+
+  command += ' > ' + path.normalize('./tools/jasmine_runner/dev_deps.js');
+
+  exec(command, function (err) {
+    callback(err);
+  });
+}
 
 /**
  * @param {Array<string>} inputs
- * @param {Array<string>} externs
  * @param {string} entryPoint
  * @param {string} outputFile
  * @param {boolean=} opt_debug
  * @returns {*}
  */
-function compile(inputs, externs, entryPoint, outputFile, opt_debug) {
+function compile(inputs, entryPoint, outputFile, opt_debug) {
   const debug = opt_debug || false;
   const destinationFolder = path.normalize('./bin');
+  const externs = [
+    'node_modules/google-closure-compiler/contrib/externs/jasmine-2.0.js'
+  ];
 
   const options = {
     js: inputs.map(input => path.normalize(input)),
@@ -68,3 +89,8 @@ function compile(inputs, externs, entryPoint, outputFile, opt_debug) {
       .src()
       .pipe(gulp.dest(destinationFolder));
 }
+
+gulp.task('create-dev-deps', callback => {
+  deps(callback, depsRoots);
+});
+gulp.task('compile-test', () => compile(testFiles, 'test_main', 'test.js'));
