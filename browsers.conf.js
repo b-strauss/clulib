@@ -43,6 +43,57 @@ const sauceLabsDesktopLaunchers = {
   }
 };
 
+const sauceLabsMobileLaunchers = {
+  'SL_IOS_9': {
+    base: 'SauceLabs',
+    browserName: 'iphone',
+    platform: 'OS X 10.10',
+    version: '9'
+  },
+  'SL_IOS_10': {
+    base: 'SauceLabs',
+    browserName: 'iphone',
+    platform: 'OS X 10.10',
+    version: '10'
+  },
+  'SL_ANDROID_4.4': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '4.4'
+  },
+  'SL_ANDROID_5.0': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '5.0'
+  },
+  'SL_ANDROID_5.1': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '5.1'
+  },
+  'SL_ANDROID_6.0': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '6.0'
+  },
+  'SL_ANDROID_7.0': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '7.0'
+  },
+  'SL_ANDROID_7.1': {
+    base: 'SauceLabs',
+    browserName: 'android',
+    platform: 'Linux',
+    version: '7.1'
+  }
+};
+
 module.exports = {
-  customLaunchers: Object.assign({}, sauceLabsDesktopLaunchers)
+  customLaunchers: Object.assign({}, sauceLabsDesktopLaunchers, sauceLabsMobileLaunchers)
 };
