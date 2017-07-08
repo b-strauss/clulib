@@ -29,7 +29,7 @@ module.exports = function (config) {
     sauceLabs: {
       testName: 'clulib',
       retryLimit: 3,
-      startConnect: false,
+      startConnect: true,
       recordVideo: false,
       recordScreenshots: false,
       options: {
@@ -48,4 +48,13 @@ module.exports = function (config) {
     singleRun: true,
     concurrency: Infinity
   });
+
+  if (process.env.TRAVIS) {
+    var buildId = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
+    if (process.env.CI_MODE.startsWith('saucelabs')) {
+      config.sauceLabs.build = buildId;
+      config.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
+      config.transports = ['polling'];
+    }
+  }
 };

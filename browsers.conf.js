@@ -1,7 +1,7 @@
 'use strict';
 
 const sauceLabsLaunchers = {
-  chrome: {
+  'SL_CHROME': {
     base: 'SauceLabs',
     browserName: 'chrome',
     platform: 'Windows 10',
