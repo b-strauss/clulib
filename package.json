@@ -9,11 +9,18 @@
     "type": "git",
     "url": "https://github.com/b-strauss/clulib.git"
   },
+  "scripts": {
+    "compile": "./node_modules/.bin/gulp compile-test",
+    "test": "./node_modules/.bin/karma start karma.conf.js"
+  },
   "devDependencies": {
     "google-closure-compiler": "20170626.0.0",
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
     "jasmine": "2.6.0",
-    "jasmine-core": "2.6.4"
+    "jasmine-core": "2.6.4",
+    "karma": "1.7.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-jasmine": "1.1.0"
   }
 }
