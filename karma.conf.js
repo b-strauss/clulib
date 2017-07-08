@@ -91,5 +91,6 @@ module.exports = config => {
     config.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
     config.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
     config.transports = ['polling'];
+    config.browsers = Object.keys(sauceLabsLaunchers)
   }
 };

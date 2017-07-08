@@ -11,8 +11,7 @@
   },
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile-test",
-    "test": "./node_modules/.bin/karma start karma.conf.js --browsers=SL_IE_11,SL_EDGE_14,SL_EDGE_15,SL_SAFARI_9,SL_SAFARI_10,SL_CHROME,SL_FIREFOX",
-    "test-local": "./node_modules/.bin/karma start karma.conf.js"
+    "test": "./node_modules/.bin/karma start karma.conf.js"
   },
   "devDependencies": {
     "google-closure-compiler": "20170626.0.0",
