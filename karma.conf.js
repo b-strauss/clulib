@@ -1,28 +1,38 @@
+'use strict';
+
+const browsers = require('./browsers.conf.js');
+
 module.exports = function (config) {
   config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-
-    // list of files / patterns to load in the browser
     files: ['./bin/test.js'],
 
-    // list of files to exclude
-    exclude: [],
+    customLaunchers: browsers.sauceLabsLaunchers,
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {},
+    preprocessors: {
+      './bin/test.js': ['sourcemap']
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
+
+    sauceLabs: {
+      testName: 'clulib',
+      retryLimit: 3,
+      startConnect: false,
+      recordVideo: false,
+      recordScreenshots: false,
+      options: {
+        'selenium-version': '2.53.0',
+        'command-timeout': 600,
+        'idle-timeout': 600,
+        'max-duration': 5400,
+      }
+    },
 
     // web server port
     port: 9876,

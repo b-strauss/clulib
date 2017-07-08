@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - ' 6.11.0'
+  - '6.11.0'
 
 cache:
   yarn: true
@@ -13,6 +13,8 @@ matrix:
 install:
   - yarn install
 
-script:
+before_script:
   - yarn compile
+
+script:
   - yarn test

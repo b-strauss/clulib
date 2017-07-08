@@ -5,6 +5,7 @@ const path = require('path');
 
 const closureCompiler = require('google-closure-compiler').gulp();
 const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
 
 const testFiles = [
   'node_modules/google-closure-library/closure/goog/**.js',
@@ -87,6 +88,8 @@ function compile(inputs, entryPoint, outputFile, opt_debug) {
 
   return closureCompiler(options)
       .src()
+      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.write('.', {}))
       .pipe(gulp.dest(destinationFolder));
 }
 
