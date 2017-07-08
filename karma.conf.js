@@ -15,10 +15,16 @@ module.exports = function (config) {
       './bin/test.js': ['sourcemap']
     },
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['spec'],
+
+    specReporter: {
+      suppressErrorSummary: false,
+      suppressFailed: false,
+      suppressPassed: false,
+      suppressSkipped: false,
+      showSpecTiming: true,
+      failFast: false
+    },
 
     sauceLabs: {
       testName: 'clulib',

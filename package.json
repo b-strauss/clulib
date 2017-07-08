@@ -11,7 +11,8 @@
   },
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile-test",
-    "test": "./node_modules/.bin/karma start karma.conf.js --single-run --browsers=chrome --reporters saucelabs"
+    "test": "./node_modules/.bin/karma start karma.conf.js --browsers=chrome saucelabs",
+    "test-local": "./node_modules/.bin/karma start karma.conf.js"
   },
   "devDependencies": {
     "google-closure-compiler": "20170626.0.0",
@@ -24,6 +25,7 @@
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.0",
     "karma-sauce-launcher": "1.1.0",
-    "karma-sourcemap-loader": "0.3.7"
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-spec-reporter": "0.0.31"
   }
 }
