@@ -1,6 +1,6 @@
 'use strict';
 
-const sauceLabsLaunchers = {
+const sauceLabsDesktopLaunchers = {
   'SL_CHROME': {
     base: 'SauceLabs',
     browserName: 'chrome',
@@ -44,5 +44,5 @@ const sauceLabsLaunchers = {
 };
 
 module.exports = {
-  sauceLabsLaunchers: sauceLabsLaunchers
+  customLaunchers: Object.assign({}, sauceLabsDesktopLaunchers)
 };

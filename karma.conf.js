@@ -1,15 +1,14 @@
 'use strict';
 
-const sauceLabsLaunchers = require('./browsers.conf.js').sauceLabsLaunchers;
+const customLaunchers = require('./browsers.conf.js').customLaunchers;
 
 module.exports = config => {
   config.set({
-
     frameworks: ['jasmine'],
 
     files: ['./bin/test.js'],
 
-    customLaunchers: sauceLabsLaunchers,
+    customLaunchers: customLaunchers,
 
     preprocessors: {
       './bin/test.js': ['sourcemap']
@@ -48,6 +47,6 @@ module.exports = config => {
     config.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
     config.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
     config.transports = ['polling'];
-    config.browsers = Object.keys(sauceLabsLaunchers)
+    config.browsers = Object.keys(customLaunchers)
   }
 };
