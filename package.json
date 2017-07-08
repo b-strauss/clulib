@@ -11,7 +11,7 @@
   },
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile-test",
-    "test": "./node_modules/.bin/karma start karma.conf.js"
+    "test": "./node_modules/.bin/karma start karma.conf.js --single-run --browsers=chrome --reporters saucelabs"
   },
   "devDependencies": {
     "google-closure-compiler": "20170626.0.0",
