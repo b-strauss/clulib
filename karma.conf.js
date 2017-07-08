@@ -15,7 +15,7 @@ module.exports = function (config) {
       './bin/test.js': ['sourcemap']
     },
 
-    reporters: ['spec'],
+    reporters: ['spec', 'saucelabs'],
 
     specReporter: {
       suppressErrorSummary: false,
