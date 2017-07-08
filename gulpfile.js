@@ -24,14 +24,14 @@ const depsRoots = {
  * @param {Object<string, string>} roots
  */
 function deps(callback, roots) {
-  let command = 'python ' + path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py');
+  let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
 
   for (let key in roots) {
     if (roots.hasOwnProperty(key))
-      command += ' --root_with_prefix="' + path.normalize(key) + ' ' + path.normalize(roots[key]) + '"';
+      command += ` --root_with_prefix="${path.normalize(key)} ${path.normalize(roots[key])}"`;
   }
 
-  command += ' > ' + path.normalize('./tools/jasmine_runner/dev_deps.js');
+  command += ` > ${path.normalize('./tools/jasmine_runner/dev_deps.js')}`;
 
   exec(command, function (err) {
     callback(err);

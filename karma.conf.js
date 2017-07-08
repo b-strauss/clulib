@@ -2,7 +2,7 @@
 
 const browsers = require('./browsers.conf.js');
 
-module.exports = function (config) {
+module.exports = config => {
   config.set({
 
     frameworks: ['jasmine'],
@@ -23,17 +23,14 @@ module.exports = function (config) {
       suppressPassed: false,
       suppressSkipped: false,
       showSpecTiming: true,
-      failFast: false
+      failFast: true
     },
 
     sauceLabs: {
       testName: 'clulib',
-      retryLimit: 3,
-      startConnect: true,
-      recordVideo: false,
+      retryLimit: 2,
       recordScreenshots: false,
       options: {
-        'selenium-version': '2.53.0',
         'command-timeout': 600,
         'idle-timeout': 600,
         'max-duration': 5400,
@@ -41,12 +38,10 @@ module.exports = function (config) {
     },
 
     port: 9876,
-    colors: true,
-    logLevel: config.LOG_INFO,
     autoWatch: false,
     browsers: ['Chrome'],
     singleRun: true,
-    concurrency: Infinity
+    concurrency: 1
   });
 
   if (process.env.TRAVIS) {
