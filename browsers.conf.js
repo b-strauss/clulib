@@ -44,60 +44,60 @@ const desktop = {
 };
 
 const mobile = {
-  'SL_IOS_9': {
+  // 'SL_IOS_9': {
+  //   base: 'SauceLabs',
+  //   browserName: 'Safari',
+  //   appiumVersion: '1.6.4',
+  //   deviceName: 'iPhone 6 Simulator',
+  //   deviceOrientation: 'portrait',
+  //   platformVersion: '9.3',
+  //   platformName: 'iOS'
+  // },
+  // 'SL_IOS_10': {
+  //   base: 'SauceLabs',
+  //   browserName: 'Safari',
+  //   appiumVersion: '1.6.4',
+  //   deviceName: 'iPhone 7 Simulator',
+  //   deviceOrientation: 'portrait',
+  //   platformVersion: '10.3',
+  //   platformName: 'iOS'
+  // },
+  'SL_ANDROID_4.4': {
     base: 'SauceLabs',
-    browserName: 'Safari',
+    browserName: 'Browser',
     appiumVersion: '1.6.4',
-    deviceName: 'iPhone 6 Plus Simulator',
+    deviceName: 'Android Emulator',
     deviceOrientation: 'portrait',
-    platformVersion: '9.3',
-    platformName: 'iOS'
+    platformVersion: '4.4',
+    platformName: 'Android'
   },
-  'SL_IOS_10': {
+  'SL_ANDROID_5.0': {
     base: 'SauceLabs',
-    browserName: 'Safari',
+    browserName: 'Browser',
     appiumVersion: '1.6.4',
-    deviceName: 'iPhone 7 Plus Simulator',
+    deviceName: 'Android Emulator',
     deviceOrientation: 'portrait',
-    platformVersion: '10.3',
-    platformName: 'iOS'
+    platformVersion: '5.0',
+    platformName: 'Android'
   },
-  // 'SL_ANDROID_4.4': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '4.4'
-  // },
-  // 'SL_ANDROID_5.0': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '5.0'
-  // },
-  // 'SL_ANDROID_5.1': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '5.1'
-  // },
-  // 'SL_ANDROID_6.0': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '6.0'
-  // },
-  // 'SL_ANDROID_7.0': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '7.0'
-  // },
-  // 'SL_ANDROID_7.1': {
-  //   base: 'SauceLabs',
-  //   browserName: 'android',
-  //   platform: 'Linux',
-  //   version: '7.1'
-  // }
+  'SL_ANDROID_5.1': {
+    base: 'SauceLabs',
+    browserName: 'Browser',
+    appiumVersion: '1.6.4',
+    deviceName: 'Android Emulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '5.1',
+    platformName: 'Android'
+  },
+  'SL_ANDROID_6.0': {
+    base: 'SauceLabs',
+    browserName: 'Chrome',
+    appiumVersion: '1.6.4',
+    deviceName: 'Android Emulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '6.0',
+    platformName: 'Android'
+  },
 };
 
 module.exports = {

@@ -28,7 +28,7 @@ module.exports = config => {
     sauceLabs: {
       testName: 'clulib',
       retryLimit: 2,
-      recordScreenshots: true,
+      recordScreenshots: false,
       options: {
         'command-timeout': 600,
         'idle-timeout': 600,
@@ -39,7 +39,7 @@ module.exports = config => {
     browserDisconnectTimeout: 10 * 1000, // default 2s
     browserDisconnectTolerance: 1, // default 0
     browserNoActivityTimeout: 4 * 60 * 1000, // default 10s
-    captureTimeout: 4 * 60 * 1000, // default 60s
+    captureTimeout: 5 * 60 * 1000, // default 60s
     port: 9876,
     autoWatch: false,
     browsers: ['Chrome'],
