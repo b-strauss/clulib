@@ -48,14 +48,14 @@ const mobile = {
     base: 'SauceLabs',
     browserName: 'Safari',
     platform: 'iOS',
-    version: '9.3',
+    version: '9',
     device: 'iPhone 6'
   },
   'SL_IOS_10': {
     base: 'SauceLabs',
     browserName: 'Safari',
     platform: 'iOS',
-    version: '10.3',
+    version: '10',
     device: 'iPhone 7'
   },
   // 'SL_ANDROID_4.4': {
