@@ -28,7 +28,7 @@ module.exports = config => {
     sauceLabs: {
       testName: 'clulib',
       retryLimit: 2,
-      recordScreenshots: false,
+      recordScreenshots: true,
       options: {
         'command-timeout': 600,
         'idle-timeout': 600,
