@@ -47,16 +47,20 @@ const mobile = {
   'SL_IOS_9': {
     base: 'SauceLabs',
     browserName: 'Safari',
-    platform: 'iOS',
-    version: '9',
-    device: 'iPhone 6'
+    appiumVersion: '1.6.4',
+    deviceName: 'iPhone 6 Plus Simulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '9.3',
+    platformName: 'iOS'
   },
   'SL_IOS_10': {
     base: 'SauceLabs',
     browserName: 'Safari',
-    platform: 'iOS',
-    version: '10',
-    device: 'iPhone 7'
+    appiumVersion: '1.6.4',
+    deviceName: 'iPhone 7 Plus Simulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '10.3',
+    platformName: 'iOS'
   },
   // 'SL_ANDROID_4.4': {
   //   base: 'SauceLabs',
