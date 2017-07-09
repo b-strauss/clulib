@@ -22,7 +22,7 @@ module.exports = config => {
       suppressPassed: false,
       suppressSkipped: false,
       showSpecTiming: true,
-      failFast: true
+      failFast: false
     },
 
     sauceLabs: {
