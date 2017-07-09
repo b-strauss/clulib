@@ -47,11 +47,9 @@ const mobile = {
   'SL_IOS_9': {
     base: 'SauceLabs',
     browserName: 'Safari',
-    appiumVersion: '1.6.4',
-    deviceName: 'iPhone 6 Plus Simulator',
-    deviceOrientation: 'portrait',
-    platformVersion: '9',
-    platformName: 'iOS'
+    platform: 'iOS',
+    version: '9',
+    device: 'iPhone 6'
   },
   // 'SL_IOS_10': {
   //   base: 'SauceLabs',
