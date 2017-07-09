@@ -44,7 +44,7 @@ module.exports = config => {
     autoWatch: false,
     browsers: ['Chrome'],
     singleRun: true,
-    concurrency: 1
+    concurrency: 5
   });
 
   if (process.env.TRAVIS) {
