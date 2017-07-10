@@ -18,7 +18,6 @@ clulib.array.test.main = () => {
     describe('asyncForEach', () => {
       it('should execute async functions for every element in an array consecutively', done => {
         const strings = ['first', 'second', 'third'];
-        const stringsCopy = goog.array.clone(strings);
         const delays = [500, 200, 50];
         let result = '';
 
@@ -34,16 +33,25 @@ clulib.array.test.main = () => {
           });
         }).then(() => {
           expect(result).toEqual(strings.join(''));
-          expect(strings).toEqual(stringsCopy);
           done();
         });
+      });
+
+      it('should preserve the original array', done => {
+        const strings = ['first', 'second', 'third'];
+        const stringsCopy = goog.array.clone(strings);
+
+        clulib.array.asyncForEach(strings, () => Promise.resolve())
+            .then(() => {
+              expect(strings).toEqual(stringsCopy);
+              done();
+            });
       });
     });
 
     describe('asyncForEachRight', () => {
       it('should execute async functions for every element in an array consecutively, in reverse order', done => {
         const strings = ['first', 'second', 'third'];
-        const stringsCopy = goog.array.clone(strings);
         const stringsCopyReversed = goog.array.clone(strings);
         stringsCopyReversed.reverse();
 
@@ -62,9 +70,19 @@ clulib.array.test.main = () => {
           });
         }).then(() => {
           expect(result).toEqual(stringsCopyReversed.join(''));
-          expect(strings).toEqual(stringsCopy);
           done();
         });
+      });
+
+      it('should preserve the original array', done => {
+        const strings = ['first', 'second', 'third'];
+        const stringsCopy = goog.array.clone(strings);
+
+        clulib.array.asyncForEachRight(strings, () => Promise.resolve())
+            .then(() => {
+              expect(strings).toEqual(stringsCopy);
+              done();
+            });
       });
     });
   });
