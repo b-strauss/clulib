@@ -11,9 +11,14 @@
   },
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile-test",
-    "test": "./node_modules/.bin/karma start karma.conf.js"
+    "test": "./node_modules/.bin/karma start karma.conf.js",
+    "check-lint": "./node_modules/.bin/eslint 'lib/**' 'test/**' browsers.conf.js gulpfile.js karma.conf.js test_main.js"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "devDependencies": {
+    "eslint": "4.2.0",
     "google-closure-compiler": "20170626.0.0",
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
@@ -25,6 +30,7 @@
     "karma-jasmine": "1.1.0",
     "karma-sauce-launcher": "1.1.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-spec-reporter": "0.0.31"
+    "karma-spec-reporter": "0.0.31",
+    "pre-commit": "1.2.2"
   }
 }
