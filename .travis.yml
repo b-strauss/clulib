@@ -8,7 +8,7 @@ cache:
     - ./node_modules
 
 notifications:
-  email: false
+  email: true
 
 matrix:
   fast_finish: true
