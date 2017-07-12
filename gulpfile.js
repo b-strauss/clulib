@@ -87,10 +87,10 @@ function compile(inputs, entryPoint, outputFile, opt_debug) {
   };
 
   return closureCompiler(options)
-      .src()
-      .pipe(sourcemaps.init())
-      .pipe(sourcemaps.write('.', {}))
-      .pipe(gulp.dest(destinationFolder));
+    .src()
+    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.write('.', {}))
+    .pipe(gulp.dest(destinationFolder));
 }
 
 gulp.task('create-dev-deps', callback => {

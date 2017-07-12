@@ -9,7 +9,7 @@ clulib.array.test.main = () => {
     describe('removeHoles', () => {
       it('should remove holes from an array', () => {
         const a = [0, 1];
-        const b = clulib.array.removeHoles([0,,,1]);
+        const b = clulib.array.removeHoles([0, , , 1]);
 
         expect(a).toEqual(b);
       });
@@ -42,10 +42,10 @@ clulib.array.test.main = () => {
         const stringsCopy = goog.array.clone(strings);
 
         clulib.array.asyncForEach(strings, () => Promise.resolve())
-            .then(() => {
-              expect(strings).toEqual(stringsCopy);
-              done();
-            });
+          .then(() => {
+            expect(strings).toEqual(stringsCopy);
+            done();
+          });
       });
     });
 
@@ -79,10 +79,10 @@ clulib.array.test.main = () => {
         const stringsCopy = goog.array.clone(strings);
 
         clulib.array.asyncForEachRight(strings, () => Promise.resolve())
-            .then(() => {
-              expect(strings).toEqual(stringsCopy);
-              done();
-            });
+          .then(() => {
+            expect(strings).toEqual(stringsCopy);
+            done();
+          });
       });
     });
   });
