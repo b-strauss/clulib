@@ -19,8 +19,8 @@ module.exports = config => {
     specReporter: {
       suppressErrorSummary: false,
       suppressFailed: false,
-      suppressPassed: false,
-      suppressSkipped: false,
+      suppressPassed: process.env.TRAVIS,
+      suppressSkipped: process.env.TRAVIS,
       showSpecTiming: true,
       failFast: false
     },
