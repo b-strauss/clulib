@@ -15,7 +15,6 @@
     "check-lint": "./node_modules/.bin/eslint 'lib/**' 'test/**' browsers.conf.js gulpfile.js karma.conf.js test_main.js"
   },
   "pre-commit": [
-    "lint"
   ],
   "devDependencies": {
     "eslint": "4.2.0",

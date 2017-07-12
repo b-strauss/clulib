@@ -46,7 +46,6 @@ clulib.dom.test.main = () => {
           </div>
         `;
         const origin = container.querySelector('#origin');
-        const target = container.querySelector('#target');
         const foundId = clulib.dom.closest(origin, '.cls').id;
 
         expect(foundId).toBe('target');

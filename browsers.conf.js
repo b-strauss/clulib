@@ -4,12 +4,12 @@ const desktop = {
   'SL_CHROME': {
     base: 'SauceLabs',
     browserName: 'chrome',
-    platform: 'Windows 10',
+    platform: 'Windows 10'
   },
   'SL_FIREFOX': {
     base: 'SauceLabs',
     browserName: 'firefox',
-    platform: 'Windows 10',
+    platform: 'Windows 10'
   },
   'SL_IE_11': {
     base: 'SauceLabs',
