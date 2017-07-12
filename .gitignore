@@ -1,19 +1,12 @@
-!.placeholder
-
-npm-debug.log
-.DS_Store
-/temp
+*.DS_Store
 Thumbs.db
-
-*~
 *.bak
-*.idea
-*.iml
 *.ipr
 *.iws
 *.project
 *.swp
-*.DS_Store
+/.idea
+/*.iml
 *.buildpath
 *.cache
 *.sass-cache
@@ -22,6 +15,10 @@ Thumbs.db
 *.TemporaryItems
 *.webprj
 *.phpintel
+
+# Ignore npm/yarn debug log
+npm-debug.log
+yarn-error.log
 
 /bin
 /node_modules
