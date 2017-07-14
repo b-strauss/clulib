@@ -1,3 +1,17 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/b-strauss/clulib/compare/1.2.0...1.3.0) (2017-07-14)
+
+### Bug Fixes
+
+* fix: use strict equality check for all checks not comparing null ([0ba012a](https://github.com/b-strauss/clulib/commit/0ba012a))
+* fix(async): forEachRight to not change the original array ([fc56665](https://github.com/b-strauss/clulib/commit/fc56665))
+
+### Deprecations
+
+* deprecate: clulib.async.forEach and clulib.async.forEachRight in favor of clulib.array.asyncForEach and clulib.array.asyncForEachRight ([8fc8ecc](https://github.com/b-strauss/clulib/commit/8fc8ecc))
+* deprecate: clulib.sdks.loadFacebookSdk and clulib.sdks.loadGooglePlusSdk ([d12c232](https://github.com/b-strauss/clulib/commit/d12c232))
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/b-strauss/clulib/compare/1.1.2...1.2.0) (2017-02-26)
 
