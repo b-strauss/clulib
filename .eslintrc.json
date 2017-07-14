@@ -157,7 +157,6 @@
     ],
     "init-declarations": "error",
     "no-delete-var": "error",
-    "arrow-body-style": "error",
     "arrow-parens": [
       "error",
       "as-needed"
