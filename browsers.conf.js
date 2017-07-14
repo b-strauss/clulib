@@ -97,7 +97,7 @@ const mobile = {
     deviceOrientation: 'portrait',
     platformVersion: '6.0',
     platformName: 'Android'
-  },
+  }
 };
 
 module.exports = {

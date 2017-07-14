@@ -23,7 +23,7 @@ const depsRoots = {
  * @param {Function} callback
  * @param {Object<string, string>} roots
  */
-function deps(callback, roots) {
+function deps (callback, roots) {
   let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
 
   for (let key in roots) {
@@ -45,7 +45,7 @@ function deps(callback, roots) {
  * @param {boolean=} opt_debug
  * @returns {*}
  */
-function compile(inputs, entryPoint, outputFile, opt_debug) {
+function compile (inputs, entryPoint, outputFile, opt_debug) {
   const debug = opt_debug || false;
   const destinationFolder = path.normalize('./bin');
   const externs = [
@@ -96,4 +96,4 @@ function compile(inputs, entryPoint, outputFile, opt_debug) {
 gulp.task('create-dev-deps', callback => {
   deps(callback, depsRoots);
 });
-gulp.task('compile-test', () => compile(testFiles, 'test_main', 'test.js'));
+gulp.task('compile', () => compile(testFiles, 'test_main', 'test.js'));
