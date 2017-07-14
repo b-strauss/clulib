@@ -17,6 +17,7 @@ install:
   - yarn install
 
 before_script:
+  - yarn check-lint
   - yarn compile
 
 script:
