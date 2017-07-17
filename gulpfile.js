@@ -10,7 +10,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const testFiles = [
   'node_modules/google-closure-library/closure/goog/**.js',
   '!node_modules/google-closure-library/closure/goog/**_test.js',
-  'lib/**.js',
+  'src/**.js',
   'test/**.js',
   'test_main.js'
 ];
