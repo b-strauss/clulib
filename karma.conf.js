@@ -36,10 +36,10 @@ module.exports = config => {
       }
     },
 
-    browserDisconnectTimeout: 10 * 1000, // default 2s
+    browserDisconnectTimeout: 10 * 1000, // 10s - default 2s
     browserDisconnectTolerance: 1, // default 0
-    browserNoActivityTimeout: 4 * 60 * 1000, // default 10s
-    captureTimeout: 5 * 60 * 1000, // default 60s
+    browserNoActivityTimeout: 4 * 60 * 1000, // 4 min - default 10s
+    captureTimeout: 5 * 60 * 1000, // 5 min default 60s
     port: 9876,
     autoWatch: false,
     browsers: ['Chrome'],
