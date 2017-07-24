@@ -7,23 +7,14 @@ const closureCompiler = require('google-closure-compiler').gulp();
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
 
-const testFiles = [
-  'node_modules/google-closure-library/closure/goog/**.js',
-  '!node_modules/google-closure-library/closure/goog/**_test.js',
-  'src/**.js',
-  'test/**.js',
-  'test_main.js'
-];
-
-const depsRoots = {
-  './': '../../../..'
-};
-
 /**
  * @param {Function} callback
- * @param {Object<string, string>} roots
  */
-function deps (callback, roots) {
+function deps (callback) {
+  const roots = {
+    './': '../../../..'
+  };
+
   let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
 
   for (let key in roots) {
@@ -39,23 +30,29 @@ function deps (callback, roots) {
 }
 
 /**
- * @param {Array<string>} inputs
- * @param {string} entryPoint
- * @param {string} outputFile
- * @param {boolean=} opt_debug
  * @returns {*}
  */
-function compile (inputs, entryPoint, outputFile, opt_debug) {
-  const debug = opt_debug || false;
-  const destinationFolder = path.normalize('./bin');
+function compile () {
+  const inputs = [
+    'node_modules/google-closure-library/closure/goog/**.js',
+    '!node_modules/google-closure-library/closure/goog/**_test.js',
+    'src/**.js',
+    'test/**.js',
+    'test_main.js'
+  ];
+
   const externs = [
     'node_modules/google-closure-compiler/contrib/externs/jasmine-2.0.js'
   ];
 
+  const destinationFolder = './bin';
+
+  const debug = false;
+
   const options = {
     js: inputs.map(input => path.normalize(input)),
     externs: externs.map(extern => path.normalize(extern)),
-    entry_point: entryPoint,
+    entry_point: 'test_main',
     language_in: 'ECMASCRIPT_2015',
     language_out: 'ECMASCRIPT5_STRICT',
     compilation_level: 'ADVANCED',
@@ -83,17 +80,17 @@ function compile (inputs, entryPoint, outputFile, opt_debug) {
       'inferredConstCheck'
     ],
     output_wrapper: '(function(){%output%}).call(this);',
-    js_output_file: outputFile
+    js_output_file: 'test.js'
   };
 
   return closureCompiler(options)
     .src()
     .pipe(sourcemaps.init())
     .pipe(sourcemaps.write('.', {}))
-    .pipe(gulp.dest(destinationFolder));
+    .pipe(gulp.dest(path.normalize(destinationFolder)));
 }
 
 gulp.task('create-dev-deps', callback => {
-  deps(callback, depsRoots);
+  deps(callback);
 });
-gulp.task('compile', () => compile(testFiles, 'test_main', 'test.js'));
+gulp.task('compile', () => compile());
