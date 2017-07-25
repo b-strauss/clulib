@@ -1,3 +1,11 @@
+<a name="1.3.1"></a>
+# [1.3.1](https://github.com/b-strauss/clulib/compare/1.3.0...1.3.1) (2017-07-25)
+
+### Bug Fixes
+
+* fix(cm): node_tree superfluous require ([75af17a](https://github.com/b-strauss/clulib/commit/75af17a))
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/b-strauss/clulib/compare/1.2.0...1.3.0) (2017-07-14)
 
