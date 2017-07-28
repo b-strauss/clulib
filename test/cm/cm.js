@@ -4,10 +4,25 @@ goog.require('clulib.cm.ComponentManager');
 goog.require('clulib.cm.Component');
 
 goog.require('goog.dom');
+goog.require('goog.dom.classlist');
 goog.require('goog.structs.Map');
 
 clulib.cm.test.main = () => {
   describe('clulib.cm.ComponentManager', () => {
+    /**
+     * @type {?Element}
+     */
+    let container = null;
+
+    beforeEach(() => {
+      container = clulib.cm.test.addDummyHtml();
+    });
+
+    afterEach(() => {
+      clulib.cm.test.removeDummyHtml(container);
+      container = null;
+    });
+
     it('should use specific attributes for decoration', () => {
       const manager = new clulib.cm.ComponentManager();
 
@@ -47,13 +62,101 @@ clulib.cm.test.main = () => {
       expect(manager.getRegistry().get('three')).toBe(component3);
       expect(manager.getRegistry().get('four')).toBe(component4);
     });
+
+    it('should decorate dom elements with components', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let init1 = false;
+      let init2 = false;
+
+      const component1 = clulib.cm.test.createDummyComponent(null, component => {
+        init1 = goog.dom.classlist.contains(component.getElement(), 'outer');
+      });
+      const component2 = clulib.cm.test.createDummyComponent(null, component => {
+        init2 = goog.dom.classlist.contains(component.getElement(), 'inner');
+      });
+
+      manager.addComponentMap({
+        'outer': component1,
+        'inner': component2
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          expect(init1).toBe(true);
+          expect(init2).toBe(true);
+
+          manager.disposeAll();
+          done();
+        });
+    });
+
+    it('should return the component for an element', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let instance = null;
+
+      const component = clulib.cm.test.createDummyComponent(null, component => {
+        instance = component;
+      });
+
+      manager.addComponentMap({
+        'outer': component,
+        'inner': clulib.cm.test.createDummyComponent()
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          const foundInstance = manager.getComponentForElement(container.querySelector('.outer'));
+
+          expect(foundInstance).toBe(instance);
+
+          manager.disposeAll();
+          done();
+        });
+    });
+
+    it('should return components for an array of elements', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let instance1 = null;
+      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance1 = cmp;
+      });
+
+      let instance2 = null;
+      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance2 = cmp;
+      });
+
+      manager.addComponentMap({
+        'outer': component1,
+        'inner': component2
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          const elements = [
+            container.querySelector('.outer'),
+            container.querySelector('.inner')
+          ];
+
+          const foundInstances = manager.getComponentsForElementArray(elements);
+
+          expect(foundInstances[0]).toBe(instance1);
+          expect(foundInstances[1]).toBe(instance2);
+
+          manager.disposeAll();
+          done();
+        });
+    });
   });
 };
 
 /**
- * @param {Function=} constructorFn
- * @param {Function=} onInitFn
- * @param {Function=} onDisposeFn
+ * @param {(function(clulib.cm.Component=):void|null)=} constructorFn
+ * @param {(function(clulib.cm.Component=):void|null)=} onInitFn
+ * @param {(function(clulib.cm.Component=):void|null)=} onDisposeFn
  * @param {(function():Promise|null)=} waitForFn
  * @returns {function(new:clulib.cm.Component)}
  */
@@ -69,7 +172,7 @@ clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, on
     Component.base(this, 'constructor');
 
     if (constructorFn != null)
-      constructorFn();
+      constructorFn(this);
   };
 
   goog.inherits(Component, clulib.cm.Component);
@@ -87,13 +190,13 @@ clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, on
   Component.prototype.onInit = function () {
     Component.base(this, 'onInit');
     if (onInitFn != null)
-      onInitFn();
+      onInitFn(this);
   };
 
   Component.prototype.onDispose = function () {
     Component.base(this, 'onDispose');
     if (onDisposeFn != null)
-      onDisposeFn();
+      onDisposeFn(this);
   };
 
   return Component;
@@ -109,7 +212,7 @@ clulib.cm.test.addDummyHtml = () => {
       <div class="middle">
         <div class="inner" data-cmp="inner"></div>
       </div>
-    <div>
+    </div>
   `;
 
   goog.dom.appendChild(document.body, container);
