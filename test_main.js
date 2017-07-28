@@ -7,5 +7,5 @@ goog.require('clulib.dom.test');
 
 clulib.array.test.main();
 clulib.async.Completer.test.main();
-clulib.cm.ComponentManager.test.main();
+clulib.cm.test.main();
 clulib.dom.test.main();

@@ -1,4 +1,4 @@
-goog.provide('clulib.cm.ComponentManager.test');
+goog.provide('clulib.cm.test');
 
 goog.require('clulib.cm.ComponentManager');
 goog.require('clulib.cm.Component');
@@ -6,7 +6,7 @@ goog.require('clulib.cm.Component');
 goog.require('goog.dom');
 goog.require('goog.structs.Map');
 
-clulib.cm.ComponentManager.test.main = () => {
+clulib.cm.test.main = () => {
   describe('clulib.cm.ComponentManager', () => {
     it('should use specific attributes for decoration', () => {
       const manager = new clulib.cm.ComponentManager();
@@ -18,7 +18,7 @@ clulib.cm.ComponentManager.test.main = () => {
 
     it('should accept a component for registration', () => {
       const manager = new clulib.cm.ComponentManager();
-      const component = clulib.cm.ComponentManager.test.createDummyComponent();
+      const component = clulib.cm.test.createDummyComponent();
 
       manager.addComponent('foo', component);
 
@@ -27,10 +27,10 @@ clulib.cm.ComponentManager.test.main = () => {
 
     it('should accept multiple components for registration', () => {
       const manager = new clulib.cm.ComponentManager();
-      const component1 = clulib.cm.ComponentManager.test.createDummyComponent();
-      const component2 = clulib.cm.ComponentManager.test.createDummyComponent();
-      const component3 = clulib.cm.ComponentManager.test.createDummyComponent();
-      const component4 = clulib.cm.ComponentManager.test.createDummyComponent();
+      const component1 = clulib.cm.test.createDummyComponent();
+      const component2 = clulib.cm.test.createDummyComponent();
+      const component3 = clulib.cm.test.createDummyComponent();
+      const component4 = clulib.cm.test.createDummyComponent();
 
       manager.addComponentMap({
         'one': component1,
@@ -57,7 +57,7 @@ clulib.cm.ComponentManager.test.main = () => {
  * @param {(function():Promise|null)=} waitForFn
  * @returns {function(new:clulib.cm.Component)}
  */
-clulib.cm.ComponentManager.test.createDummyComponent = (constructorFn = null, onInitFn = null, onDisposeFn = null,
+clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, onDisposeFn = null,
   waitForFn = null) => {
   waitForFn = waitForFn || (() => Promise.resolve());
 
@@ -102,7 +102,7 @@ clulib.cm.ComponentManager.test.createDummyComponent = (constructorFn = null, on
 /**
  * @returns {Element}
  */
-clulib.cm.ComponentManager.test.addDummyHtml = () => {
+clulib.cm.test.addDummyHtml = () => {
   const container = document.createElement('div');
   container.innerHTML = `
     <div class="outer" data-cmp="outer">
@@ -120,6 +120,6 @@ clulib.cm.ComponentManager.test.addDummyHtml = () => {
 /**
  * @param {Element} element
  */
-clulib.cm.ComponentManager.test.removeDummyHtml = element => {
+clulib.cm.test.removeDummyHtml = element => {
   goog.dom.removeNode(element);
 };
