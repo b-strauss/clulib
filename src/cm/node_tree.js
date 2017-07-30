@@ -5,7 +5,6 @@ goog.require('clulib.cm.ComponentNode');
 goog.require('clulib.dom');
 
 goog.require('goog.dom');
-goog.require('goog.structs.Map');
 
 /**
  * Look into [clulib.cm.Component] and [clulib.cm.ComponentManager] instead.
@@ -23,11 +22,11 @@ clulib.cm.NodeTree = function (manager) {
   this.manager_ = manager;
 
   /**
-   * @type {goog.structs.Map<string, clulib.cm.ComponentNode>}
+   * @type {Map<string, clulib.cm.ComponentNode>}
    * @const
    * @private
    */
-  this.collection_ = new goog.structs.Map();
+  this.collection_ = new Map();
 };
 
 /**
@@ -35,7 +34,7 @@ clulib.cm.NodeTree = function (manager) {
  * @returns {?clulib.cm.Component}
  */
 clulib.cm.NodeTree.prototype.getComponent = function (id) {
-  const node = this.collection_.get(id, null);
+  const node = this.collection_.get(id) || null;
 
   if (node == null)
     return null;
@@ -71,9 +70,9 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
     return Promise.resolve();
 
   /**
-   * @type {goog.structs.Map<string, clulib.cm.ComponentNode>}
+   * @type {Map<string, clulib.cm.ComponentNode>}
    */
-  const unsolved = new goog.structs.Map();
+  const unsolved = new Map();
 
   // Instantiate components
   elements.forEach(element => {
@@ -83,8 +82,8 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
     if (constructor == null)
       throw new Error(`No constructor found for component type '${type}'.`);
     node.instantiate(constructor);
-    this.collection_.set(node.getId(), node);
-    unsolved.set(node.getId(), node);
+    this.collection_.set(/** @type {!string} */ (node.getId()), node);
+    unsolved.set(/** @type {!string} */ (node.getId()), node);
   });
 
   // Solve node tree
@@ -146,11 +145,11 @@ clulib.cm.NodeTree.prototype.findParentNode_ = function (node) {
 clulib.cm.NodeTree.prototype.disposeNode = function (id) {
   const node = this.collection_.get(id);
   node.dispose();
-  this.collection_.remove(id);
+  this.collection_.delete(id);
 };
 
 clulib.cm.NodeTree.prototype.disposeAll = function () {
-  const copy = this.collection_.clone();
+  const copy = new Map(this.collection_);
   copy.forEach(node => {
     node.getComponent().dispose();
   });

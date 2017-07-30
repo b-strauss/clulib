@@ -1,7 +1,6 @@
 goog.provide('clulib.cm.ComponentNode');
 
 goog.require('goog.crypt.base64');
-goog.require('goog.structs.Map');
 
 /**
  * Look into [clulib.cm.Component] and [clulib.cm.ComponentManager] instead.
@@ -45,11 +44,11 @@ clulib.cm.ComponentNode = function (manager, element) {
   this.parent_ = null;
 
   /**
-   * @type {goog.structs.Map<string, clulib.cm.ComponentNode>}
+   * @type {Map<string, clulib.cm.ComponentNode>}
    * @const
    * @private
    */
-  this.children_ = new goog.structs.Map();
+  this.children_ = new Map();
 
   /**
    * @type {number}
@@ -77,7 +76,7 @@ clulib.cm.ComponentNode = function (manager, element) {
  */
 clulib.cm.ComponentNode.prototype.addChild = function (node) {
   node.parent_ = this;
-  this.children_.set(node.getId(), node);
+  this.children_.set(/** @type {!string} */ (node.getId()), node);
   this.component_.addChild(node.component_, false);
   node.setDepth(this.depth_ + 1);
 };
@@ -156,5 +155,5 @@ clulib.cm.ComponentNode.prototype.initialize = function () {
 
 clulib.cm.ComponentNode.prototype.dispose = function () {
   if (this.parent_ != null)
-    this.parent_.children_.remove(this.getId());
+    this.parent_.children_.delete(/** @type {!string} */ (this.getId()));
 };
