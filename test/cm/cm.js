@@ -6,7 +6,6 @@ goog.require('clulib.cm.Component');
 goog.require('goog.dom');
 goog.require('goog.dom.classlist');
 goog.require('goog.dom.dataset');
-goog.require('goog.structs.Map');
 
 clulib.cm.test.main = () => {
   describe('clulib.cm.ComponentManager', () => {
@@ -50,13 +49,10 @@ clulib.cm.test.main = () => {
 
       manager.addComponentMap({
         'one': component1,
-        'two': component2
-      });
-
-      manager.addComponentMap(new goog.structs.Map({
+        'two': component2,
         'three': component3,
         'four': component4
-      }));
+      });
 
       expect(manager.getRegistry().get('one')).toBe(component1);
       expect(manager.getRegistry().get('two')).toBe(component2);

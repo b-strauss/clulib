@@ -3,7 +3,6 @@ goog.provide('clulib.cm.ComponentManager');
 goog.require('clulib.cm.NodeTree');
 
 goog.require('goog.asserts');
-goog.require('goog.structs.Map');
 
 /**
  * TODO: docs
@@ -34,11 +33,11 @@ clulib.cm.ComponentManager = function () {
   this.configAttribute_ = 'data-cmp-cfg';
 
   /**
-   * @type {goog.structs.Map<string, Function>}
+   * @type {Map<string, Function>}
    * @const
    * @private
    */
-  this.registry_ = new goog.structs.Map();
+  this.registry_ = new Map();
 
   /**
    * @type {clulib.cm.NodeTree}
@@ -70,7 +69,7 @@ clulib.cm.ComponentManager.prototype.getConfigAttribute = function () {
 };
 
 /**
- * @returns {goog.structs.Map<string, Function>}
+ * @returns {Map<string, Function>}
  */
 clulib.cm.ComponentManager.prototype.getRegistry = function () {
   return this.registry_;
@@ -140,19 +139,16 @@ clulib.cm.ComponentManager.prototype.disposeNode = function (id) {
  * @param {function(new:clulib.cm.Component)} constructor
  */
 clulib.cm.ComponentManager.prototype.addComponent = function (type, constructor) {
-  goog.asserts.assert(this.registry_.containsKey(type) === false, `Component with type '${type}' already registered.`);
+  goog.asserts.assert(this.registry_.has(type) === false, `Component with type '${type}' already registered.`);
   this.registry_.set(type, constructor);
 };
 
 /**
- * @param {goog.structs.Map<string, function(new:clulib.cm.Component)>|
- *   Object<string, function(new:clulib.cm.Component)>} map
+ * @param {!Object<string, function(new:clulib.cm.Component)>} obj
  */
-clulib.cm.ComponentManager.prototype.addComponentMap = function (map) {
-  map = new goog.structs.Map(map);
-
-  map.forEach((component, type) => {
-    this.addComponent(type, component);
+clulib.cm.ComponentManager.prototype.addComponentMap = function (obj) {
+  Object.keys(obj).forEach(key => {
+    this.addComponent(key, obj[key]);
   });
 };
 
