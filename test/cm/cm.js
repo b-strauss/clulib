@@ -5,6 +5,7 @@ goog.require('clulib.cm.Component');
 
 goog.require('goog.dom');
 goog.require('goog.dom.classlist');
+goog.require('goog.dom.dataset');
 goog.require('goog.structs.Map');
 
 clulib.cm.test.main = () => {
@@ -147,6 +148,83 @@ clulib.cm.test.main = () => {
           expect(foundInstances[1]).toBe(instance2);
 
           manager.disposeAll();
+          done();
+        });
+    });
+
+    it('should return a component by selector', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let instance = null;
+
+      const component = clulib.cm.test.createDummyComponent(null, component => {
+        instance = component;
+      });
+
+      manager.addComponentMap({
+        'outer': component,
+        'inner': clulib.cm.test.createDummyComponent()
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          const foundInstance = manager.queryComponent('.outer');
+
+          expect(foundInstance).toBe(instance);
+
+          manager.disposeAll();
+          done();
+        });
+    });
+
+    it('should return multiple components by selector', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let instance1 = null;
+      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance1 = cmp;
+      });
+
+      let instance2 = null;
+      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance2 = cmp;
+      });
+
+      manager.addComponentMap({
+        'outer': component1,
+        'inner': component2
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          const foundInstances = manager.queryComponentAll('.outer, .inner');
+
+          expect(foundInstances[0]).toBe(instance1);
+          expect(foundInstances[1]).toBe(instance2);
+
+          manager.disposeAll();
+          done();
+        });
+    });
+
+    it('should dispose all components', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      manager.addComponentMap({
+        'outer': clulib.cm.test.createDummyComponent(),
+        'inner': clulib.cm.test.createDummyComponent()
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          expect(goog.dom.dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
+          expect(goog.dom.dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
+
+          manager.disposeAll();
+
+          expect(goog.dom.dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
+          expect(goog.dom.dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
+
           done();
         });
     });
