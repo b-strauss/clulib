@@ -1,5 +1,32 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/b-strauss/clulib/compare/1.3.0...2.0.0) (2017-07-30)
+
+### BREAKING CHANGES
+
+* update(project): rename lib into src ([7c7e14a](https://github.com/b-strauss/clulib/commit/7c7e14a))
+
+  All source files now reside under `./src`. Update your build script accordingly.
+
+* remove: `clulib.async.forEach` and `clulib.async.forEachRight` ([94d45f3](https://github.com/b-strauss/clulib/commit/94d45f3))
+
+  Use `clulib.array.asyncForEach` and `clulib.array.asyncForEachRight` instead.
+
+* remove: `clulib.sdks.loadFacebookSdk` and `clulib.sdks.loadGooglePlusSdk` ([3d21e3f](https://github.com/b-strauss/clulib/commit/3d21e3f))
+
+  There is no replacement for these functions.
+
+* update: `clulib.cm.ComponentManager` to use `Map` instead ot the deprecated `goog.structs.Map` ([84c75b7](https://github.com/b-strauss/clulib/commit/84c75b7))
+
+  * `clulib.cm.ComponentManager.prototype.getRegistry` now returns a `Map`
+  * `clulib.cm.ComponentManager.prototype.addComponentMap` now accepts only an object of type `!Object<string, function(new:clulib.cm.Component)>`
+
+### Bug Fixes
+
+* fix(cm): node_tree superfluous require ([75af17a](https://github.com/b-strauss/clulib/commit/75af17a))
+
+
 <a name="1.3.1"></a>
-# [1.3.1](https://github.com/b-strauss/clulib/compare/1.3.0...1.3.1) (2017-07-25)
+## [1.3.1](https://github.com/b-strauss/clulib/compare/1.3.0...1.3.1) (2017-07-25)
 
 ### Bug Fixes
 
@@ -12,12 +39,12 @@
 ### Bug Fixes
 
 * fix: use strict equality check for all checks not comparing null ([0ba012a](https://github.com/b-strauss/clulib/commit/0ba012a))
-* fix(async): forEachRight to not change the original array ([fc56665](https://github.com/b-strauss/clulib/commit/fc56665))
+* fix(async): `forEachRight` to not change the original array ([fc56665](https://github.com/b-strauss/clulib/commit/fc56665))
 
 ### Deprecations
 
-* deprecate: clulib.async.forEach and clulib.async.forEachRight in favor of clulib.array.asyncForEach and clulib.array.asyncForEachRight ([8fc8ecc](https://github.com/b-strauss/clulib/commit/8fc8ecc))
-* deprecate: clulib.sdks.loadFacebookSdk and clulib.sdks.loadGooglePlusSdk ([d12c232](https://github.com/b-strauss/clulib/commit/d12c232))
+* deprecate: `clulib.async.forEach` and `clulib.async.forEachRight` in favor of `clulib.array.asyncForEach` and `clulib.array.asyncForEachRight` ([8fc8ecc](https://github.com/b-strauss/clulib/commit/8fc8ecc))
+* deprecate: `clulib.sdks.loadFacebookSdk` and `clulib.sdks.loadGooglePlusSdk` ([d12c232](https://github.com/b-strauss/clulib/commit/d12c232))
 
 
 <a name="1.2.0"></a>
@@ -25,9 +52,9 @@
 
 ### Features
 
-* feat(array): add clulib.array.removeHoles ([61a698a](https://github.com/b-strauss/clulib/commit/61a698a))
-* feat(async): clulib.async.forEach + clulib.async.forEachRight ([a9fc7df](https://github.com/b-strauss/clulib/commit/a9fc7df))
-* feat(dom): clulib.dom.matches + clulib.dom.closest ([f674dba](https://github.com/b-strauss/clulib/commit/f674dba))
+* feat(array): add `clulib.array.removeHoles` ([61a698a](https://github.com/b-strauss/clulib/commit/61a698a))
+* feat(async): `clulib.async.forEach` + `clulib.async.forEachRight` ([a9fc7df](https://github.com/b-strauss/clulib/commit/a9fc7df))
+* feat(dom): `clulib.dom.matches` + `clulib.dom.closest` ([f674dba](https://github.com/b-strauss/clulib/commit/f674dba))
 
 ### Bug Fixes
 
@@ -43,7 +70,7 @@
 
 ### Bug Fixes
 
-* fix(cm): call addChild before decorate to prevent goog.ui.Component's repositioning ([97d49e9](https://github.com/b-strauss/clulib/commit/97d49e9))
+* fix(cm): call addChild before decorate to prevent `goog.ui.Component`'s repositioning ([97d49e9](https://github.com/b-strauss/clulib/commit/97d49e9))
 
 
 
@@ -53,7 +80,7 @@
 ### Bug Fixes
 
 * fix(cm): make private apis package private ([9232679](https://github.com/b-strauss/clulib/commit/9232679))
-* fix Element.prototype.closest fallback calling hasAttribute on non Elements ([0f04bca](https://github.com/b-strauss/clulib/commit/0f04bca))
+* fix `Element.prototype.closest` fallback calling `hasAttribute` on non Elements ([0f04bca](https://github.com/b-strauss/clulib/commit/0f04bca))
 
 ### Misc
 
