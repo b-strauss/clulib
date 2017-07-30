@@ -207,6 +207,41 @@ clulib.cm.test.main = () => {
         });
     });
 
+    it('should initialize components in tree order', done => {
+      const manager = new clulib.cm.ComponentManager();
+
+      let output = '';
+
+      let instance1 = null;
+      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance1 = cmp;
+        output += 'outer';
+      });
+
+      let instance2 = null;
+      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+        instance2 = cmp;
+        output += 'inner';
+      }, null, () => {
+        return new Promise(resolve => {
+          setTimeout(() => resolve(), 100);
+        });
+      });
+
+      manager.addComponentMap({
+        'outer': component1,
+        'inner': component2
+      });
+
+      manager.decorate(container)
+        .then(() => {
+          expect(output).toBe('innerouter');
+
+          manager.disposeAll();
+          done();
+        });
+    });
+
     it('should dispose all components', done => {
       const manager = new clulib.cm.ComponentManager();
 
@@ -286,7 +321,7 @@ clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, on
 clulib.cm.test.addDummyHtml = () => {
   const container = document.createElement('div');
   container.innerHTML = `
-    <div class="outer" data-cmp="outer">
+    <div class="outer" data-cmp="outer" data-cfg="eyJkYXRhIjoiYWJjIn0=">
       <div class="middle">
         <div class="inner" data-cmp="inner"></div>
       </div>
