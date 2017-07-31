@@ -6,12 +6,12 @@ module.exports = config => {
   config.set({
     frameworks: ['jasmine'],
     
-    files: ['./bin/test.js'],
+    files: ['./bin/test.min.js'],
     
     customLaunchers,
     
     preprocessors: {
-      './bin/test.js': ['sourcemap']
+      './bin/test.min.js': ['sourcemap']
     },
     
     reporters: ['spec', 'saucelabs'],

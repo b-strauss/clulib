@@ -11,6 +11,7 @@
   },
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile",
+    "deps": "./node_modules/.bin/gulp deps",
     "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" browsers.conf.js gulpfile.js karma.conf.js test_main.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"
   },

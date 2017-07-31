@@ -22,4 +22,4 @@ yarn-error.log
 
 /bin
 /node_modules
-/tools/jasmine_runner/dev_deps.js
+/tools/jasmine_runner/deps.js

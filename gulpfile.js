@@ -22,7 +22,7 @@ function deps (callback) {
       command += ` --root_with_prefix="${path.normalize(key)} ${path.normalize(roots[key])}"`;
   }
   
-  command += ` > ${path.normalize('./tools/jasmine_runner/dev_deps.js')}`;
+  command += ` > ${path.normalize('./tools/jasmine_runner/deps.js')}`;
   
   exec(command, function (err) {
     callback(err);
@@ -80,7 +80,7 @@ function compile () {
       'inferredConstCheck'
     ],
     output_wrapper: '(function(){%output%}).call(this);',
-    js_output_file: 'test.js'
+    js_output_file: 'test.min.js'
   };
   
   return closureCompiler(options)
@@ -90,7 +90,7 @@ function compile () {
     .pipe(gulp.dest(path.normalize(destinationFolder)));
 }
 
-gulp.task('create-dev-deps', callback => {
+gulp.task('compile', () => compile());
+gulp.task('deps', callback => {
   deps(callback);
 });
-gulp.task('compile', () => compile());
