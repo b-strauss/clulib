@@ -1,13 +1,13 @@
-goog.provide('clulib.cm.test');
+goog.module('test.clulib.cm');
 
-goog.require('clulib.cm.ComponentManager');
-goog.require('clulib.cm.Component');
+const ComponentManager = goog.require('clulib.cm.ComponentManager');
+const BaseComponent = goog.require('clulib.cm.Component');
 
-goog.require('goog.dom');
-goog.require('goog.dom.classlist');
-goog.require('goog.dom.dataset');
+const dom = goog.require('goog.dom');
+const classlist = goog.require('goog.dom.classlist');
+const dataset = goog.require('goog.dom.dataset');
 
-clulib.cm.test.main = () => {
+exports = function () {
   describe('clulib.cm.ComponentManager', () => {
     /**
      * @type {?Element}
@@ -15,16 +15,16 @@ clulib.cm.test.main = () => {
     let container = null;
     
     beforeEach(() => {
-      container = clulib.cm.test.addDummyHtml();
+      container = addDummyHtml();
     });
     
     afterEach(() => {
-      clulib.cm.test.removeDummyHtml(container);
+      removeDummyHtml(container);
       container = null;
     });
     
     it('should use specific attributes for decoration', () => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       expect(manager.getTypeAttribute()).toBe('data-cmp');
       expect(manager.getIdAttribute()).toBe('data-cmp-id');
@@ -32,8 +32,8 @@ clulib.cm.test.main = () => {
     });
     
     it('should accept a component for registration', () => {
-      const manager = new clulib.cm.ComponentManager();
-      const component = clulib.cm.test.createDummyComponent();
+      const manager = new ComponentManager();
+      const component = createDummyComponent();
       
       manager.addComponent('foo', component);
       
@@ -41,11 +41,11 @@ clulib.cm.test.main = () => {
     });
     
     it('should accept multiple components for registration', () => {
-      const manager = new clulib.cm.ComponentManager();
-      const component1 = clulib.cm.test.createDummyComponent();
-      const component2 = clulib.cm.test.createDummyComponent();
-      const component3 = clulib.cm.test.createDummyComponent();
-      const component4 = clulib.cm.test.createDummyComponent();
+      const manager = new ComponentManager();
+      const component1 = createDummyComponent();
+      const component2 = createDummyComponent();
+      const component3 = createDummyComponent();
+      const component4 = createDummyComponent();
       
       manager.addComponentMap({
         'one': component1,
@@ -61,16 +61,16 @@ clulib.cm.test.main = () => {
     });
     
     it('should decorate dom elements with components', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let init1 = false;
       let init2 = false;
       
-      const component1 = clulib.cm.test.createDummyComponent(null, component => {
-        init1 = goog.dom.classlist.contains(component.getElement(), 'outer');
+      const component1 = createDummyComponent(null, component => {
+        init1 = classlist.contains(component.getElement(), 'outer');
       });
-      const component2 = clulib.cm.test.createDummyComponent(null, component => {
-        init2 = goog.dom.classlist.contains(component.getElement(), 'inner');
+      const component2 = createDummyComponent(null, component => {
+        init2 = classlist.contains(component.getElement(), 'inner');
       });
       
       manager.addComponentMap({
@@ -89,17 +89,17 @@ clulib.cm.test.main = () => {
     });
     
     it('should return the component for an element', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let instance = null;
       
-      const component = clulib.cm.test.createDummyComponent(null, component => {
+      const component = createDummyComponent(null, component => {
         instance = component;
       });
       
       manager.addComponentMap({
         'outer': component,
-        'inner': clulib.cm.test.createDummyComponent()
+        'inner': createDummyComponent()
       });
       
       manager.decorate(container)
@@ -114,15 +114,15 @@ clulib.cm.test.main = () => {
     });
     
     it('should return components for an array of elements', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let instance1 = null;
-      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component1 = createDummyComponent(null, cmp => {
         instance1 = cmp;
       });
       
       let instance2 = null;
-      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component2 = createDummyComponent(null, cmp => {
         instance2 = cmp;
       });
       
@@ -149,17 +149,17 @@ clulib.cm.test.main = () => {
     });
     
     it('should return a component by selector', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let instance = null;
       
-      const component = clulib.cm.test.createDummyComponent(null, component => {
+      const component = createDummyComponent(null, component => {
         instance = component;
       });
       
       manager.addComponentMap({
         'outer': component,
-        'inner': clulib.cm.test.createDummyComponent()
+        'inner': createDummyComponent()
       });
       
       manager.decorate(container)
@@ -174,15 +174,15 @@ clulib.cm.test.main = () => {
     });
     
     it('should return multiple components by selector', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let instance1 = null;
-      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component1 = createDummyComponent(null, cmp => {
         instance1 = cmp;
       });
       
       let instance2 = null;
-      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component2 = createDummyComponent(null, cmp => {
         instance2 = cmp;
       });
       
@@ -204,18 +204,18 @@ clulib.cm.test.main = () => {
     });
     
     it('should initialize components in tree order', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       let output = '';
       
       let instance1 = null;
-      const component1 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component1 = createDummyComponent(null, cmp => {
         instance1 = cmp;
         output += 'outer';
       });
       
       let instance2 = null;
-      const component2 = clulib.cm.test.createDummyComponent(null, cmp => {
+      const component2 = createDummyComponent(null, cmp => {
         instance2 = cmp;
         output += 'inner';
       }, null, () => {
@@ -239,22 +239,22 @@ clulib.cm.test.main = () => {
     });
     
     it('should dispose all components', done => {
-      const manager = new clulib.cm.ComponentManager();
+      const manager = new ComponentManager();
       
       manager.addComponentMap({
-        'outer': clulib.cm.test.createDummyComponent(),
-        'inner': clulib.cm.test.createDummyComponent()
+        'outer': createDummyComponent(),
+        'inner': createDummyComponent()
       });
       
       manager.decorate(container)
         .then(() => {
-          expect(goog.dom.dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
-          expect(goog.dom.dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
+          expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
+          expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
           
           manager.disposeAll();
           
-          expect(goog.dom.dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
-          expect(goog.dom.dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
+          expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
+          expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
           
           done();
         });
@@ -263,19 +263,19 @@ clulib.cm.test.main = () => {
 };
 
 /**
- * @param {(function(clulib.cm.Component=):void|null)=} constructorFn
- * @param {(function(clulib.cm.Component=):void|null)=} onInitFn
- * @param {(function(clulib.cm.Component=):void|null)=} onDisposeFn
+ * @param {(function(BaseComponent=):void|null)=} constructorFn
+ * @param {(function(BaseComponent=):void|null)=} onInitFn
+ * @param {(function(BaseComponent=):void|null)=} onDisposeFn
  * @param {(function():Promise|null)=} waitForFn
- * @returns {function(new:clulib.cm.Component)}
+ * @returns {function(new:BaseComponent)}
  */
-clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, onDisposeFn = null,
-  waitForFn = null) => {
+function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null,
+  waitForFn = null) {
   waitForFn = waitForFn || (() => Promise.resolve());
   
   /**
    * @constructor
-   * @extends {clulib.cm.Component}
+   * @extends {BaseComponent}
    */
   const Component = function () {
     Component.base(this, 'constructor');
@@ -284,7 +284,7 @@ clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, on
       constructorFn(this);
   };
   
-  goog.inherits(Component, clulib.cm.Component);
+  goog.inherits(Component, BaseComponent);
   
   /**
    * @returns {Promise}
@@ -309,12 +309,12 @@ clulib.cm.test.createDummyComponent = (constructorFn = null, onInitFn = null, on
   };
   
   return Component;
-};
+}
 
 /**
  * @returns {Element}
  */
-clulib.cm.test.addDummyHtml = () => {
+function addDummyHtml () {
   const container = document.createElement('div');
   container.innerHTML = `
     <div class="outer" data-cmp="outer" data-cfg="eyJkYXRhIjoiYWJjIn0=">
@@ -324,14 +324,14 @@ clulib.cm.test.addDummyHtml = () => {
     </div>
   `;
   
-  goog.dom.appendChild(document.body, container);
+  dom.appendChild(document.body, container);
   
   return container;
-};
+}
 
 /**
  * @param {Element} element
  */
-clulib.cm.test.removeDummyHtml = element => {
-  goog.dom.removeNode(element);
-};
+function removeDummyHtml (element) {
+  dom.removeNode(element);
+}

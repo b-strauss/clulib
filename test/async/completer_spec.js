@@ -1,45 +1,45 @@
-goog.provide('clulib.async.Completer.test');
+goog.module('test.clulib.async.Completer');
 
-goog.require('clulib.async.Completer');
+const Completer = goog.require('clulib.async.Completer');
 
-clulib.async.Completer.test.main = () => {
+exports = function () {
   describe('clulib.async.Completer', () => {
     it('should resolve its promise', done => {
-      const completer = new clulib.async.Completer();
+      const com = new Completer();
       const result = 'result';
       
-      completer.getPromise()
+      com.getPromise()
         .then(r => {
           expect(r).toBe(result);
           done();
         });
       
-      completer.resolve(result);
+      com.resolve(result);
     });
     
     it('should reject its promise', done => {
-      const completer = new clulib.async.Completer();
+      const com = new Completer();
       const error = 'error';
       
-      completer.getPromise()
+      com.getPromise()
         .catch(e => {
           expect(e).toBe(error);
           done();
         });
       
-      completer.reject(error);
+      com.reject(error);
     });
     
     it('should know if its promise has completed', done => {
-      const completer = new clulib.async.Completer();
+      const com = new Completer();
       
-      completer.getPromise()
+      com.getPromise()
         .then(() => {
-          expect(completer.hasCompleted()).toBe(true);
+          expect(com.hasCompleted()).toBe(true);
           done();
         });
       
-      completer.resolve();
+      com.resolve();
     });
   });
 };

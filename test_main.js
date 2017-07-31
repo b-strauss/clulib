@@ -1,11 +1,11 @@
-goog.provide('test_main');
+goog.module('test.main');
 
-goog.require('clulib.array.test');
-goog.require('clulib.async.Completer.test');
-goog.require('clulib.cm.test');
-goog.require('clulib.dom.test');
+const arrayMain = goog.require('test.clulib.array');
+const asyncCompleterMain = goog.require('test.clulib.async.Completer');
+const cmMain = goog.require('test.clulib.cm');
+const domMain = goog.require('test.clulib.dom');
 
-clulib.array.test.main();
-clulib.async.Completer.test.main();
-clulib.cm.test.main();
-clulib.dom.test.main();
+arrayMain();
+asyncCompleterMain();
+cmMain();
+domMain();

@@ -1,10 +1,10 @@
-goog.provide('clulib.dom.test');
+goog.module('test.clulib.dom');
 
-goog.require('clulib.dom');
+const cluDom = goog.require('clulib.dom');
 
-goog.require('goog.dom');
+const googDom = goog.require('goog.dom');
 
-clulib.dom.test.main = () => {
+exports = function () {
   describe('clulib.dom', () => {
     describe('matches', () => {
       it('should return true if the element would be selected by the specified selector string', () => {
@@ -12,13 +12,13 @@ clulib.dom.test.main = () => {
         element.id = 'id-selector';
         element.classList.add('class-selector');
         
-        expect(clulib.dom.matches(element, '#id-selector.class-selector')).toBe(true);
+        expect(cluDom.matches(element, '#id-selector.class-selector')).toBe(true);
       });
       
       it('should return false if the element would not be selected by the specified selector string', () => {
         const element = document.createElement('div');
         
-        expect(clulib.dom.matches(element, '#some-id')).toBe(false);
+        expect(cluDom.matches(element, '#some-id')).toBe(false);
       });
     });
     
@@ -31,7 +31,7 @@ clulib.dom.test.main = () => {
           </div>
         `;
         const origin = container.querySelector('.origin');
-        const foundId = clulib.dom.closest(origin, '.cls').id;
+        const foundId = cluDom.closest(origin, '.cls').id;
         
         expect(foundId).toBe('target');
       });
@@ -46,7 +46,7 @@ clulib.dom.test.main = () => {
           </div>
         `;
         const origin = container.querySelector('#origin');
-        const foundId = clulib.dom.closest(origin, '.cls').id;
+        const foundId = cluDom.closest(origin, '.cls').id;
         
         expect(foundId).toBe('target');
       });
@@ -61,7 +61,7 @@ clulib.dom.test.main = () => {
           </div>
         `;
         const origin = container.querySelector('#origin');
-        const foundObject = clulib.dom.closest(origin, '.cls');
+        const foundObject = cluDom.closest(origin, '.cls');
         
         expect(foundObject).toBe(null);
       });
@@ -76,14 +76,14 @@ clulib.dom.test.main = () => {
           </div>
         `;
         
-        goog.dom.appendChild(document.body, container);
+        googDom.appendChild(document.body, container);
         
         const origin = container.querySelector('#origin');
-        const foundObject = clulib.dom.closest(origin, '.cls');
+        const foundObject = cluDom.closest(origin, '.cls');
         
         expect(foundObject).toBe(null);
         
-        goog.dom.removeNode(container);
+        googDom.removeNode(container);
       });
     });
   });

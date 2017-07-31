@@ -1,15 +1,14 @@
-goog.provide('clulib.array.test');
+goog.module('test.clulib.array');
 
-goog.require('clulib.array');
+const cluArray = goog.require('clulib.array');
+const googArray = goog.require('goog.array');
 
-goog.require('goog.array');
-
-clulib.array.test.main = () => {
+exports = function () {
   describe('clulib.array', () => {
     describe('removeHoles', () => {
       it('should remove holes from an array', () => {
         const a = [0, 1];
-        const b = clulib.array.removeHoles([0, , , 1]);
+        const b = cluArray.removeHoles([0, , , 1]);
         
         expect(a).toEqual(b);
       });
@@ -21,7 +20,7 @@ clulib.array.test.main = () => {
         const delays = [500, 200, 50];
         let result = '';
         
-        clulib.array.asyncForEach(strings, (element, index, array) => {
+        cluArray.asyncForEach(strings, (element, index, array) => {
           expect(array).toEqual(strings);
           expect(element).toEqual(array[index]);
           
@@ -39,9 +38,9 @@ clulib.array.test.main = () => {
       
       it('should preserve the original array', done => {
         const strings = ['first', 'second', 'third'];
-        const stringsCopy = goog.array.clone(strings);
+        const stringsCopy = googArray.clone(strings);
         
-        clulib.array.asyncForEach(strings, () => Promise.resolve())
+        cluArray.asyncForEach(strings, () => Promise.resolve())
           .then(() => {
             expect(strings).toEqual(stringsCopy);
             done();
@@ -52,13 +51,13 @@ clulib.array.test.main = () => {
     describe('asyncForEachRight', () => {
       it('should execute async functions for every element in an array consecutively, in reverse order', done => {
         const strings = ['first', 'second', 'third'];
-        const stringsCopyReversed = goog.array.clone(strings);
+        const stringsCopyReversed = googArray.clone(strings);
         stringsCopyReversed.reverse();
         
         const delays = [500, 200, 50];
         let result = '';
         
-        clulib.array.asyncForEachRight(strings, (element, index, array) => {
+        cluArray.asyncForEachRight(strings, (element, index, array) => {
           expect(array).toEqual(strings);
           expect(element).toEqual(array[index]);
           
@@ -76,9 +75,9 @@ clulib.array.test.main = () => {
       
       it('should preserve the original array', done => {
         const strings = ['first', 'second', 'third'];
-        const stringsCopy = goog.array.clone(strings);
+        const stringsCopy = googArray.clone(strings);
         
-        clulib.array.asyncForEachRight(strings, () => Promise.resolve())
+        cluArray.asyncForEachRight(strings, () => Promise.resolve())
           .then(() => {
             expect(strings).toEqual(stringsCopy);
             done();
