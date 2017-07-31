@@ -22,11 +22,15 @@ Example `package.json`:
 ```
 
 To include clulib, include all files under `./src` into your build process. All symbols can be found under the `clulib` namespace
-(e.g. `clulib.array.asyncForEach`). Clulib is still written with traditional `goog.provide`. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
+(e.g. `clulib.array.asyncForEach`).
+
+Clulib is still written with traditional `goog.provide`. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
 on the closure-compiler wiki page, for infos on how to use it with `goog.module`.
 
 Clulib heavily uses newer ECMAScript features. The closure-compiler can compile these down to ES5. The required input language
 compiler option for clulib is `ECMASCRIPT_2017`. Because of this, uncompiled code can only run on current Browsers (Chrome is recommended).
+
+Clulib is compatible with closures `ADVANCED_OPTIMIZATIONS` mode.
 
 This project follows [Semantic Versioning](http://semver.org/) as closely as possible.
 
@@ -38,6 +42,8 @@ Required tools:
 - Java
 - Yarn
 - Chrome Browser
+
+Run `yarn install` to install all npm packages.
 
 To generate the closure deps for local testing run: `yarn deps`. The html file under `tools/jasmine_runner/spec_runner_dev.html` can
 then run the uncompiled test code. Because of the newer ECMAScript features, this requires a current version of the Chrome Browser.
