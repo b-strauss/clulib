@@ -35,7 +35,13 @@
     "no-mixed-spaces-and-tabs": "error",
     "no-multiple-empty-lines": "error",
     "no-tabs": "error",
-    "no-trailing-spaces": "error",
+    "no-trailing-spaces": [
+      "error",
+      {
+        "skipBlankLines": true,
+        "ignoreComments": true
+      }
+    ],
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": [
       "error",

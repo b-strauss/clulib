@@ -20,7 +20,7 @@ clulib.cm.NodeTree = function (manager) {
    * @private
    */
   this.manager_ = manager;
-
+  
   /**
    * @type {Map<string, clulib.cm.ComponentNode>}
    * @const
@@ -35,7 +35,7 @@ clulib.cm.NodeTree = function (manager) {
  */
 clulib.cm.NodeTree.prototype.getComponent = function (id) {
   const node = this.collection_.get(id) || null;
-
+  
   if (node == null)
     return null;
   else
@@ -61,19 +61,19 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
    * @type {Array<Element>}
    */
   const elements = Array.from(rootElement.querySelectorAll(selector));
-
+  
   if (rootElement.hasAttribute(this.manager_.getTypeAttribute())
     && !rootElement.hasAttribute(this.manager_.getIdAttribute()))
     elements.push(rootElement);
-
+  
   if (elements.length === 0)
     return Promise.resolve();
-
+  
   /**
    * @type {Map<string, clulib.cm.ComponentNode>}
    */
   const unsolved = new Map();
-
+  
   // Instantiate components
   elements.forEach(element => {
     const node = new clulib.cm.ComponentNode(this.manager_, element);
@@ -85,14 +85,14 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
     this.collection_.set(/** @type {!string} */ (node.getId()), node);
     unsolved.set(/** @type {!string} */ (node.getId()), node);
   });
-
+  
   // Solve node tree
   unsolved.forEach(node => {
     const parentNode = this.findParentNode_(node);
     if (parentNode != null)
       parentNode.addChild(node);
   });
-
+  
   // Initialize asynchronously in tree order, bottom up.
   /**
    * @type {Array<Array<clulib.cm.ComponentNode>>}
@@ -104,12 +104,12 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
     const group = sparseOrderedNodeGroups[depth] || (sparseOrderedNodeGroups[depth] = []);
     group.push(node);
   });
-
+  
   /**
    * @type {Array<Array<clulib.cm.ComponentNode>>}
    */
   const denseOrderedNodeGroups = clulib.array.removeHoles(sparseOrderedNodeGroups);
-
+  
   return clulib.array.asyncForEachRight(denseOrderedNodeGroups, group => {
     return Promise.all(group.map(node => node.initialize()));
   });
@@ -122,20 +122,20 @@ clulib.cm.NodeTree.prototype.createTree = function (rootElement) {
  */
 clulib.cm.NodeTree.prototype.findParentNode_ = function (node) {
   const parent = goog.dom.getParentElement(node.getElement());
-
+  
   if (!goog.dom.isElement(parent))
     return null;
-
+  
   /**
    * @type {Element}
    */
   let foundElement = clulib.dom.closest(parent, `[${this.manager_.getIdAttribute()}]`);
-
+  
   if (foundElement == null)
     return null;
-
+  
   const foundId = foundElement.getAttribute(this.manager_.getIdAttribute());
-
+  
   return this.collection_.get(foundId);
 };
 

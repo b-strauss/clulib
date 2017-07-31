@@ -5,17 +5,17 @@ const customLaunchers = require('./browsers.conf.js').customLaunchers;
 module.exports = config => {
   config.set({
     frameworks: ['jasmine'],
-
+    
     files: ['./bin/test.js'],
-
+    
     customLaunchers,
-
+    
     preprocessors: {
       './bin/test.js': ['sourcemap']
     },
-
+    
     reporters: ['spec', 'saucelabs'],
-
+    
     specReporter: {
       suppressErrorSummary: false,
       suppressFailed: false,
@@ -24,7 +24,7 @@ module.exports = config => {
       showSpecTiming: true,
       failFast: false
     },
-
+    
     sauceLabs: {
       testName: 'clulib',
       retryLimit: 2,
@@ -35,7 +35,7 @@ module.exports = config => {
         'max-duration': 5400
       }
     },
-
+    
     browserDisconnectTimeout: 10 * 1000, // 10s - default 2s
     browserDisconnectTolerance: 1, // default 0
     browserNoActivityTimeout: 4 * 60 * 1000, // 4 min - default 10s
@@ -46,7 +46,7 @@ module.exports = config => {
     singleRun: true,
     concurrency: 5
   });
-
+  
   if (process.env.TRAVIS) {
     config.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
     config.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;

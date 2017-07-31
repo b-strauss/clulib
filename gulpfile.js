@@ -14,16 +14,16 @@ function deps (callback) {
   const roots = {
     './': '../../../..'
   };
-
+  
   let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
-
+  
   for (let key in roots) {
     if (roots.hasOwnProperty(key))
       command += ` --root_with_prefix="${path.normalize(key)} ${path.normalize(roots[key])}"`;
   }
-
+  
   command += ` > ${path.normalize('./tools/jasmine_runner/dev_deps.js')}`;
-
+  
   exec(command, function (err) {
     callback(err);
   });
@@ -40,15 +40,15 @@ function compile () {
     'test/**.js',
     'test_main.js'
   ];
-
+  
   const externs = [
     'node_modules/google-closure-compiler/contrib/externs/jasmine-2.0.js'
   ];
-
+  
   const destinationFolder = './bin';
-
+  
   const debug = false;
-
+  
   const options = {
     js: inputs.map(input => path.normalize(input)),
     externs: externs.map(extern => path.normalize(extern)),
@@ -82,7 +82,7 @@ function compile () {
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.js'
   };
-
+  
   return closureCompiler(options)
     .src()
     .pipe(sourcemaps.init())

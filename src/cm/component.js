@@ -50,21 +50,21 @@ goog.require('goog.ui.Component');
  */
 clulib.cm.Component = function () {
   clulib.cm.Component.base(this, 'constructor');
-
+  
   /**
    * The [clulib.cm.ComponentManager] this component belongs to.
    *
    * @type {clulib.cm.ComponentManager}
    */
   this.manager = null;
-
+  
   /**
    * @type {clulib.async.Completer}
    * @const
    * @package
    */
   this.initCompleter = new clulib.async.Completer();
-
+  
   /**
    * @type {clulib.async.Completer}
    * @const
