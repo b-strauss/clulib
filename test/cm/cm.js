@@ -60,7 +60,7 @@ exports = function () {
       expect(manager.getRegistry().get('four')).toBe(component4);
     });
     
-    it('should decorate dom elements with components', done => {
+    it('should decorate dom elements with components', async done => {
       const manager = new ComponentManager();
       
       let init1 = false;
@@ -78,17 +78,16 @@ exports = function () {
         'inner': component2
       });
       
-      manager.decorate(container)
-        .then(() => {
-          expect(init1).toBe(true);
-          expect(init2).toBe(true);
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      expect(init1).toBe(true);
+      expect(init2).toBe(true);
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should return the component for an element', done => {
+    it('should return the component for an element', async done => {
       const manager = new ComponentManager();
       
       let instance = null;
@@ -102,18 +101,16 @@ exports = function () {
         'inner': createDummyComponent()
       });
       
-      manager.decorate(container)
-        .then(() => {
-          const foundInstance = manager.getComponentForElement(container.querySelector('.outer'));
-          
-          expect(foundInstance).toBe(instance);
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      const foundInstance = manager.getComponentForElement(container.querySelector('.outer'));
+      expect(foundInstance).toBe(instance);
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should return components for an array of elements', done => {
+    it('should return components for an array of elements', async done => {
       const manager = new ComponentManager();
       
       let instance1 = null;
@@ -131,24 +128,22 @@ exports = function () {
         'inner': component2
       });
       
-      manager.decorate(container)
-        .then(() => {
-          const elements = [
-            container.querySelector('.outer'),
-            container.querySelector('.inner')
-          ];
-          
-          const foundInstances = manager.getComponentsForElementArray(elements);
-          
-          expect(foundInstances[0]).toBe(instance1);
-          expect(foundInstances[1]).toBe(instance2);
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      const elements = [
+        container.querySelector('.outer'),
+        container.querySelector('.inner')
+      ];
+      
+      const foundInstances = manager.getComponentsForElementArray(elements);
+      expect(foundInstances[0]).toBe(instance1);
+      expect(foundInstances[1]).toBe(instance2);
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should return a component by selector', done => {
+    it('should return a component by selector', async done => {
       const manager = new ComponentManager();
       
       let instance = null;
@@ -162,18 +157,17 @@ exports = function () {
         'inner': createDummyComponent()
       });
       
-      manager.decorate(container)
-        .then(() => {
-          const foundInstance = manager.queryComponent('.outer');
-          
-          expect(foundInstance).toBe(instance);
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      const foundInstance = manager.queryComponent('.outer');
+      
+      expect(foundInstance).toBe(instance);
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should return multiple components by selector', done => {
+    it('should return multiple components by selector', async done => {
       const manager = new ComponentManager();
       
       let instance1 = null;
@@ -191,19 +185,18 @@ exports = function () {
         'inner': component2
       });
       
-      manager.decorate(container)
-        .then(() => {
-          const foundInstances = manager.queryComponentAll('.outer, .inner');
-          
-          expect(foundInstances[0]).toBe(instance1);
-          expect(foundInstances[1]).toBe(instance2);
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      const foundInstances = manager.queryComponentAll('.outer, .inner');
+      
+      expect(foundInstances[0]).toBe(instance1);
+      expect(foundInstances[1]).toBe(instance2);
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should initialize components in tree order', done => {
+    it('should initialize components in tree order', async done => {
       const manager = new ComponentManager();
       
       let output = '';
@@ -229,16 +222,15 @@ exports = function () {
         'inner': component2
       });
       
-      manager.decorate(container)
-        .then(() => {
-          expect(output).toBe('innerouter');
-          
-          manager.disposeAll();
-          done();
-        });
+      await manager.decorate(container);
+      
+      expect(output).toBe('innerouter');
+      
+      manager.disposeAll();
+      done();
     });
     
-    it('should dispose all components', done => {
+    it('should dispose all components', async done => {
       const manager = new ComponentManager();
       
       manager.addComponentMap({
@@ -246,18 +238,17 @@ exports = function () {
         'inner': createDummyComponent()
       });
       
-      manager.decorate(container)
-        .then(() => {
-          expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
-          expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
-          
-          manager.disposeAll();
-          
-          expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
-          expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
-          
-          done();
-        });
+      await manager.decorate(container);
+      
+      expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
+      expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
+      
+      manager.disposeAll();
+      
+      expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
+      expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
+      
+      done();
     });
   });
 };
@@ -269,8 +260,7 @@ exports = function () {
  * @param {(function():Promise|null)=} waitForFn
  * @returns {function(new:BaseComponent)}
  */
-function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null,
-  waitForFn = null) {
+function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null, waitForFn = null) {
   waitForFn = waitForFn || (() => Promise.resolve());
   
   /**
