@@ -9,6 +9,13 @@
     "type": "git",
     "url": "https://github.com/b-strauss/clulib.git"
   },
+  "keywords": [
+    "javascript",
+    "library",
+    "closure",
+    "es6",
+    "es2015"
+  ],
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile",
     "deps": "./node_modules/.bin/gulp deps",
