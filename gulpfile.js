@@ -53,7 +53,7 @@ function compile () {
     js: inputs.map(input => path.normalize(input)),
     externs: externs.map(extern => path.normalize(extern)),
     entry_point: 'test.main',
-    language_in: 'ECMASCRIPT_2015',
+    language_in: 'ECMASCRIPT_2017',
     language_out: 'ECMASCRIPT5_STRICT',
     compilation_level: 'ADVANCED',
     warning_level: 'VERBOSE',
