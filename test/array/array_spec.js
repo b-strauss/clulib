@@ -15,7 +15,7 @@ exports = function () {
     });
     
     describe('asyncForEach', () => {
-      it('should execute async functions for every element in an array consecutively', async done => {
+      it('should execute async functions for every element in an array consecutively', async () => {
         const strings = ['first', 'second', 'third'];
         const delays = [500, 200, 50];
         let result = '';
@@ -33,22 +33,20 @@ exports = function () {
         });
         
         expect(result).toEqual(strings.join(''));
-        done();
       });
       
-      it('should preserve the original array', async done => {
+      it('should preserve the original array', async () => {
         const strings = ['first', 'second', 'third'];
         const stringsCopy = googArray.clone(strings);
         
         await cluArray.asyncForEach(strings, () => Promise.resolve());
         
         expect(strings).toEqual(stringsCopy);
-        done();
       });
     });
     
     describe('asyncForEachRight', () => {
-      it('should execute async functions for every element in an array consecutively, in reverse order', async done => {
+      it('should execute async functions for every element in an array consecutively, in reverse order', async () => {
         const strings = ['first', 'second', 'third'];
         const stringsCopyReversed = googArray.clone(strings);
         stringsCopyReversed.reverse();
@@ -69,17 +67,15 @@ exports = function () {
         });
         
         expect(result).toEqual(stringsCopyReversed.join(''));
-        done();
       });
       
-      it('should preserve the original array', async done => {
+      it('should preserve the original array', async () => {
         const strings = ['first', 'second', 'third'];
         const stringsCopy = googArray.clone(strings);
         
         await cluArray.asyncForEachRight(strings, () => Promise.resolve());
         
         expect(strings).toEqual(stringsCopy);
-        done();
       });
     });
   });

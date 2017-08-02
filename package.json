@@ -26,13 +26,13 @@
     "lint"
   ],
   "devDependencies": {
-    "eslint": "4.2.0",
+    "eslint": "4.3.0",
     "google-closure-compiler": "20170626.0.0",
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
     "gulp-sourcemaps": "2.6.0",
-    "jasmine": "2.6.0",
-    "jasmine-core": "2.6.4",
+    "jasmine": "2.7.0",
+    "jasmine-core": "2.7.0",
     "karma": "1.7.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.0",

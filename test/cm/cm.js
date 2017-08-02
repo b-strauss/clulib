@@ -60,7 +60,7 @@ exports = function () {
       expect(manager.getRegistry().get('four')).toBe(component4);
     });
     
-    it('should decorate dom elements with components', async done => {
+    it('should decorate dom elements with components', async () => {
       const manager = new ComponentManager();
       
       let init1 = false;
@@ -84,10 +84,9 @@ exports = function () {
       expect(init2).toBe(true);
       
       manager.disposeAll();
-      done();
     });
     
-    it('should return the component for an element', async done => {
+    it('should return the component for an element', async () => {
       const manager = new ComponentManager();
       
       let instance = null;
@@ -107,10 +106,9 @@ exports = function () {
       expect(foundInstance).toBe(instance);
       
       manager.disposeAll();
-      done();
     });
     
-    it('should return components for an array of elements', async done => {
+    it('should return components for an array of elements', async () => {
       const manager = new ComponentManager();
       
       let instance1 = null;
@@ -140,10 +138,9 @@ exports = function () {
       expect(foundInstances[1]).toBe(instance2);
       
       manager.disposeAll();
-      done();
     });
     
-    it('should return a component by selector', async done => {
+    it('should return a component by selector', async () => {
       const manager = new ComponentManager();
       
       let instance = null;
@@ -164,10 +161,9 @@ exports = function () {
       expect(foundInstance).toBe(instance);
       
       manager.disposeAll();
-      done();
     });
     
-    it('should return multiple components by selector', async done => {
+    it('should return multiple components by selector', async () => {
       const manager = new ComponentManager();
       
       let instance1 = null;
@@ -193,10 +189,9 @@ exports = function () {
       expect(foundInstances[1]).toBe(instance2);
       
       manager.disposeAll();
-      done();
     });
     
-    it('should initialize components in tree order', async done => {
+    it('should initialize components in tree order', async () => {
       const manager = new ComponentManager();
       
       let output = '';
@@ -227,10 +222,9 @@ exports = function () {
       expect(output).toBe('innerouter');
       
       manager.disposeAll();
-      done();
     });
     
-    it('should dispose all components', async done => {
+    it('should dispose all components', async () => {
       const manager = new ComponentManager();
       
       manager.addComponentMap({
@@ -247,8 +241,6 @@ exports = function () {
       
       expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
       expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
-      
-      done();
     });
   });
 };
