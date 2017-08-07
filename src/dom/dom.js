@@ -3,8 +3,8 @@ goog.provide('clulib.dom');
 goog.require('goog.dom');
 
 /**
- * Returns true if the [element] would be selected by the specified
- * [selector] string, false otherwise.
+ * Returns true if the element would be selected by the specified
+ * selector string, false otherwise.
  *
  * @param {Element} element
  * @param {string} selector
@@ -24,8 +24,8 @@ clulib.dom.matches = function (element, selector) {
 };
 
 /**
- * Returns the closest ancestor of the specified [element] (or the specified element itself)
- * which matches the [selector]. Returns null, if there is no such ancestor.
+ * Returns the closest ancestor of the specified element (or the specified element itself)
+ * which matches the selector. Returns null, if there is no such ancestor.
  *
  * @param {Element} element
  * @param {string} selector

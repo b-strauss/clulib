@@ -3,9 +3,9 @@ goog.provide('clulib.async.Completer');
 goog.require('goog.asserts');
 
 /**
- * A class to produce [Promise] objects and to complete them later with a value or error.
+ * A class to produce Promise objects and to complete them later with a value or error.
  *
- * This class can be used to create [Promise] objects and to hand them out, without having
+ * This class can be used to create Promise objects and to hand them out, without having
  * to resolve them onspot.
  *
  * @constructor
@@ -42,7 +42,7 @@ clulib.async.Completer = function () {
 };
 
 /**
- * Returns the [Promise] associated with this Completer.
+ * Returns the Promise associated with this Completer.
  *
  * @returns {Promise<T>}
  */

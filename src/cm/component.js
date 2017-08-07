@@ -91,7 +91,7 @@ clulib.cm.Component.prototype.isTag = function (tagname) {
 /**
  * Returns the JSON configuration associated with the component.
  *
- * By default, this is the JSON config that has been serialized as base64 and attached
+ * This is the JSON config that has been serialized as base64 and attached
  * to the element of this component as a data attribute named 'data-cmp-cfg'.
  *
  * @returns {*}
