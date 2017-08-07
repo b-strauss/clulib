@@ -3,7 +3,10 @@ goog.provide('clulib.async.Completer');
 goog.require('goog.asserts');
 
 /**
- * TODO: docs
+ * A class to produce [Promise] objects and to complete them later with a value or error.
+ *
+ * This class can be used to create [Promise] objects and to hand them out, without having
+ * to resolve them onspot.
  *
  * @constructor
  * @template T
@@ -39,6 +42,8 @@ clulib.async.Completer = function () {
 };
 
 /**
+ * Returns the [Promise] associated with this Completer.
+ *
  * @returns {Promise<T>}
  */
 clulib.async.Completer.prototype.getPromise = function () {
@@ -46,6 +51,8 @@ clulib.async.Completer.prototype.getPromise = function () {
 };
 
 /**
+ * Resolves this Completer's Promise with the given value.
+ *
  * @param {(T|Promise<T>)=} value
  */
 clulib.async.Completer.prototype.resolve = function (value = null) {
@@ -55,6 +62,8 @@ clulib.async.Completer.prototype.resolve = function (value = null) {
 };
 
 /**
+ * Rejects this Completer's Promise with the given reason.
+ *
  * @param {*=} reason
  */
 clulib.async.Completer.prototype.reject = function (reason = null) {
@@ -64,6 +73,8 @@ clulib.async.Completer.prototype.reject = function (reason = null) {
 };
 
 /**
+ * Returns true if the Completer has already been completed with value or error.
+ *
  * @returns {boolean}
  */
 clulib.async.Completer.prototype.hasCompleted = function () {
