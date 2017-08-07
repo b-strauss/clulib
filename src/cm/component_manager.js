@@ -5,7 +5,13 @@ goog.require('clulib.cm.NodeTree');
 goog.require('goog.asserts');
 
 /**
- * TODO: docs
+ * A class to automatically decorate HTML elements with [clulib.cm.Component]s, based on HTML data-attributes.
+ * It is intended to be used on projects that generate most of their HTML on the server side.
+ *
+ * Calling [decorate] searches the DOM tree inside the target element (the body by default) for all elements
+ * that have data-cmp attributes and decorates them by key with instances of [clulib.cm.Component]s that have been
+ * registered with the ComponentManager. The ComponentManager takes care of instantiation, decoration, and lifecycle
+ * management. See [clulib.cm.Component] for more details on how a component works.
  *
  * @final
  * @constructor
@@ -48,6 +54,8 @@ clulib.cm.ComponentManager = function () {
 };
 
 /**
+ * Gets the attribute that serves as key for the component.
+ *
  * @returns {string}
  */
 clulib.cm.ComponentManager.prototype.getTypeAttribute = function () {
@@ -55,6 +63,8 @@ clulib.cm.ComponentManager.prototype.getTypeAttribute = function () {
 };
 
 /**
+ * Gets the attribute that serves as unique id for every instance of a component.
+ *
  * @returns {string}
  */
 clulib.cm.ComponentManager.prototype.getIdAttribute = function () {
@@ -62,6 +72,8 @@ clulib.cm.ComponentManager.prototype.getIdAttribute = function () {
 };
 
 /**
+ * Gets the attribute that holds a base64 encoded JSON configuration for the component.
+ *
  * @returns {string}
  */
 clulib.cm.ComponentManager.prototype.getConfigAttribute = function () {
@@ -69,6 +81,10 @@ clulib.cm.ComponentManager.prototype.getConfigAttribute = function () {
 };
 
 /**
+ * Gets the registry of the ComponentManager.
+ *
+ * The registry is a Map of keys to component constructors.
+ *
  * @returns {Map<string, Function>}
  */
 clulib.cm.ComponentManager.prototype.getRegistry = function () {
@@ -76,6 +92,8 @@ clulib.cm.ComponentManager.prototype.getRegistry = function () {
 };
 
 /**
+ * Gets the instance of the component for an element that has been decorated by this ComponentManager.
+ *
  * @param {Element} element
  * @returns {?clulib.cm.Component}
  */
@@ -89,6 +107,8 @@ clulib.cm.ComponentManager.prototype.getComponentForElement = function (element)
 };
 
 /**
+ * Gets the instances of components for an array of elements that have been decorated by this ComponentManager.
+ *
  * @param {Array<Element>} elementArray
  * @returns {Array<clulib.cm.Component>}
  */
@@ -99,7 +119,7 @@ clulib.cm.ComponentManager.prototype.getComponentsForElementArray = function (el
 };
 
 /**
- * Returns the component of the element that matches the selector.
+ * Returns the component of an element that matches the selector, and has been decorated by this ComponentManager.
  * The element can sit anywhere in the document.
  *
  * Elements optained with this method are not guaranteed to be initialized.
@@ -113,7 +133,7 @@ clulib.cm.ComponentManager.prototype.queryComponent = function (selector) {
 };
 
 /**
- * Returns the components of the elements that match the selector.
+ * Returns the components of the elements that match the selector, and have been decorated by this ComponentManager.
  * The elements can sit anywhere in the document.
  *
  * Elements optained with this method are not guaranteed to be initialized.
@@ -135,6 +155,10 @@ clulib.cm.ComponentManager.prototype.disposeNode = function (id) {
 };
 
 /**
+ * Registers a component constructor by key with this ComponentManager.
+ *
+ * The key must match the data-cmp attribute on the elements that wish to be decorated.
+ *
  * @param {string} type
  * @param {function(new:clulib.cm.Component)} constructor
  */
@@ -144,6 +168,8 @@ clulib.cm.ComponentManager.prototype.addComponent = function (type, constructor)
 };
 
 /**
+ * Registers a Map of keys to component constructors with this ComponentManager.
+ *
  * @param {!Object<string, function(new:clulib.cm.Component)>} obj
  */
 clulib.cm.ComponentManager.prototype.addComponentMap = function (obj) {
@@ -153,6 +179,10 @@ clulib.cm.ComponentManager.prototype.addComponentMap = function (obj) {
 };
 
 /**
+ * Decorates all elements inside the provided rootElement with their associated components.
+ *
+ * This kicks off the lifecycle management.
+ *
  * @param {Element=} rootElement
  * @returns {Promise}
  */
@@ -160,6 +190,9 @@ clulib.cm.ComponentManager.prototype.decorate = function (rootElement = document
   return this.nodeTree_.createTree(rootElement);
 };
 
+/**
+ * Disposes all components managed by this ComponentManager.
+ */
 clulib.cm.ComponentManager.prototype.disposeAll = function () {
   this.nodeTree_.disposeAll();
 };
