@@ -1,11 +1,12 @@
 'use strict';
 
-const exec = require('child_process').exec;
+const {exec} = require('child_process');
 const path = require('path');
 
 const closureCompiler = require('google-closure-compiler').gulp();
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
+const {env} = require('gulp-util');
 
 /**
  * @param {Function} callback
@@ -47,7 +48,7 @@ function compile () {
 
   const destinationFolder = './bin';
 
-  const debug = false;
+  const isDebug = env.debug != null && env.debug === 'true';
 
   const options = {
     js: inputs.map(input => path.normalize(input)),
@@ -55,10 +56,10 @@ function compile () {
     entry_point: 'test.main',
     language_in: 'ECMASCRIPT_2017',
     language_out: 'ECMASCRIPT5_STRICT',
-    compilation_level: 'ADVANCED',
+    compilation_level: isDebug ? 'SIMPLE' : 'ADVANCED',
     warning_level: 'VERBOSE',
     define: [
-      debug ? 'goog.DEBUG=true' : 'goog.DEBUG=false'
+      `goog.DEBUG=${isDebug ? 'true' : 'false'}`
     ],
     assume_function_wrapper: 'true',
     rewrite_polyfills: 'true',

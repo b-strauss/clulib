@@ -23,7 +23,7 @@ install:
 
 before_script:
   - yarn lint
-  - yarn compile
 
 script:
+  - yarn compile
   - yarn test

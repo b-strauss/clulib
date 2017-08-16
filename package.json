@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "compile": "./node_modules/.bin/gulp compile",
+    "compile-debug": "./node_modules/.bin/gulp compile --debug=true",
     "deps": "./node_modules/.bin/gulp deps",
     "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" browsers.conf.js gulpfile.js karma.conf.js test_main.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"
@@ -31,6 +32,7 @@
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
     "gulp-sourcemaps": "2.6.0",
+    "gulp-util": "3.0.8",
     "jasmine": "2.7.0",
     "jasmine-core": "2.7.0",
     "karma": "1.7.0",

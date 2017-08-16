@@ -1,6 +1,6 @@
 'use strict';
 
-const customLaunchers = require('./browsers.conf.js').customLaunchers;
+const {customLaunchers} = require('./browsers.conf.js');
 
 module.exports = config => {
   config.set({
