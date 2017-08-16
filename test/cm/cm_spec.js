@@ -3,9 +3,9 @@ goog.module('test.clulib.cm');
 const ComponentManager = goog.require('clulib.cm.ComponentManager');
 const BaseComponent = goog.require('clulib.cm.Component');
 
-const dom = goog.require('goog.dom');
-const classlist = goog.require('goog.dom.classlist');
-const dataset = goog.require('goog.dom.dataset');
+const {appendChild, removeNode} = goog.require('goog.dom');
+const {contains} = goog.require('goog.dom.classlist');
+const {has} = goog.require('goog.dom.dataset');
 
 exports = function () {
   describe('clulib.cm.ComponentManager', () => {
@@ -67,10 +67,10 @@ exports = function () {
       let init2 = false;
 
       const component1 = createDummyComponent(null, component => {
-        init1 = classlist.contains(component.getElement(), 'outer');
+        init1 = contains(component.getElement(), 'outer');
       });
       const component2 = createDummyComponent(null, component => {
-        init2 = classlist.contains(component.getElement(), 'inner');
+        init2 = contains(component.getElement(), 'inner');
       });
 
       manager.addComponentMap({
@@ -234,13 +234,13 @@ exports = function () {
 
       await manager.decorate(container);
 
-      expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(true);
-      expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(true);
+      expect(has(container.querySelector('.outer'), 'cmpId')).toBe(true);
+      expect(has(container.querySelector('.inner'), 'cmpId')).toBe(true);
 
       manager.disposeAll();
 
-      expect(dataset.has(container.querySelector('.outer'), 'cmpId')).toBe(false);
-      expect(dataset.has(container.querySelector('.inner'), 'cmpId')).toBe(false);
+      expect(has(container.querySelector('.outer'), 'cmpId')).toBe(false);
+      expect(has(container.querySelector('.inner'), 'cmpId')).toBe(false);
     });
   });
 };
@@ -306,7 +306,7 @@ function addDummyHtml () {
     </div>
   `;
 
-  dom.appendChild(document.body, container);
+  appendChild(document.body, container);
 
   return container;
 }
@@ -315,5 +315,5 @@ function addDummyHtml () {
  * @param {Element} element
  */
 function removeDummyHtml (element) {
-  dom.removeNode(element);
+  removeNode(element);
 }

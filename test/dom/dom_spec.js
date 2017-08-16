@@ -1,8 +1,8 @@
 goog.module('test.clulib.dom');
 
-const cluDom = goog.require('clulib.dom');
+const {matches, closest} = goog.require('clulib.dom');
 
-const googDom = goog.require('goog.dom');
+const {appendChild, removeNode} = goog.require('goog.dom');
 
 exports = function () {
   describe('clulib.dom', () => {
@@ -12,13 +12,13 @@ exports = function () {
         element.id = 'id-selector';
         element.classList.add('class-selector');
 
-        expect(cluDom.matches(element, '#id-selector.class-selector')).toBe(true);
+        expect(matches(element, '#id-selector.class-selector')).toBe(true);
       });
 
       it('should return false if the element would not be selected by the specified selector string', () => {
         const element = document.createElement('div');
 
-        expect(cluDom.matches(element, '#some-id')).toBe(false);
+        expect(matches(element, '#some-id')).toBe(false);
       });
     });
 
@@ -31,7 +31,7 @@ exports = function () {
           </div>
         `;
         const origin = container.querySelector('.origin');
-        const foundId = cluDom.closest(origin, '.cls').id;
+        const foundId = closest(origin, '.cls').id;
 
         expect(foundId).toBe('target');
       });
@@ -46,7 +46,7 @@ exports = function () {
           </div>
         `;
         const origin = container.querySelector('#origin');
-        const foundId = cluDom.closest(origin, '.cls').id;
+        const foundId = closest(origin, '.cls').id;
 
         expect(foundId).toBe('target');
       });
@@ -61,7 +61,7 @@ exports = function () {
           </div>
         `;
         const origin = container.querySelector('#origin');
-        const foundObject = cluDom.closest(origin, '.cls');
+        const foundObject = closest(origin, '.cls');
 
         expect(foundObject).toBe(null);
       });
@@ -76,14 +76,14 @@ exports = function () {
           </div>
         `;
 
-        googDom.appendChild(document.body, container);
+        appendChild(document.body, container);
 
         const origin = container.querySelector('#origin');
-        const foundObject = cluDom.closest(origin, '.cls');
+        const foundObject = closest(origin, '.cls');
 
         expect(foundObject).toBe(null);
 
-        googDom.removeNode(container);
+        removeNode(container);
       });
     });
   });
