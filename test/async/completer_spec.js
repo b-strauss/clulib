@@ -1,6 +1,7 @@
 goog.module('test.clulib.async.Completer');
 
 const Completer = goog.require('clulib.async.Completer');
+const AssertionError = goog.require('goog.asserts.AssertionError');
 
 exports = function () {
   describe('clulib.async.Completer', () => {
@@ -41,5 +42,27 @@ exports = function () {
 
       com.resolve();
     });
+
+    if (goog.DEBUG) {
+      it('DEBUG - should throw an assertion error, if it\'s resolved more than once', () => {
+        const com = new Completer();
+
+        com.resolve();
+
+        expect(() => {
+          com.resolve();
+        }).toThrowError(AssertionError, 'Assertion failed: Completer should not be completed more than once.');
+      });
+
+      it('DEBUG - should throw an assertion error, if it\'s rejected more than once', () => {
+        const com = new Completer();
+
+        com.reject();
+
+        expect(() => {
+          com.reject();
+        }).toThrowError(AssertionError, 'Assertion failed: Completer should not be completed more than once.');
+      });
+    }
   });
 };
