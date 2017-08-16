@@ -25,5 +25,7 @@ before_script:
   - yarn lint
 
 script:
+  - yarn compile-debug
+  - yarn test
   - yarn compile
   - yarn test
