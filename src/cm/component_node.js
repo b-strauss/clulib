@@ -17,52 +17,52 @@ clulib.cm.ComponentNode = function (manager, element) {
    * @private
    */
   this.manager_ = manager;
-  
+
   /**
    * @type {Element}
    * @const
    * @private
    */
   this.element_ = element;
-  
+
   /**
    * @type {?clulib.cm.Component}
    * @private
    */
   this.component_ = null;
-  
+
   /**
    * @type {?string}
    * @private
    */
   this.id_ = null;
-  
+
   /**
    * @type {clulib.cm.ComponentNode}
    * @private
    */
   this.parent_ = null;
-  
+
   /**
    * @type {Map<string, clulib.cm.ComponentNode>}
    * @const
    * @private
    */
   this.children_ = new Map();
-  
+
   /**
    * @type {number}
    * @private
    */
   this.depth_ = 0;
-  
+
   /**
    * @type {string}
    * @const
    * @private
    */
   this.type_ = this.element_.getAttribute(this.manager_.getTypeAttribute());
-  
+
   /**
    * @type {?string}
    * @const
@@ -129,10 +129,10 @@ clulib.cm.ComponentNode.prototype.getId = function () {
  */
 clulib.cm.ComponentNode.prototype.instantiate = function (constructor) {
   this.component_ = new constructor();
-  
+
   this.id_ = this.component_.getId();
   this.element_.setAttribute(this.manager_.getIdAttribute(), /** @type {!string} */ (this.id_));
-  
+
   this.component_.manager = this.manager_;
   if (this.config_ != null)
     this.component_.setModel(JSON.parse(goog.crypt.base64.decodeString(this.config_)));

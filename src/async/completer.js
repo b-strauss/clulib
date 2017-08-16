@@ -17,13 +17,13 @@ clulib.async.Completer = function () {
    * @private
    */
   this.resolveFn_ = null;
-  
+
   /**
    * @type {?(function(*=): void)}
    * @private
    */
   this.rejectFn_ = null;
-  
+
   /**
    * @type {Promise<T>}
    * @const
@@ -33,7 +33,7 @@ clulib.async.Completer = function () {
     this.resolveFn_ = rs;
     this.rejectFn_ = rj;
   });
-  
+
   /**
    * @type {boolean}
    * @private

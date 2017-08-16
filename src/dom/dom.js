@@ -19,7 +19,7 @@ clulib.dom.matches = function (element, selector) {
     element['webkitMatchesSelector'] ||
     element['mozMatchesSelector'] ||
     element['msMatchesSelector'];
-  
+
   return matches.call(element, selector);
 };
 

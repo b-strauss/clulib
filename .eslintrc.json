@@ -37,11 +37,7 @@
     "no-multiple-empty-lines": "error",
     "no-tabs": "error",
     "no-trailing-spaces": [
-      "error",
-      {
-        "skipBlankLines": true,
-        "ignoreComments": true
-      }
+      "error"
     ],
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": [

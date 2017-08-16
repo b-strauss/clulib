@@ -15,7 +15,7 @@ goog.require('goog.events.EventType');
  */
 clulib.ui.ToggleButton = function () {
   clulib.ui.ToggleButton.base(this, 'constructor');
-  
+
   /**
    * @type {boolean}
    * @private
@@ -46,7 +46,7 @@ clulib.ui.ToggleButton.EventType = {
  */
 clulib.ui.ToggleButton.prototype.onInit = function () {
   clulib.ui.ToggleButton.base(this, 'onInit');
-  
+
   this.isChecked_ = goog.dom.classlist.contains(this.getElement(), clulib.ui.ToggleButton.CHECKED_CLASS);
   this.getHandler().listen(this.getElement(), goog.events.EventType.CLICK, () => {
     this.toggle();
@@ -58,7 +58,7 @@ clulib.ui.ToggleButton.prototype.onInit = function () {
  */
 clulib.ui.ToggleButton.prototype.isDisabled = function () {
   let button = /** @type {HTMLButtonElement} */ (this.getElement());
-  
+
   return button.disabled;
 };
 

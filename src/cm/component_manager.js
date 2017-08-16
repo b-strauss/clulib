@@ -23,28 +23,28 @@ clulib.cm.ComponentManager = function () {
    * @private
    */
   this.typeAttribute_ = 'data-cmp';
-  
+
   /**
    * @type {string}
    * @const
    * @private
    */
   this.idAttribute_ = 'data-cmp-id';
-  
+
   /**
    * @type {string}
    * @const
    * @private
    */
   this.configAttribute_ = 'data-cmp-cfg';
-  
+
   /**
    * @type {Map<string, Function>}
    * @const
    * @private
    */
   this.registry_ = new Map();
-  
+
   /**
    * @type {clulib.cm.NodeTree}
    * @const
@@ -100,9 +100,9 @@ clulib.cm.ComponentManager.prototype.getRegistry = function () {
 clulib.cm.ComponentManager.prototype.getComponentForElement = function (element) {
   if (element == null || element.hasAttribute(this.idAttribute_) === false)
     return null;
-  
+
   const id = element.getAttribute(this.idAttribute_);
-  
+
   return this.nodeTree_.getComponent(id);
 };
 
