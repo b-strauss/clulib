@@ -13,6 +13,8 @@
     "javascript",
     "library",
     "closure",
+    "closure-library",
+    "closure-compiler",
     "es6",
     "es2015"
   ],
