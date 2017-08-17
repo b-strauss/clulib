@@ -77,8 +77,7 @@ function compile () {
       'checkRegExp',
       'deprecatedAnnotations',
       'deprecated',
-      'extraRequire',
-      'inferredConstCheck'
+      'extraRequire'
     ],
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.min.js'
