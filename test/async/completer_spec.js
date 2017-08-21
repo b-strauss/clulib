@@ -5,42 +5,38 @@ const AssertionError = goog.require('goog.asserts.AssertionError');
 
 exports = function () {
   describe('clulib.async.Completer', () => {
-    it('should resolve its promise', done => {
+    it('should resolve its promise', async () => {
       const com = new Completer();
       const result = 'result';
 
-      com.getPromise()
-        .then(r => {
-          expect(r).toBe(result);
-          done();
-        });
-
       com.resolve(result);
+
+      const r = await com.getPromise();
+
+      expect(r).toBe(result);
     });
 
-    it('should reject its promise', done => {
+    it('should reject its promise', async () => {
       const com = new Completer();
       const error = 'error';
 
-      com.getPromise()
-        .catch(e => {
-          expect(e).toBe(error);
-          done();
-        });
-
       com.reject(error);
+
+      try {
+        await com.getPromise();
+      } catch (e) {
+        expect(e).toBe(error);
+      }
     });
 
-    it('should know if its promise has completed', done => {
+    it('should know if its promise has completed', () => {
       const com = new Completer();
 
-      com.getPromise()
-        .then(() => {
-          expect(com.hasCompleted()).toBe(true);
-          done();
-        });
+      expect(com.hasCompleted()).toBe(false);
 
       com.resolve();
+
+      expect(com.hasCompleted()).toBe(true);
     });
 
     if (goog.DEBUG) {
