@@ -3,7 +3,7 @@ goog.module('test.clulib.cm');
 const ComponentManager = goog.require('clulib.cm.ComponentManager');
 const BaseComponent = goog.require('clulib.cm.Component');
 
-const {appendChild, removeNode} = goog.require('goog.dom');
+const {appendChild, removeNode, getFirstElementChild} = goog.require('goog.dom');
 const {contains} = goog.require('goog.dom.classlist');
 const {has} = goog.require('goog.dom.dataset');
 
@@ -37,6 +37,7 @@ exports = function () {
 
       manager.addComponent('foo', component);
 
+      expect(manager.getRegistry().size).toBe(1);
       expect(manager.getRegistry().get('foo')).toBe(component);
     });
 
@@ -54,6 +55,7 @@ exports = function () {
         'four': component4
       });
 
+      expect(manager.getRegistry().size).toBe(4);
       expect(manager.getRegistry().get('one')).toBe(component1);
       expect(manager.getRegistry().get('two')).toBe(component2);
       expect(manager.getRegistry().get('three')).toBe(component3);
@@ -224,6 +226,43 @@ exports = function () {
       manager.disposeAll();
     });
 
+    it('should not change the dom tree on decoration', async () => {
+      const manager = new ComponentManager();
+
+      manager.addComponentMap({
+        'outer': createDummyComponent(),
+        'inner': createDummyComponent()
+      });
+
+      await manager.decorate(container);
+
+      const outerElement = container.querySelector('.outer');
+      const middleElement = getFirstElementChild(outerElement);
+      const innerElement = getFirstElementChild(middleElement);
+
+      expect(contains(outerElement, 'outer')).toBe(true);
+      expect(contains(middleElement, 'middle')).toBe(true);
+      expect(contains(innerElement, 'inner')).toBe(true);
+
+      manager.disposeAll();
+    });
+
+    it('should load the json config of a component', async () => {
+      const manager = new ComponentManager();
+
+      manager.addComponentMap({
+        'outer': createDummyComponent(null, instance => {
+          const config = instance.getConfig();
+          expect(config['data']).toBe('abc');
+        }),
+        'inner': createDummyComponent()
+      });
+
+      await manager.decorate(container);
+
+      manager.disposeAll();
+    });
+
     it('should dispose all components', async () => {
       const manager = new ComponentManager();
 
@@ -298,8 +337,9 @@ function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeF
  */
 function addDummyHtml () {
   const container = document.createElement('div');
+  // data-cmp-cfg is the object {data: "abc"}
   container.innerHTML = `
-    <div class="outer" data-cmp="outer" data-cfg="eyJkYXRhIjoiYWJjIn0=">
+    <div class="outer" data-cmp="outer" data-cmp-cfg="eyJkYXRhIjoiYWJjIn0=">
       <div class="middle">
         <div class="inner" data-cmp="inner"></div>
       </div>
