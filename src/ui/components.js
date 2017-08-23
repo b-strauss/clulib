@@ -1,10 +1,12 @@
-goog.provide('clulib.ui.components');
+goog.module('clulib.ui.components');
 
-goog.require('clulib.ui.ToggleButton');
+const ToggleButton = goog.require('clulib.ui.ToggleButton');
 
 /**
  * @type {Object<string, function(new:clulib.cm.Component)>}
  */
-clulib.ui.components.collection = {
-  'clu-toggle-button': clulib.ui.ToggleButton
+const collection = {
+  'clu-toggle-button': ToggleButton
 };
+
+exports = {collection};

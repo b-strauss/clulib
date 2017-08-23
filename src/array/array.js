@@ -1,4 +1,4 @@
-goog.provide('clulib.array');
+goog.module('clulib.array');
 
 /**
  * Removes all holes from an array.
@@ -8,9 +8,9 @@ goog.provide('clulib.array');
  * @param {Array} array
  * @returns {Array}
  */
-clulib.array.removeHoles = function (array) {
+function removeHoles (array) {
   return array.filter(() => true);
-};
+}
 
 /**
  * Calls an async function for each element in an array. Subsequent
@@ -25,11 +25,11 @@ clulib.array.removeHoles = function (array) {
  * @returns {Promise}
  * @template T
  */
-clulib.array.asyncForEach = function (array, action) {
+function asyncForEach (array, action) {
   return array.reduce((promise, element, index, arr) => {
     return promise.then(() => action(element, index, arr));
   }, Promise.resolve());
-};
+}
 
 /**
  * Calls an async function for each element in an array, starting from
@@ -44,8 +44,10 @@ clulib.array.asyncForEach = function (array, action) {
  * @returns {Promise}
  * @template T
  */
-clulib.array.asyncForEachRight = function (array, action) {
+function asyncForEachRight (array, action) {
   return array.reduceRight((promise, element, index, arr) => {
     return promise.then(() => action(element, index, arr));
   }, Promise.resolve());
-};
+}
+
+exports = {removeHoles, asyncForEach, asyncForEachRight};

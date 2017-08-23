@@ -50,10 +50,16 @@ exports = function () {
         }).toThrowError(AssertionError, 'Assertion failed: Completer should not be completed more than once.');
       });
 
-      it('DEBUG - should throw an assertion error, if it\'s rejected more than once', () => {
+      it('DEBUG - should throw an assertion error, if it\'s rejected more than once', async () => {
         const com = new Completer();
 
         com.reject();
+
+        try {
+          await com.getPromise();
+        } catch (error) {
+          // intentionally empty
+        }
 
         expect(() => {
           com.reject();

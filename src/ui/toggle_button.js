@@ -1,54 +1,53 @@
-goog.provide('clulib.ui.ToggleButton');
-goog.provide('clulib.ui.ToggleButton.EventType');
+goog.module('clulib.ui.ToggleButton');
 
-goog.require('clulib.cm.Component');
+const {Component} = goog.require('clulib.cm');
 
-goog.require('goog.dom.classlist');
-goog.require('goog.events.Event');
-goog.require('goog.events.EventType');
+const {contains, enable} = goog.require('goog.dom.classlist');
+const GoogEvent = goog.require('goog.events.Event');
+const GoogEventType = goog.require('goog.events.EventType');
+
+/**
+ * @enum {string}
+ */
+const EventType = {
+  CHANGE: 'clulib.ui.ToggleButton.EventType.CHANGE'
+};
 
 /**
  * This class assumes to be only decorated on 'button' elements.
  *
  * @constructor
- * @extends {clulib.cm.Component}
+ * @extends {Component}
  */
-clulib.ui.ToggleButton = function () {
-  clulib.ui.ToggleButton.base(this, 'constructor');
+function ToggleButton () {
+  ToggleButton.base(this, 'constructor');
 
   /**
    * @type {boolean}
    * @private
    */
   this.isChecked_ = false;
-};
+}
 
 goog.inherits(
-  clulib.ui.ToggleButton,
-  clulib.cm.Component
+  ToggleButton,
+  Component
 );
 
 /**
  * @type {string}
  * @const
  */
-clulib.ui.ToggleButton.CHECKED_CLASS = 'checked';
-
-/**
- * @enum {string}
- */
-clulib.ui.ToggleButton.EventType = {
-  CHANGE: 'clulib.ui.ToggleButton.EventType.CHANGE'
-};
+ToggleButton.CHECKED_CLASS = 'checked';
 
 /**
  * @inheritDoc
  */
-clulib.ui.ToggleButton.prototype.onInit = function () {
-  clulib.ui.ToggleButton.base(this, 'onInit');
+ToggleButton.prototype.onInit = function () {
+  ToggleButton.base(this, 'onInit');
 
-  this.isChecked_ = goog.dom.classlist.contains(this.getElement(), clulib.ui.ToggleButton.CHECKED_CLASS);
-  this.getHandler().listen(this.getElement(), goog.events.EventType.CLICK, () => {
+  this.isChecked_ = contains(this.getElement(), ToggleButton.CHECKED_CLASS);
+  this.getHandler().listen(this.getElement(), GoogEventType.CLICK, () => {
     this.toggle();
   });
 };
@@ -56,7 +55,7 @@ clulib.ui.ToggleButton.prototype.onInit = function () {
 /**
  * @returns {boolean}
  */
-clulib.ui.ToggleButton.prototype.isDisabled = function () {
+ToggleButton.prototype.isDisabled = function () {
   let button = /** @type {HTMLButtonElement} */ (this.getElement());
 
   return button.disabled;
@@ -65,14 +64,14 @@ clulib.ui.ToggleButton.prototype.isDisabled = function () {
 /**
  * @returns {boolean}
  */
-clulib.ui.ToggleButton.prototype.isChecked = function () {
+ToggleButton.prototype.isChecked = function () {
   return this.isChecked_;
 };
 
 /**
  * @param {boolean} value
  */
-clulib.ui.ToggleButton.prototype.setDisabled = function (value) {
+ToggleButton.prototype.setDisabled = function (value) {
   let button = /** @type {HTMLButtonElement} */ (this.getElement());
   button.disabled = value;
 };
@@ -81,18 +80,20 @@ clulib.ui.ToggleButton.prototype.setDisabled = function (value) {
  * @param {boolean} value
  * @param {boolean=} preventEvent
  */
-clulib.ui.ToggleButton.prototype.setChecked = function (value, preventEvent = false) {
+ToggleButton.prototype.setChecked = function (value, preventEvent = false) {
   if (this.isChecked_ !== value) {
     this.isChecked_ = value;
-    goog.dom.classlist.enable(this.getElement(), clulib.ui.ToggleButton.CHECKED_CLASS, this.isChecked_);
+    enable(this.getElement(), ToggleButton.CHECKED_CLASS, this.isChecked_);
     if (!preventEvent)
-      this.dispatchEvent(new goog.events.Event(clulib.ui.ToggleButton.EventType.CHANGE));
+      this.dispatchEvent(new GoogEvent(EventType.CHANGE));
   }
 };
 
 /**
  * @param {boolean=} preventEvent
  */
-clulib.ui.ToggleButton.prototype.toggle = function (preventEvent = false) {
+ToggleButton.prototype.toggle = function (preventEvent = false) {
   this.setChecked(!this.isChecked_, preventEvent);
 };
+
+exports = {ToggleButton, EventType};

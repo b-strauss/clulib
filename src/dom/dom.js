@@ -1,6 +1,6 @@
-goog.provide('clulib.dom');
+goog.module('clulib.dom');
 
-goog.require('goog.dom');
+const {getAncestor, isElement} = goog.require('goog.dom');
 
 /**
  * Returns true if the element would be selected by the specified
@@ -10,7 +10,7 @@ goog.require('goog.dom');
  * @param {string} selector
  * @returns {boolean}
  */
-clulib.dom.matches = function (element, selector) {
+function matches (element, selector) {
   /**
    * @type {function(this:Element, string):boolean}
    */
@@ -21,7 +21,7 @@ clulib.dom.matches = function (element, selector) {
     element['msMatchesSelector'];
 
   return matches.call(element, selector);
-};
+}
 
 /**
  * Returns the closest ancestor of the specified element (or the specified element itself)
@@ -31,15 +31,17 @@ clulib.dom.matches = function (element, selector) {
  * @param {string} selector
  * @returns {?Element}
  */
-clulib.dom.closest = function (element, selector) {
+function closest (element, selector) {
   if (element['closest'] != null) {
     return /** @type {?Element} */ (element['closest'](selector));
   } else {
-    return /** @type {?Element} */ (goog.dom.getAncestor(element, node => {
-      if (goog.dom.isElement(node))
-        return clulib.dom.matches(/** @type {Element} */ (node), selector);
+    return /** @type {?Element} */ (getAncestor(element, node => {
+      if (isElement(node))
+        return matches(/** @type {Element} */ (node), selector);
       else
         return false;
     }, true));
   }
-};
+}
+
+exports = {matches, closest};

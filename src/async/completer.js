@@ -1,6 +1,6 @@
-goog.provide('clulib.async.Completer');
+goog.module('clulib.async.Completer');
 
-goog.require('goog.asserts');
+const {assert} = goog.require('goog.asserts');
 
 /**
  * A class to produce Promise objects and to complete them later with a value or error.
@@ -11,7 +11,7 @@ goog.require('goog.asserts');
  * @constructor
  * @template T
  */
-clulib.async.Completer = function () {
+function Completer () {
   /**
    * @type {?(function((T|Promise<T>)=))}
    * @private
@@ -39,14 +39,14 @@ clulib.async.Completer = function () {
    * @private
    */
   this.completed_ = false;
-};
+}
 
 /**
  * Returns the Promise associated with this Completer.
  *
  * @returns {Promise<T>}
  */
-clulib.async.Completer.prototype.getPromise = function () {
+Completer.prototype.getPromise = function () {
   return this.promise_;
 };
 
@@ -55,8 +55,8 @@ clulib.async.Completer.prototype.getPromise = function () {
  *
  * @param {(T|Promise<T>)=} value
  */
-clulib.async.Completer.prototype.resolve = function (value = null) {
-  goog.asserts.assert(this.completed_ === false, 'Completer should not be completed more than once.');
+Completer.prototype.resolve = function (value = null) {
+  assert(this.completed_ === false, 'Completer should not be completed more than once.');
   this.resolveFn_(value);
   this.completed_ = true;
 };
@@ -66,8 +66,8 @@ clulib.async.Completer.prototype.resolve = function (value = null) {
  *
  * @param {*=} reason
  */
-clulib.async.Completer.prototype.reject = function (reason = null) {
-  goog.asserts.assert(this.completed_ === false, 'Completer should not be completed more than once.');
+Completer.prototype.reject = function (reason = null) {
+  assert(this.completed_ === false, 'Completer should not be completed more than once.');
   this.rejectFn_(reason);
   this.completed_ = true;
 };
@@ -77,6 +77,8 @@ clulib.async.Completer.prototype.reject = function (reason = null) {
  *
  * @returns {boolean}
  */
-clulib.async.Completer.prototype.hasCompleted = function () {
+Completer.prototype.hasCompleted = function () {
   return this.completed_;
 };
+
+exports = Completer;

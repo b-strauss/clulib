@@ -1,7 +1,6 @@
 goog.module('test.clulib.cm');
 
-const ComponentManager = goog.require('clulib.cm.ComponentManager');
-const BaseComponent = goog.require('clulib.cm.Component');
+const {ComponentManager, Component} = goog.require('clulib.cm');
 
 const {appendChild, removeNode, getFirstElementChild} = goog.require('goog.dom');
 const {contains} = goog.require('goog.dom.classlist');
@@ -285,51 +284,51 @@ exports = function () {
 };
 
 /**
- * @param {(function(BaseComponent=):void|null)=} constructorFn
- * @param {(function(BaseComponent=):void|null)=} onInitFn
- * @param {(function(BaseComponent=):void|null)=} onDisposeFn
+ * @param {(function(Component=):void|null)=} constructorFn
+ * @param {(function(Component=):void|null)=} onInitFn
+ * @param {(function(Component=):void|null)=} onDisposeFn
  * @param {(function():Promise|null)=} waitForFn
- * @returns {function(new:BaseComponent)}
+ * @returns {function(new:Component)}
  */
 function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null, waitForFn = null) {
   waitForFn = waitForFn || (() => Promise.resolve());
 
   /**
    * @constructor
-   * @extends {BaseComponent}
+   * @extends {Component}
    */
-  const Component = function () {
-    Component.base(this, 'constructor');
+  const DummyComponent = function () {
+    DummyComponent.base(this, 'constructor');
 
     if (constructorFn != null)
       constructorFn(this);
   };
 
-  goog.inherits(Component, BaseComponent);
+  goog.inherits(DummyComponent, Component);
 
   /**
    * @returns {Promise}
    */
-  Component.prototype.waitFor = function () {
+  DummyComponent.prototype.waitFor = function () {
     return Promise.all([
-      Component.base(this, 'waitFor'),
+      DummyComponent.base(this, 'waitFor'),
       waitForFn()
     ]);
   };
 
-  Component.prototype.onInit = function () {
-    Component.base(this, 'onInit');
+  DummyComponent.prototype.onInit = function () {
+    DummyComponent.base(this, 'onInit');
     if (onInitFn != null)
       onInitFn(this);
   };
 
-  Component.prototype.onDispose = function () {
-    Component.base(this, 'onDispose');
+  DummyComponent.prototype.onDispose = function () {
+    DummyComponent.base(this, 'onDispose');
     if (onDisposeFn != null)
       onDisposeFn(this);
   };
 
-  return Component;
+  return DummyComponent;
 }
 
 /**
