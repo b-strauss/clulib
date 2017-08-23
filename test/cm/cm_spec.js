@@ -293,40 +293,42 @@ exports = function () {
 function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null, waitForFn = null) {
   waitForFn = waitForFn || (() => Promise.resolve());
 
-  /**
-   * @constructor
-   * @extends {Component}
-   */
-  const DummyComponent = function () {
-    DummyComponent.base(this, 'constructor');
+  class DummyComponent extends Component {
+    constructor () {
+      super();
 
-    if (constructorFn != null)
-      constructorFn(this);
-  };
+      if (constructorFn != null)
+        constructorFn(this);
+    }
 
-  goog.inherits(DummyComponent, Component);
+    /**
+     * @inheritDoc
+     */
+    waitFor () {
+      return Promise.all([
+        super.waitFor(),
+        waitForFn()
+      ]);
+    }
 
-  /**
-   * @returns {Promise}
-   */
-  DummyComponent.prototype.waitFor = function () {
-    return Promise.all([
-      DummyComponent.base(this, 'waitFor'),
-      waitForFn()
-    ]);
-  };
+    /**
+     * @inheritDoc
+     */
+    onInit () {
+      super.onInit();
+      if (onInitFn != null)
+        onInitFn(this);
+    }
 
-  DummyComponent.prototype.onInit = function () {
-    DummyComponent.base(this, 'onInit');
-    if (onInitFn != null)
-      onInitFn(this);
-  };
-
-  DummyComponent.prototype.onDispose = function () {
-    DummyComponent.base(this, 'onDispose');
-    if (onDisposeFn != null)
-      onDisposeFn(this);
-  };
+    /**
+     * @inheritDoc
+     */
+    onDispose () {
+      super.onDispose();
+      if (onDisposeFn != null)
+        onDisposeFn(this);
+    }
+  }
 
   return DummyComponent;
 }
