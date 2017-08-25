@@ -29,18 +29,18 @@
     "lint"
   ],
   "devDependencies": {
-    "eslint": "4.4.1",
+    "eslint": "4.5.0",
     "google-closure-compiler": "20170806.0.0",
     "google-closure-library": "20170806.0.0",
     "gulp": "3.9.1",
-    "gulp-sourcemaps": "2.6.0",
+    "gulp-sourcemaps": "2.6.1",
     "gulp-util": "3.0.8",
-    "jasmine": "2.7.0",
-    "jasmine-core": "2.7.0",
+    "jasmine": "2.8.0",
+    "jasmine-core": "2.8.0",
     "karma": "1.7.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.0",
-    "karma-sauce-launcher": "1.1.0",
+    "karma-sauce-launcher": "1.2.0",
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.31",
     "pre-commit": "1.2.2"
