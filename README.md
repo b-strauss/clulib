@@ -50,7 +50,8 @@ then run the uncompiled test code. Because of the newer ECMAScript features, thi
 
 To generate the compiled and minified version for local testing run: `yarn compile`. The html file under
 `tools/jasmine_runner/spec_runner_prod.html` can then run the compiled test code on all supported Browsers.
-You can also run `yarn compile-debug` to compile with assertions enabled, this enables additional runtime checks.
+You can also run `yarn compile-debug` to compile with assertions enabled for testing, this enables additional runtime checks but
+significantly increases the output size.
 
 The command `yarn test` starts a local karma test runner on Chrome and runs all test specs that have been compiled with
 `yarn compile`.
