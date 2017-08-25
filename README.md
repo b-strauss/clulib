@@ -21,11 +21,11 @@ Example `package.json`:
 "google-closure-library": "20170626.0.0",
 ```
 
-To include clulib, include all files under `./src` into your build process. All symbols can be found under the `clulib` namespace
-(e.g. `clulib.array.asyncForEach`).
+To include clulib, include all files under `./src` into your build process. All modules are prefixed with `clulib`
+(e.g. `clulib.array`).
 
-Clulib is still written with traditional `goog.provide`. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
-on the closure-compiler wiki page, for infos on how to use it with `goog.module`.
+Clulib is written with closure's new `goog.module` system. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
+on the closure-compiler wiki page, for infos on how to use it.
 
 Clulib heavily uses newer ECMAScript features. The closure-compiler can compile these down to ES5. The required input language
 compiler option for clulib is `ECMASCRIPT_2017`. Because of this, uncompiled code can only run on current Browsers (Chrome is recommended).
@@ -50,6 +50,7 @@ then run the uncompiled test code. Because of the newer ECMAScript features, thi
 
 To generate the compiled and minified version for local testing run: `yarn compile`. The html file under
 `tools/jasmine_runner/spec_runner_prod.html` can then run the compiled test code on all supported Browsers.
+You can also run `yarn compile-debug` to compile with assertions enabled, this enables additional runtime checks.
 
 The command `yarn test` starts a local karma test runner on Chrome and runs all test specs that have been compiled with
 `yarn compile`.
