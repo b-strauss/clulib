@@ -1,3 +1,20 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/b-strauss/clulib/compare/2.0.0...3.0.0) (2017-08-27)
+
+### BREAKING CHANGES
+
+* feature(general): use goog.module for the whole codebase
+
+  The whole library now uses `goog.module` instead of `goog.provide`. This makes the code more concise, easier to understand, and resembles ES2015 modules more closely.
+  Most old `goog.require` namespaces have identical `goog.module` ids. Only the component manager code has been refactored into `clulib.cm`.
+  See the [closure wiki](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide) for more infos on how to use `goog.module`.
+  `goog.module` code can still be used inside legacy `goog.provide` code.
+
+* feature(general): use ES2015 classes for the whole codebase
+
+  All classes are now real ES2015 classes. The closure-compiler understands these, and can mix them with legacy `goog.inherits` classes.
+  Please note that the classes do not yet use getters/setters, as the closure-compiler currently doesn't understand `@template` types on getters/setters.
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/b-strauss/clulib/compare/1.3.0...2.0.0) (2017-07-30)
 
