@@ -380,9 +380,6 @@ class ComponentManager {
 }
 
 
-/**
- * @package
- */
 class ComponentNode {
   /**
    * @param {ComponentManager} manager
@@ -538,9 +535,6 @@ class ComponentNode {
 }
 
 
-/**
- * @package
- */
 class NodeTree {
   /**
    * @param {ComponentManager} manager
