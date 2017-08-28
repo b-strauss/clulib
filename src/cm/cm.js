@@ -6,7 +6,6 @@ const {closest} = goog.require('clulib.dom');
 
 const GoogComponent = goog.require('goog.ui.Component');
 const {assert} = goog.require('goog.asserts');
-const {decodeString} = goog.require('goog.crypt.base64');
 const {getParentElement, isElement} = goog.require('goog.dom');
 
 /**
@@ -514,7 +513,7 @@ class ComponentNode {
 
     this.component_.manager = this.manager_;
     if (this.config_ != null)
-      this.component_.setModel(JSON.parse(decodeString(this.config_)));
+      this.component_.setModel(JSON.parse(atob(this.config_)));
   }
 
   decorate () {
