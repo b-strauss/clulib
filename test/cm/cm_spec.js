@@ -225,6 +225,34 @@ exports = function () {
       manager.disposeAll();
     });
 
+    it('should initialize a component after waitFor', async () => {
+      const manager = new ComponentManager();
+
+      let output = '';
+
+      const component = createDummyComponent(null, () => {
+        output += 'init';
+      }, null, () => {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            output += 'waitFor';
+            resolve();
+          }, 100);
+        });
+      });
+
+      manager.addComponentMap({
+        'outer': component,
+        'inner': createDummyComponent()
+      });
+
+      await manager.decorate(container);
+
+      expect(output).toBe('waitForinit');
+
+      manager.disposeAll();
+    });
+
     it('should not change the dom tree on decoration', async () => {
       const manager = new ComponentManager();
 
@@ -265,9 +293,15 @@ exports = function () {
     it('should dispose all components', async () => {
       const manager = new ComponentManager();
 
+      let output = '';
+
       manager.addComponentMap({
-        'outer': createDummyComponent(),
-        'inner': createDummyComponent()
+        'outer': createDummyComponent(null, null, () => {
+          output += 'outer';
+        }),
+        'inner': createDummyComponent(null, null, () => {
+          output += 'inner';
+        })
       });
 
       await manager.decorate(container);
@@ -276,6 +310,8 @@ exports = function () {
       expect(has(container.querySelector('.inner'), 'cmpId')).toBe(true);
 
       manager.disposeAll();
+
+      expect(output).toBe('outerinner');
 
       expect(has(container.querySelector('.outer'), 'cmpId')).toBe(false);
       expect(has(container.querySelector('.inner'), 'cmpId')).toBe(false);
