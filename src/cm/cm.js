@@ -520,12 +520,13 @@ class ComponentNode {
   /**
    * @returns {Promise}
    */
-  initialize () {
-    return this.component_.waitFor()
-      .then(() => {
-        this.component_.onInit();
-        this.component_.initCompleter.resolve();
-      });
+  async initialize () {
+    await this.component_.waitFor();
+
+    this.component_.onInit();
+    this.component_.initCompleter.resolve();
+
+    return null;
   }
 
   dispose () {
