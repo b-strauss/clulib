@@ -2,11 +2,26 @@ goog.module('clulib.cm');
 
 const {removeHoles, asyncForEachRight} = goog.require('clulib.array');
 const Completer = goog.require('clulib.async.Completer');
-const {closest} = goog.require('clulib.dom');
+const {closest, matches} = goog.require('clulib.dom');
 
 const GoogComponent = goog.require('goog.ui.Component');
 const {assert} = goog.require('goog.asserts');
 const {getParentElement, isElement} = goog.require('goog.dom');
+
+/**
+ * @typedef {{
+ *   type: string,
+ *   selector: (string|undefined)
+ * }}
+ */
+// eslint-disable-next-line init-declarations
+let ComponentMetadata;
+
+/**
+ * @typedef {function(new:Component)|{Metadata:ComponentMetadata}}
+ */
+// eslint-disable-next-line init-declarations
+let ComponentType;
 
 /**
  * Component base class used together with the [clulib.cm.ComponentManager],
@@ -61,6 +76,12 @@ class Component extends GoogComponent {
     this.manager = null;
 
     /**
+     * @type {?ComponentMetadata}
+     * @package
+     */
+    this.metadata = null;
+
+    /**
      * @type {Completer}
      * @const
      * @package
@@ -73,6 +94,13 @@ class Component extends GoogComponent {
      * @package
      */
     this.disposeCompleter = new Completer();
+  }
+
+  /**
+   * @returns {?ComponentMetadata}
+   */
+  getMetadata () {
+    return this.metadata;
   }
 
   /**
@@ -220,7 +248,7 @@ class ComponentManager {
     this.configAttribute_ = 'data-cmp-cfg';
 
     /**
-     * @type {Map<string, Function>}
+     * @type {Map<string, ComponentType>}
      * @const
      * @private
      */
@@ -266,7 +294,7 @@ class ComponentManager {
    *
    * The registry is a Map of keys to component constructors.
    *
-   * @returns {Map<string, Function>}
+   * @returns {Map<string, ComponentType>}
    */
   getRegistry () {
     return this.registry_;
@@ -341,7 +369,7 @@ class ComponentManager {
    * The key must match the data-cmp attribute on the elements that wish to be decorated.
    *
    * @param {string} type
-   * @param {function(new:Component)} constructor
+   * @param {ComponentType} constructor
    */
   addComponent (type, constructor) {
     assert(this.registry_.has(type) === false, `Component with type '${type}' already registered.`);
@@ -349,9 +377,20 @@ class ComponentManager {
   }
 
   /**
+   * @param {ComponentType} clazz
+   */
+  addClass (clazz) {
+    /**
+     * @type {ComponentMetadata}
+     */
+    const metadata = /** @type {ComponentMetadata} */ (clazz.Metadata);
+    this.addComponent(metadata.type, clazz);
+  }
+
+  /**
    * Registers a Map of keys to component constructors with this ComponentManager.
    *
-   * @param {!Object<string, function(new:Component)>} obj
+   * @param {!Object<string, ComponentType>} obj
    */
   addComponentMap (obj) {
     Object.keys(obj).forEach(key => {
@@ -500,10 +539,13 @@ class ComponentNode {
   }
 
   /**
-   * @param {function(new:Component)} constructor
+   * @param {ComponentType} constructor
    */
   instantiate (constructor) {
-    this.component_ = new constructor();
+    const metadata = constructor.Metadata != null ? constructor.Metadata : null;
+
+    this.component_ = new /** @type {function(new:Component)} */ (constructor)();
+    this.component_.metadata = metadata;
 
     this.id_ = this.component_.getId();
     this.element_.setAttribute(this.manager_.getIdAttribute(), /** @type {!string} */ (this.id_));
@@ -514,6 +556,14 @@ class ComponentNode {
   }
 
   decorate () {
+    if (this.component_.metadata != null && this.component_.metadata.selector != null) {
+      const selector = this.component_.metadata.selector;
+      if (!matches(this.element_, selector))
+        throw new Error(
+          `Component type '${this.type_}' can only be decorated on elements that match selector '${selector}'.`
+        );
+    }
+
     this.component_.decorate(this.element_);
   }
 
@@ -683,4 +733,4 @@ class NodeTree {
   }
 }
 
-exports = {Component, ComponentManager};
+exports = {Component, ComponentManager, ComponentMetadata, ComponentType};

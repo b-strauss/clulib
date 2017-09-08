@@ -61,6 +61,43 @@ exports = function () {
       expect(manager.getRegistry().get('four')).toBe(component4);
     });
 
+    it('should accept a class with metadata for registration and initialization', () => {
+      const manager = new ComponentManager();
+      const component = createDummyComponent(null, null, null, null, {
+        type: 'inner'
+      });
+
+      manager.addClass(component);
+      manager.addComponent('outer', createDummyComponent());
+
+      expect(manager.getRegistry().get('inner')).toBe(component);
+    });
+
+    it('should fail initialization on a class with selector metadata that doesn\'t match its elements selector',
+      async () => {
+        const manager = new ComponentManager();
+        const component = createDummyComponent(null, null, null, null, {
+          type: 'inner',
+          selector: 'button'
+        });
+
+        manager.addClass(component);
+        manager.addComponent('outer', createDummyComponent());
+
+        let error = null;
+
+        try {
+          await manager.decorate(container);
+        } catch (e) {
+          error = e;
+        } finally {
+          expect(error).toBeDefined();
+          expect(error.message)
+            .toBe('Component type \'inner\' can only be decorated on elements that match selector \'button\'.');
+        }
+      }
+    );
+
     it('should decorate dom elements with components', async () => {
       const manager = new ComponentManager();
 
@@ -324,9 +361,11 @@ exports = function () {
  * @param {(function(Component=):void|null)=} onInitFn
  * @param {(function(Component=):void|null)=} onDisposeFn
  * @param {(function():Promise|null)=} waitForFn
- * @returns {function(new:Component)}
+ * @param {(?clulib.cm.ComponentMetadata)=} metadata
+ * @returns {clulib.cm.ComponentType}
  */
-function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null, waitForFn = null) {
+function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeFn = null, waitForFn = null,
+  metadata = null) {
   waitForFn = waitForFn || (() => Promise.resolve());
 
   class DummyComponent extends Component {
@@ -365,6 +404,8 @@ function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeF
         onDisposeFn(this);
     }
   }
+
+  DummyComponent.Metadata = metadata;
 
   return DummyComponent;
 }
