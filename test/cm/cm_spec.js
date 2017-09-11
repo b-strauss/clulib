@@ -403,9 +403,11 @@ function createDummyComponent (constructorFn = null, onInitFn = null, onDisposeF
       if (onDisposeFn != null)
         onDisposeFn(this);
     }
-  }
 
-  DummyComponent.Metadata = metadata;
+    static get metadata () {
+      return metadata;
+    }
+  }
 
   return DummyComponent;
 }

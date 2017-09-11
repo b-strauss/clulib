@@ -18,7 +18,7 @@ const {getParentElement, isElement} = goog.require('goog.dom');
 let ComponentMetadata;
 
 /**
- * @typedef {function(new:Component)|{Metadata:ComponentMetadata}}
+ * @typedef {function(new:Component)|{metadata:ComponentMetadata}}
  */
 // eslint-disable-next-line init-declarations
 let ComponentType;
@@ -76,12 +76,6 @@ class Component extends GoogComponent {
     this.manager = null;
 
     /**
-     * @type {?ComponentMetadata}
-     * @package
-     */
-    this.metadata = null;
-
-    /**
      * @type {Completer}
      * @const
      * @package
@@ -94,13 +88,6 @@ class Component extends GoogComponent {
      * @package
      */
     this.disposeCompleter = new Completer();
-  }
-
-  /**
-   * @returns {?ComponentMetadata}
-   */
-  getMetadata () {
-    return this.metadata;
   }
 
   /**
@@ -209,6 +196,13 @@ class Component extends GoogComponent {
    */
   onDisposeComplete () {
     return this.disposeCompleter.getPromise();
+  }
+
+  /**
+   * @returns {?ComponentMetadata}
+   */
+  static get metadata () {
+    return null;
   }
 }
 
@@ -380,10 +374,9 @@ class ComponentManager {
    * @param {ComponentType} clazz
    */
   addClass (clazz) {
-    /**
-     * @type {ComponentMetadata}
-     */
-    const metadata = /** @type {ComponentMetadata} */ (clazz.Metadata);
+    const metadata = /** @type {ComponentMetadata} */ (clazz.metadata);
+    if (metadata == null)
+      throw new Error('Component class must have a static metadata getter.');
     this.addComponent(metadata.type, clazz);
   }
 
@@ -444,6 +437,12 @@ class ComponentNode {
      * @private
      */
     this.component_ = null;
+
+    /**
+     * @type {?ComponentMetadata}
+     * @private
+     */
+    this.metadata_ = null;
 
     /**
      * @type {?string}
@@ -542,10 +541,9 @@ class ComponentNode {
    * @param {ComponentType} constructor
    */
   instantiate (constructor) {
-    const metadata = constructor.Metadata != null ? constructor.Metadata : null;
+    this.metadata_ = constructor.metadata != null ? constructor.metadata : null;
 
     this.component_ = new /** @type {function(new:Component)} */ (constructor)();
-    this.component_.metadata = metadata;
 
     this.id_ = this.component_.getId();
     this.element_.setAttribute(this.manager_.getIdAttribute(), /** @type {!string} */ (this.id_));
@@ -556,8 +554,8 @@ class ComponentNode {
   }
 
   decorate () {
-    if (this.component_.metadata != null && this.component_.metadata.selector != null) {
-      const selector = this.component_.metadata.selector;
+    if (this.metadata_ != null && this.metadata_.selector != null) {
+      const selector = this.metadata_.selector;
       if (!matches(this.element_, selector))
         throw new Error(
           `Component type '${this.type_}' can only be decorated on elements that match selector '${selector}'.`
@@ -657,7 +655,7 @@ class NodeTree {
       const type = node.getType();
       const constructor = this.manager_.getRegistry().get(type);
       if (constructor == null)
-        throw new Error(`No constructor found for component type '${type}'.`);
+        throw new Error(`No class found for component type '${type}'.`);
       node.instantiate(constructor);
       this.collection_.set(/** @type {!string} */ (node.getId()), node);
       unsolved.set(/** @type {!string} */ (node.getId()), node);
