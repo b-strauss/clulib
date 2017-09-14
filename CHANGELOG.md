@@ -1,3 +1,29 @@
+<a name="3.1.0"></a>
+## [3.1.0](https://github.com/b-strauss/clulib/compare/3.0.0...3.1.0) (2017-09-14)
+
+### Features
+
+* feature(cm): metadata getter for component metadata
+
+  Component metadata like `type` and `selector` can now be defined inside a static getter on the component.
+  This feature needs to be used in combination with the `addClass` and `addClasses` methods on the `ComponentManager`.
+  
+  Example:
+  
+  ```Javascript
+  // inside 'ButtonComponent'
+  static get metadata () {
+    return {
+      type: 'default-button',
+      selector: 'button.default-button'
+    };
+  }
+  
+  // adding the component
+  cm.addclass(ButtonComponent);
+  ```
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/b-strauss/clulib/compare/2.0.0...3.0.0) (2017-08-27)
 

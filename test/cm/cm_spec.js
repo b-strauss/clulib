@@ -73,6 +73,21 @@ exports = function () {
       expect(manager.getRegistry().get('inner')).toBe(component);
     });
 
+    it('should accept an array of classes with metadata for registration and initialization', () => {
+      const manager = new ComponentManager();
+      const component1 = createDummyComponent(null, null, null, null, {
+        type: 'inner'
+      });
+      const component2 = createDummyComponent(null, null, null, null, {
+        type: 'outer'
+      });
+
+      manager.addClasses([component1, component2]);
+
+      expect(manager.getRegistry().get('inner')).toBe(component1);
+      expect(manager.getRegistry().get('outer')).toBe(component2);
+    });
+
     it('should fail initialization on a class with selector metadata that doesn\'t match its elements selector',
       async () => {
         const manager = new ComponentManager();

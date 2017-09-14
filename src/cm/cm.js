@@ -9,6 +9,11 @@ const {assert} = goog.require('goog.asserts');
 const {getParentElement, isElement} = goog.require('goog.dom');
 
 /**
+ * Component metadata.
+ *
+ * `type`: the type of the component
+ * `selector`: selector constraining the elements that can be decorated with the component
+ *
  * @typedef {{
  *   type: string,
  *   selector: (string|undefined)
@@ -18,6 +23,8 @@ const {getParentElement, isElement} = goog.require('goog.dom');
 let ComponentMetadata;
 
 /**
+ * Typedef for a component.
+ *
  * @typedef {function(new:Component)|{metadata:ComponentMetadata}}
  */
 // eslint-disable-next-line init-declarations
@@ -364,30 +371,54 @@ class ComponentManager {
    *
    * @param {string} type
    * @param {ComponentType} constructor
+   * @deprecated Use `addClass`.
    */
   addComponent (type, constructor) {
+    this.addComponent_(type, constructor);
+  }
+
+  /**
+   * @param {string} type
+   * @param {ComponentType} constructor
+   * @private
+   */
+  addComponent_ (type, constructor) {
     assert(this.registry_.has(type) === false, `Component with type '${type}' already registered.`);
     this.registry_.set(type, constructor);
   }
 
   /**
+   * Registers a component class with this ComponentManager.
+   *
+   * The class needs to provide a static getter called `metadata` that returns an object of type ComponentMetadata.
+   *
+   * See {@see ComponentMetadata} for details.
+   *
    * @param {ComponentType} clazz
    */
   addClass (clazz) {
     const metadata = /** @type {ComponentMetadata} */ (clazz.metadata);
     if (metadata == null)
       throw new Error('Component class must have a static metadata getter.');
-    this.addComponent(metadata.type, clazz);
+    this.addComponent_(metadata.type, clazz);
+  }
+
+  /**
+   * @param {Array<ComponentType>} classes
+   */
+  addClasses (classes) {
+    classes.forEach(clazz => this.addClass(clazz));
   }
 
   /**
    * Registers a Map of keys to component constructors with this ComponentManager.
    *
    * @param {!Object<string, ComponentType>} obj
+   * @deprecated Use `addClasses`.
    */
   addComponentMap (obj) {
     Object.keys(obj).forEach(key => {
-      this.addComponent(key, obj[key]);
+      this.addComponent_(key, obj[key]);
     });
   }
 
