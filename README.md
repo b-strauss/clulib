@@ -34,7 +34,9 @@ Clulib is compatible with closures `ADVANCED_OPTIMIZATIONS` mode.
 
 This project follows [Semantic Versioning](http://semver.org/) as closely as possible.
 
-## Building
+## Running the test specs
+
+Checkout `https://github.com/b-strauss/clulib.git`
 
 Required tools:
 

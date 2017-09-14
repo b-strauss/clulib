@@ -2,6 +2,7 @@
 
 const {exec} = require('child_process');
 const path = require('path');
+const fs = require('fs-extra');
 
 const closureCompiler = require('google-closure-compiler').gulp();
 const gulp = require('gulp');
@@ -90,6 +91,39 @@ function compile () {
     .pipe(gulp.dest(path.normalize(destinationFolder)));
 }
 
+function createPackage () {
+  const files = [
+    ['./', 'AUTHORS'],
+    ['./', 'CHANGELOG.md'],
+    ['./', 'LICENSE'],
+    ['./', 'README.md']
+  ];
+
+  const folders = [
+    ['./', 'src']
+  ];
+
+  const target = './dist/';
+
+  fs.emptyDirSync(target);
+
+  files.concat(folders).forEach(element => {
+    const path = element[0];
+    const name = element[1];
+    fs.copySync(path + name, target + name);
+  });
+
+  const packageJson = fs.readJsonSync('./package.json');
+
+  delete packageJson['private'];
+  delete packageJson['scripts'];
+  delete packageJson['pre-commit'];
+  delete packageJson['devDependencies'];
+
+  fs.writeJsonSync(`${target}/package.json`, packageJson, {spaces: 2});
+}
+
+gulp.task('create-package', () => createPackage());
 gulp.task('compile', () => compile());
 gulp.task('deps', callback => {
   deps(callback);

@@ -18,7 +18,9 @@
     "es6",
     "es2015"
   ],
+  "private": true,
   "scripts": {
+    "create-package": "./node_modules/.bin/gulp create-package",
     "compile": "./node_modules/.bin/gulp compile",
     "compile-debug": "./node_modules/.bin/gulp compile --debug=true",
     "deps": "./node_modules/.bin/gulp deps",
@@ -30,6 +32,7 @@
   ],
   "devDependencies": {
     "eslint": "4.5.0",
+    "fs-extra": "4.0.2",
     "google-closure-compiler": "20170806.0.0",
     "google-closure-library": "20170806.0.0",
     "gulp": "3.9.1",
