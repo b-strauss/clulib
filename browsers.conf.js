@@ -62,6 +62,15 @@ const mobile = {
     platformVersion: '10.3',
     platformName: 'iOS'
   },
+  'SL_IOS_11': {
+    base: 'SauceLabs',
+    browserName: 'Safari',
+    appiumVersion: '1.7.1',
+    deviceName: 'iPhone 8 Simulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '11.0',
+    platformName: 'iOS'
+  },
   'SL_ANDROID_4.4': {
     base: 'SauceLabs',
     browserName: 'Browser',
