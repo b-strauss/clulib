@@ -35,7 +35,7 @@ const mobile = {
     appiumVersion: '1.6.4',
     deviceName: 'iPhone 7 Simulator',
     deviceOrientation: 'portrait',
-    platformVersion: '10.3',
+    platformVersion: '10',
     platformName: 'iOS'
   },
   'SL_IOS_11': {
@@ -44,7 +44,7 @@ const mobile = {
     appiumVersion: '1.7.1',
     deviceName: 'iPhone 8 Simulator',
     deviceOrientation: 'portrait',
-    platformVersion: '11.0',
+    platformVersion: '11',
     platformName: 'iOS'
   },
   'SL_ANDROID_4.4': {
@@ -77,8 +77,8 @@ const mobile = {
   'SL_ANDROID_7.1': {
     base: 'SauceLabs',
     browserName: 'Chrome',
-    appiumVersion: '1.6.4',
-    deviceName: 'Android Emulator',
+    appiumVersion: '1.6.5',
+    deviceName: 'Android GoogleAPI Emulator',
     deviceOrientation: 'portrait',
     platformVersion: '7.1',
     platformName: 'Android'
