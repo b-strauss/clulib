@@ -6,7 +6,16 @@ module.exports = config => {
   config.set({
     frameworks: ['jasmine'],
 
-    files: ['./bin/test.min.js'],
+    files: [
+      './bin/test.min.js',
+      {
+        pattern: 'test-assets/json/*.json',
+        watched: false,
+        included: false,
+        served: true,
+        nocache: false
+      }
+    ],
 
     customLaunchers,
 

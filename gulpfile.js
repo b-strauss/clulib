@@ -24,7 +24,7 @@ function deps (callback) {
       command += ` --root_with_prefix="${path.normalize(key)} ${path.normalize(roots[key])}"`;
   }
 
-  command += ` > ${path.normalize('./tools/jasmine_runner/deps.js')}`;
+  command += ` > ${path.normalize('./deps.js')}`;
 
   exec(command, function (err) {
     callback(err);
@@ -40,6 +40,7 @@ function compile () {
     '!node_modules/google-closure-library/closure/goog/**_test.js',
     'src/**.js',
     'test/**.js',
+    'testing/**.js',
     'test_main.js'
   ];
 
