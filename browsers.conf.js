@@ -35,7 +35,7 @@ const mobile = {
     appiumVersion: '1.6.4',
     deviceName: 'iPhone 7 Simulator',
     deviceOrientation: 'portrait',
-    platformVersion: '10',
+    platformVersion: '10.3',
     platformName: 'iOS'
   },
   'SL_IOS_11': {
@@ -44,7 +44,7 @@ const mobile = {
     appiumVersion: '1.7.1',
     deviceName: 'iPhone 8 Simulator',
     deviceOrientation: 'portrait',
-    platformVersion: '11',
+    platformVersion: '11.0',
     platformName: 'iOS'
   },
   'SL_ANDROID_4.4': {
