@@ -24,7 +24,7 @@
     "compile": "./node_modules/.bin/gulp compile",
     "compile-debug": "./node_modules/.bin/gulp compile --debug=true",
     "deps": "./node_modules/.bin/gulp deps",
-    "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" browsers.conf.js gulpfile.js karma.conf.js",
+    "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" \"./testing/**\" browsers.conf.js gulpfile.js karma.conf.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"
   },
   "pre-commit": [
