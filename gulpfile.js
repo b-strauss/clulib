@@ -40,8 +40,7 @@ function compile () {
     '!node_modules/google-closure-library/closure/goog/**_test.js',
     'src/**.js',
     'test/**.js',
-    'testing/**.js',
-    'test_main.js'
+    'testing/**.js'
   ];
 
   const externs = [
