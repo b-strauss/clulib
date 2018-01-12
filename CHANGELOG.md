@@ -1,3 +1,11 @@
+<a name="3.2.0"></a>
+## [3.2.0](https://github.com/b-strauss/clulib/compare/3.1.0...3.2.0) (2018-01-12)
+
+### Features
+
+* feature(functions): cacheAsyncValue ([b924995](https://github.com/b-strauss/clulib/commit/b924995))
+
+
 <a name="3.1.0"></a>
 ## [3.1.0](https://github.com/b-strauss/clulib/compare/3.0.0...3.1.0) (2017-09-14)
 
