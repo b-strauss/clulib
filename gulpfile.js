@@ -79,8 +79,11 @@ function compile () {
       'checkDebuggerStatement',
       'checkRegExp',
       'deprecatedAnnotations',
-      'deprecated',
+      // 'deprecated',
       'extraRequire'
+    ],
+    jscomp_off: [
+      'deprecated'
     ],
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.min.js'
