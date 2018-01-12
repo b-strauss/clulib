@@ -16,9 +16,6 @@ function cacheAsyncValue (func) {
   let done = false;
   let isError = false;
 
-  /**
-   * @type {T}
-   */
   let result = null;
   let error = null;
 
