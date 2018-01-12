@@ -1369,17 +1369,17 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-google-closure-compiler@20170806.0.0:
-  version "20170806.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20170806.0.0.tgz#1b04d9805a8b6e5c6f97fd9be0ab71e1a7888ee1"
+google-closure-compiler@20180101.0.0:
+  version "20180101.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180101.0.0.tgz#d1d817dc60e008be94b61be7073aa63e92978e64"
   dependencies:
     chalk "^1.0.0"
     vinyl "^2.0.1"
     vinyl-sourcemaps-apply "^0.2.0"
 
-google-closure-library@20170806.0.0:
-  version "20170806.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-library/-/google-closure-library-20170806.0.0.tgz#9bdc5481ea4caddbfb87fd562f891797f449db94"
+google-closure-library@20171203.0.0:
+  version "20171203.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-library/-/google-closure-library-20171203.0.0.tgz#e74645153e30f1697f9d199bc5b2cc99884f92ea"
 
 graceful-fs@4.X, graceful-fs@^4.1.0, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
