@@ -14,7 +14,9 @@ const {env} = require('gulp-util');
  */
 function deps (callback) {
   const roots = {
-    './': '../../../..'
+    './src': '../../../../src',
+    './test': '../../../../test',
+    './testing': '../../../../testing'
   };
 
   let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
@@ -24,7 +26,7 @@ function deps (callback) {
       command += ` --root_with_prefix="${path.normalize(key)} ${path.normalize(roots[key])}"`;
   }
 
-  command += ` > ${path.normalize('./tools/jasmine_runner/deps.js')}`;
+  command += ` > ${path.normalize('./deps.js')}`;
 
   exec(command, function (err) {
     callback(err);
@@ -40,7 +42,7 @@ function compile () {
     '!node_modules/google-closure-library/closure/goog/**_test.js',
     'src/**.js',
     'test/**.js',
-    'test_main.js'
+    'testing/**.js'
   ];
 
   const externs = [
@@ -77,8 +79,11 @@ function compile () {
       'checkDebuggerStatement',
       'checkRegExp',
       'deprecatedAnnotations',
-      'deprecated',
+      // 'deprecated',
       'extraRequire'
+    ],
+    jscomp_off: [
+      'deprecated'
     ],
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.min.js'

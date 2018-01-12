@@ -24,7 +24,7 @@
     "compile": "./node_modules/.bin/gulp compile",
     "compile-debug": "./node_modules/.bin/gulp compile --debug=true",
     "deps": "./node_modules/.bin/gulp deps",
-    "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" browsers.conf.js gulpfile.js karma.conf.js test_main.js",
+    "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" \"./testing/**\" browsers.conf.js gulpfile.js karma.conf.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"
   },
   "pre-commit": [
@@ -33,8 +33,8 @@
   "devDependencies": {
     "eslint": "4.5.0",
     "fs-extra": "4.0.2",
-    "google-closure-compiler": "20170806.0.0",
-    "google-closure-library": "20170806.0.0",
+    "google-closure-compiler": "20180101.0.0",
+    "google-closure-library": "20171203.0.0",
     "gulp": "3.9.1",
     "gulp-sourcemaps": "2.6.1",
     "gulp-util": "3.0.8",

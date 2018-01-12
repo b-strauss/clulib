@@ -11,48 +11,24 @@ const desktop = {
     browserName: 'firefox',
     platform: 'Windows 10'
   },
-  'SL_IE_11': {
+  'SL_IE': {
     base: 'SauceLabs',
     browserName: 'internet explorer',
-    platform: 'Windows 8.1',
-    version: '11'
+    platform: 'Windows 10'
   },
-  'SL_EDGE_14': {
+  'SL_EDGE': {
     base: 'SauceLabs',
     browserName: 'MicrosoftEdge',
-    platform: 'Windows 10',
-    version: '14'
+    platform: 'Windows 10'
   },
-  'SL_EDGE_15': {
-    base: 'SauceLabs',
-    browserName: 'MicrosoftEdge',
-    platform: 'Windows 10',
-    version: '15'
-  },
-  'SL_SAFARI_9': {
+  'SAFARI': {
     base: 'SauceLabs',
     browserName: 'safari',
-    platform: 'OS X 10.11',
-    version: '9'
-  },
-  'SL_SAFARI_10': {
-    base: 'SauceLabs',
-    browserName: 'safari',
-    platform: 'macOS 10.12',
-    version: '10'
+    platform: 'macOS 10.12'
   }
 };
 
 const mobile = {
-  'SL_IOS_9': {
-    base: 'SauceLabs',
-    browserName: 'Safari',
-    appiumVersion: '1.6.4',
-    deviceName: 'iPhone 6 Simulator',
-    deviceOrientation: 'portrait',
-    platformVersion: '9.3',
-    platformName: 'iOS'
-  },
   'SL_IOS_10': {
     base: 'SauceLabs',
     browserName: 'Safari',
@@ -62,6 +38,15 @@ const mobile = {
     platformVersion: '10.3',
     platformName: 'iOS'
   },
+  'SL_IOS_11': {
+    base: 'SauceLabs',
+    browserName: 'Safari',
+    appiumVersion: '1.7.1',
+    deviceName: 'iPhone 8 Simulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '11.0',
+    platformName: 'iOS'
+  },
   'SL_ANDROID_4.4': {
     base: 'SauceLabs',
     browserName: 'Browser',
@@ -69,15 +54,6 @@ const mobile = {
     deviceName: 'Android Emulator',
     deviceOrientation: 'portrait',
     platformVersion: '4.4',
-    platformName: 'Android'
-  },
-  'SL_ANDROID_5.0': {
-    base: 'SauceLabs',
-    browserName: 'Browser',
-    appiumVersion: '1.6.4',
-    deviceName: 'Android Emulator',
-    deviceOrientation: 'portrait',
-    platformVersion: '5.0',
     platformName: 'Android'
   },
   'SL_ANDROID_5.1': {
@@ -96,6 +72,15 @@ const mobile = {
     deviceName: 'Android Emulator',
     deviceOrientation: 'portrait',
     platformVersion: '6.0',
+    platformName: 'Android'
+  },
+  'SL_ANDROID_7.1': {
+    base: 'SauceLabs',
+    browserName: 'Chrome',
+    appiumVersion: '1.6.5',
+    deviceName: 'Android GoogleAPI Emulator',
+    deviceOrientation: 'portrait',
+    platformVersion: '7.1',
     platformName: 'Android'
   }
 };
