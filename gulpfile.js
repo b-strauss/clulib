@@ -14,7 +14,9 @@ const {env} = require('gulp-util');
  */
 function deps (callback) {
   const roots = {
-    './': '../../../..'
+    './src': '../../../../src',
+    './test': '../../../../test',
+    './testing': '../../../../testing'
   };
 
   let command = `python ${path.normalize('./node_modules/google-closure-library/closure/bin/build/depswriter.py')}`;
