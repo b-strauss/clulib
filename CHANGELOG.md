@@ -1,3 +1,11 @@
+<a name="3.3.0"></a>
+## [3.3.0](https://github.com/b-strauss/clulib/compare/3.2.0...3.3.0) (2018-01-16)
+
+### Features
+
+* feat(net): httpRequest, httpGetText, httpGetJson ([237a15b](https://github.com/b-strauss/clulib/commit/237a15b))
+
+
 <a name="3.2.0"></a>
 ## [3.2.0](https://github.com/b-strauss/clulib/compare/3.1.0...3.2.0) (2018-01-12)
 
