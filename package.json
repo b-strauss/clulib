@@ -22,7 +22,8 @@
   "scripts": {
     "create-package": "./node_modules/.bin/gulp create-package",
     "compile": "./node_modules/.bin/gulp compile",
-    "compile-debug": "./node_modules/.bin/gulp compile --debug=true",
+    "compile-debug": "./node_modules/.bin/gulp compile --debug",
+    "compile-nti": "./node_modules/.bin/gulp compile --nti",
     "deps": "./node_modules/.bin/gulp deps",
     "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" \"./testing/**\" browsers.conf.js gulpfile.js karma.conf.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"

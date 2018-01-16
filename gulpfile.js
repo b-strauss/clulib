@@ -51,7 +51,8 @@ function compile () {
 
   const destinationFolder = './bin';
 
-  const isDebug = env.debug != null && env.debug === 'true';
+  const isDebug = env.debug != null;
+  const useNewTypeInference = env.nti != null;
 
   const options = {
     js: inputs.map(input => path.normalize(input)),
@@ -88,6 +89,14 @@ function compile () {
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.min.js'
   };
+
+  // https://github.com/google/closure-compiler/wiki/Using-NTI-(new-type-inference)
+  if (useNewTypeInference) {
+    options.new_type_inf = 'true';
+    options.jscomp_warning.push('newCheckTypes');
+    options.jscomp_off.push('newCheckTypesExtraChecks');
+    options.hide_warnings_for = 'node_modules/google-closure-library/closure/goog';
+  }
 
   return closureCompiler(options)
     .src()
