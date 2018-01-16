@@ -586,7 +586,7 @@ class ComponentNode {
 
   decorate () {
     if (this.metadata_ != null && this.metadata_.selector != null) {
-      const selector = this.metadata_.selector;
+      const selector = /** @type {string} */ (this.metadata_.selector);
       if (!matches(this.element_, selector))
         throw new Error(
           `Component type '${this.type_}' can only be decorated on elements that match selector '${selector}'.`
