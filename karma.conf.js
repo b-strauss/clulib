@@ -14,6 +14,13 @@ module.exports = config => {
         included: false,
         served: true,
         nocache: false
+      },
+      {
+        pattern: 'test-assets/l10n/de-DE/*.json',
+        watched: false,
+        included: false,
+        served: true,
+        nocache: false
       }
     ],
 
