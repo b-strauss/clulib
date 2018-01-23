@@ -1,0 +1,16 @@
+{
+  "string": "Hello, world!",
+  "array": [
+    0,
+    1,
+    2
+  ],
+  "object": {
+    "one": 1,
+    "two": 2,
+    "three": 3
+  },
+  "number": 10,
+  "boolean": false,
+  "string-placeholder": "Hello {to}, my name is {from}."
+}
