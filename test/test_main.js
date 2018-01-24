@@ -1,5 +1,6 @@
 goog.module('test.main');
 
+const renderingMain = goog.require('test.clulib.animation.rendering');
 const arrayMain = goog.require('test.clulib.array');
 const asyncCompleterMain = goog.require('test.clulib.async.Completer');
 const cmMain = goog.require('test.clulib.cm');
@@ -11,6 +12,7 @@ const resourceManagerMain = goog.require('test.clulib.l10n.ResourceManager');
 const httpRequestMain = goog.require('test.clulib.net.http_request');
 const mathMain = goog.require('test.clulib.math');
 
+renderingMain();
 arrayMain();
 asyncCompleterMain();
 cmMain();
