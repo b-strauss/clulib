@@ -7,6 +7,24 @@ const EventType = goog.require('goog.net.EventType');
 const ResponseType = goog.require('goog.net.XhrIo.ResponseType');
 
 /**
+ * @typedef {{
+ *   response: *,
+ *   responseHeaders: !IObject<string, string>
+ * }}
+ */
+// eslint-disable-next-line init-declarations
+let HttpResult;
+
+/**
+ * @typedef {{
+ *   promise: Promise<HttpResult>,
+ *   cancel: function():void
+ * }}
+ */
+// eslint-disable-next-line init-declarations
+let RequestControls;
+
+/**
  * Creates and sends a url HTTP request for the specified [url].
  *
  * By default `request` will perform an HTTP GET request, but a different
@@ -28,10 +46,7 @@ const ResponseType = goog.require('goog.net.XhrIo.ResponseType');
  * @param {boolean=} withCredentials If the request should send credentials, only useful for cross-origin requests
  * @param {IObject<string, string>=} headers Headers to be send
  * @param {number=} timeoutInterval The time in milliseconds after which an incomplete request will be aborted
- * @returns {{
- *   promise: Promise<{response: *, responseHeaders: !IObject<string, string>}>,
- *   cancel: function()
- * }}
+ * @returns {RequestControls}
  * An object containing the result promise and an abort function
  */
 function httpRequest (url, method = 'GET', content = null, responseType = '', onUpload = null, onDownload = null,
@@ -86,10 +101,7 @@ function httpRequest (url, method = 'GET', content = null, responseType = '', on
  * A simple method for creating a get request to retrieve text content.
  *
  * @param {string} url The url to retrieve the content from
- * @returns {{
- *   promise: Promise<{response: *, responseHeaders: !IObject<string, string>}>,
- *   cancel: function()
- * }}
+ * @returns {RequestControls}
  * An object containing the result promise and an abort function
  */
 function httpGetText (url) {
@@ -100,10 +112,7 @@ function httpGetText (url) {
  * A simple method for creating a get request to retrieve JSON content.
  *
  * @param {string} url The url to retrieve the content from
- * @returns {{
- *   promise: Promise<{response: Object, responseHeaders: !IObject<string, string>}>,
- *   cancel: function()
- * }}
+ * @returns {RequestControls}
  * An object containing the result promise and an abort function
  */
 function httpGetJson (url) {
@@ -120,4 +129,4 @@ function httpGetJson (url) {
   };
 }
 
-exports = {httpRequest, httpGetText, httpGetJson};
+exports = {httpRequest, httpGetText, httpGetJson, HttpResult, RequestControls};
