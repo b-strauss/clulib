@@ -9,14 +9,7 @@ module.exports = config => {
     files: [
       './bin/test.min.js',
       {
-        pattern: 'test-assets/json/*.json',
-        watched: false,
-        included: false,
-        served: true,
-        nocache: false
-      },
-      {
-        pattern: 'test-assets/l10n/de-DE/*.json',
+        pattern: 'test-assets/**/*.*',
         watched: false,
         included: false,
         served: true,

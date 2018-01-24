@@ -21,11 +21,11 @@ exports = function () {
       expect(bundle.getArray('array')).toEqual([0, 1, 2]);
       expect(bundle.getBoolean('boolean')).toBe(false);
       expect(bundle.getNumber('number')).toBe(10);
-      expect(bundle.getString('string')).toBe('Hello, world!');
-      expect(bundle.getObject('object')).toEqual({'one': 1, 'two': 2, 'three': 3});
+      expect(bundle.getString('string')).toBe('Hallo, Welt!');
+      expect(bundle.getObject('object')).toEqual({'eins': 1, 'zwei': 2, 'drei': 3});
 
       expect(bundle.getString('string-placeholder', {'from': 'Bob', 'to': 'Max'}))
-        .toBe('Hello Max, my name is Bob.');
+        .toBe('Hallo Max, mein name ist Bob.');
     });
   });
 };
