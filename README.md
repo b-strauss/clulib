@@ -24,13 +24,13 @@ Example `package.json`:
 To include clulib, include all files under `./src` into your build process. All modules are prefixed with `clulib`
 (e.g. `clulib.array`).
 
-Clulib is written with closure's new `goog.module` system. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
+Clulib is written with closure's `goog.module` system. See [goog.module: an ES6 module like alternative to goog.provide](https://github.com/google/closure-library/wiki/goog.module:-an-ES6-module-like-alternative-to-goog.provide)
 on the closure-compiler wiki page, for infos on how to use it.
 
 Clulib heavily uses newer ECMAScript features. The closure-compiler can compile these down to ES5. The required input language
 compiler option for clulib is `ECMASCRIPT_2017`. Because of this, uncompiled code can only run on current Browsers (Chrome is recommended).
 
-Clulib is compatible with closures `ADVANCED_OPTIMIZATIONS` mode.
+Clulib is compatible with closure's `ADVANCED_OPTIMIZATIONS` mode.
 
 This project follows [Semantic Versioning](http://semver.org/) as closely as possible.
 
@@ -47,13 +47,13 @@ Required tools:
 
 Run `yarn install` to install all npm packages.
 
-To generate the closure deps for local testing run: `yarn deps`. The html file under `tools/jasmine_runner/spec_runner_dev.html` can
-then run the uncompiled test code. Because of the newer ECMAScript features, this requires a current version of the Chrome Browser.
+To generate the closure deps for local testing run: `yarn deps`. The html file under `./spec_runner_dev.html` can
+then run the uncompiled test code. Because of the newer ECMAScript features, this requires a modern browser (Chrome is recommended).
 
-To generate the compiled and minified version for local testing run: `yarn compile`. The html file under
-`tools/jasmine_runner/spec_runner_prod.html` can then run the compiled test code on all supported Browsers.
-You can also run `yarn compile-debug` to compile with assertions enabled for testing, this enables additional runtime checks but
-significantly increases the output size.
+To generate the compiled and minified version for local testing run: `yarn compile`. The html file under `./spec_runner_prod.html`
+can then run the compiled test code on all supported Browsers. You can also run `yarn compile-debug` to compile with assertions
+enabled for testing, this enables additional runtime checks but significantly increases the output size. `yarn compile-nti`
+will compile using closure's [new type inference](https://github.com/google/closure-compiler/wiki/Using-NTI-(new-type-inference)).
 
 The command `yarn test` starts a local karma test runner on Chrome and runs all test specs that have been compiled with
 `yarn compile`.
