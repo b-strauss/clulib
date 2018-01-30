@@ -11,6 +11,7 @@ const resourceBundleMain = goog.require('test.clulib.l10n.ResourceBundle');
 const resourceManagerMain = goog.require('test.clulib.l10n.ResourceManager');
 const httpRequestMain = goog.require('test.clulib.net.http_request');
 const mathMain = goog.require('test.clulib.math');
+const validationMain = goog.require('test.clulib.validation');
 
 renderingMain();
 arrayMain();
@@ -23,3 +24,4 @@ resourceBundleMain();
 resourceManagerMain();
 httpRequestMain();
 mathMain();
+validationMain();
