@@ -83,6 +83,7 @@ function compile () {
       // 'deprecated',
       'extraRequire'
     ],
+    hide_warnings_for: 'node_modules/google-closure-library/closure/goog',
     jscomp_off: [
       'deprecated'
     ],
@@ -95,7 +96,6 @@ function compile () {
     options.new_type_inf = 'true';
     options.jscomp_warning.push('newCheckTypes');
     options.jscomp_off.push('newCheckTypesExtraChecks');
-    options.hide_warnings_for = 'node_modules/google-closure-library/closure/goog';
   }
 
   return closureCompiler(options)
@@ -106,25 +106,20 @@ function compile () {
 }
 
 function createPackage () {
-  const files = [
-    ['./', 'AUTHORS'],
-    ['./', 'CHANGELOG.md'],
-    ['./', 'LICENSE'],
-    ['./', 'README.md']
-  ];
-
-  const folders = [
-    ['./', 'src']
+  const stuffToCopy = [
+    'src',
+    'AUTHORS',
+    'CHANGELOG.md',
+    'LICENSE',
+    'README.md'
   ];
 
   const target = './dist/';
 
   fs.emptyDirSync(target);
 
-  files.concat(folders).forEach(element => {
-    const path = element[0];
-    const name = element[1];
-    fs.copySync(path + name, target + name);
+  stuffToCopy.forEach(element => {
+    fs.copySync(`./${element}`, target + element);
   });
 
   const packageJson = fs.readJsonSync('./package.json');
