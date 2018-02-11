@@ -1,18 +1,7 @@
 goog.module('test.clulib.animation.rendering');
 
 const {RenderLoop, RenderLoopEventType} = goog.require('clulib.animation.rendering');
-
-/**
- * @param {number} ms
- * @returns {Promise<void>}
- */
-const waitFor = function (ms) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
-};
+const {waitFor} = goog.require('testing.async');
 
 exports = function () {
   describe('clulib.animation.rendering', () => {
