@@ -1,3 +1,16 @@
+<a name="3.4.0"></a>
+## [3.4.0](https://github.com/b-strauss/clulib/compare/3.3.0...3.4.0) (2018-02-15)
+
+### Features
+
+* feat(math): mapRange ([b435668](https://github.com/b-strauss/clulib/commit/b435668))
+* feat(collections): objectToMap, mapToObject ([e9c3a42](https://github.com/b-strauss/clulib/commit/e9c3a42))
+* feat(l10n): ResourceBundle ([fed6d09](https://github.com/b-strauss/clulib/commit/fed6d09))
+* feat(l10n): ResourceManager ([8b82ffd](https://github.com/b-strauss/clulib/commit/8b82ffd))
+* feat(animation): RenderLoop ([b26a769](https://github.com/b-strauss/clulib/commit/b26a769))
+* feat(validation): validateAge, validateDate, validateFileSize, validateFileType, validateMaxStringLength, validateMinStringLength, validateMaxNumber, validateMinNumber, validateRegExp, validateValueRequired, validateEmail, validatePostcode ([43928eb](https://github.com/b-strauss/clulib/commit/43928eb))
+
+
 <a name="3.3.0"></a>
 ## [3.3.0](https://github.com/b-strauss/clulib/compare/3.2.0...3.3.0) (2018-01-16)
 
