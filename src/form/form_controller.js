@@ -3,22 +3,15 @@ goog.module('clulib.form.FormController');
 class FormController {
   /**
    * @param {HTMLFormElement} formElement
-   * @param {boolean=} usePageReload
    * @param {boolean=} skipJsValidation
-   * @param {boolean=} skipServerValidation
+   * @param {boolean=} useNativeSubmit
    */
-  constructor (formElement, usePageReload = false, skipJsValidation = false, skipServerValidation = false) {
+  constructor (formElement, skipJsValidation = false, useNativeSubmit = false) {
     /**
      * @type {HTMLFormElement}
      * @private
      */
     this.formElement_ = formElement;
-
-    /**
-     * @type {boolean}
-     * @private
-     */
-    this.usePageReload_ = usePageReload;
 
     /**
      * @type {boolean}
@@ -30,7 +23,7 @@ class FormController {
      * @type {boolean}
      * @private
      */
-    this.skipServerValidation_ = skipServerValidation;
+    this.useNativeSubmit_ = useNativeSubmit;
 
     /**
      * @type {function():Map}
@@ -45,10 +38,10 @@ class FormController {
     return this.formElement_;
   }
 
-  init (preventClearingOnSuccess = false, sendManually = false, step = null) {
+  init (preventClearingOnSuccess = false, submitManually = false, step = null) {
   }
 
-  send () {
+  submit () {
   }
 
   clear () {
