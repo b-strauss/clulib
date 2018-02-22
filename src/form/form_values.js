@@ -1,50 +1,53 @@
 goog.module('clulib.form.FormValues');
 
 class FormValues {
-  constructor () {
+  /**
+   * @param {Map<string, string|Blob|Array<string|Blob>>=} map Creates the FormValues with preexisting values
+   */
+  constructor (map = null) {
     /**
      * @type {Map<string, string|Blob|Array<string|Blob>>}
-     * @package
+     * @private
      */
-    this.data = new Map();
+    this.data_ = new Map(map);
   }
 
   /**
    * Appends a new value onto an existing key, or adds the key if it does not already exist.
    *
-   * @param {string} name
+   * @param {string} key
    * @param {string|Blob} value
    */
-  append (name, value) {
-    const currentValue = this.data.get(name);
+  append (key, value) {
+    const currentValue = this.data_.get(key);
 
     if (currentValue != null) {
       if (Array.isArray(currentValue))
         currentValue.push(value);
       else
-        this.data.set(name, [currentValue, value]);
+        this.data_.set(key, [currentValue, value]);
     } else {
-      this.set(name, value);
+      this.set(key, value);
     }
   }
 
   /**
    * Deletes a key/value pair.
    *
-   * @param {string} name
+   * @param {string} key
    */
-  delete (name) {
-    this.data.delete(name);
+  delete (key) {
+    this.data_.delete(key);
   }
 
   /**
    * Returns the first value associated with a given key.
    *
-   * @param {string} name
+   * @param {string} key
    * @returns {string|Blob}
    */
-  get (name) {
-    const value = this.data.get(name);
+  get (key) {
+    const value = this.data_.get(key);
 
     if (Array.isArray(value))
       return value[0];
@@ -55,11 +58,11 @@ class FormValues {
   /**
    * Returns an array of all the values associated with a given key.
    *
-   * @param {string} name
+   * @param {string} key
    * @returns {Array<string|Blob>}
    */
-  getAll (name) {
-    const value = this.data.get(name);
+  getAll (key) {
+    const value = this.data_.get(key);
 
     if (Array.isArray(value))
       return value;
@@ -70,21 +73,21 @@ class FormValues {
   /**
    * Returns a boolean stating whether a certain key/value pair exists.
    *
-   * @param {string} name
+   * @param {string} key
    * @returns {boolean}
    */
-  has (name) {
-    return this.data.has(name);
+  has (key) {
+    return this.data_.has(key);
   }
 
   /**
    * Sets a new value for an existing key inside, or adds the key/value if it does not already exist.
    *
-   * @param {string} name
+   * @param {string} key
    * @param {string|Blob} value
    */
-  set (name, value) {
-    this.data.set(name, value);
+  set (key, value) {
+    this.data_.set(key, value);
   }
 
   /**
@@ -93,7 +96,7 @@ class FormValues {
    * @returns {FormValues}
    */
   clone () {
-    return FormValues.fromMap(this.data);
+    return new FormValues(this.data_);
   }
 
   /**
@@ -102,7 +105,7 @@ class FormValues {
    * @returns {Map<string, string|Blob|Array<string|Blob>>}
    */
   toMap () {
-    return new Map(this.data);
+    return new Map(this.data_);
   }
 
   /**
@@ -113,7 +116,7 @@ class FormValues {
   toFormData () {
     const formData = new FormData();
 
-    this.data.forEach((value, key) => {
+    this.data_.forEach((value, key) => {
       if (Array.isArray(value)) {
         value.forEach(arrayValue => {
           formData.append(`${key}[]`, arrayValue);
@@ -124,19 +127,6 @@ class FormValues {
     });
 
     return formData;
-  }
-
-  /**
-   * Creates a new FormValues object from an existing Map.
-   *
-   * @param {Map<string, string|Blob|Array<string|Blob>>} data
-   * @returns {FormValues}
-   */
-  static fromMap (data) {
-    const formValues = new FormValues();
-    formValues.data = new Map(data);
-
-    return formValues;
   }
 }
 
