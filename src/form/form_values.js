@@ -9,7 +9,7 @@ class FormValues {
      * @type {Map<string, string|Blob|Array<string|Blob>>}
      * @private
      */
-    this.data_ = new Map(map);
+    this.data_ = new Map(/** @type {?} */ (map));
   }
 
   /**
@@ -105,7 +105,7 @@ class FormValues {
    * @returns {Map<string, string|Blob|Array<string|Blob>>}
    */
   toMap () {
-    return new Map(this.data_);
+    return new Map(/** @type {?} */ (this.data_));
   }
 
   /**
