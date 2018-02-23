@@ -62,7 +62,7 @@ class ValueAccessor extends Disposable {
   }
 }
 
-class TextValueAccessor extends ValueAccessor {
+class DefaultValueAccessor extends ValueAccessor {
   constructor (element) {
     super(element);
 
@@ -70,14 +70,16 @@ class TextValueAccessor extends ValueAccessor {
      * @type {goog.events.Key}
      */
     this.inputKey_ = listen(this.element, EventType.INPUT, () => {
-      this.onChange((/** @type {HTMLInputElement} */ (element)).value);
+      if (this.onChange != null)
+        this.onChange((/** @type {HTMLInputElement} */ (element)).value);
     });
 
     /**
      * @type {goog.events.Key}
      */
     this.blurKey_ = listen(this.element, EventType.BLUR, () => {
-      this.onTouched();
+      if (this.onTouched != null)
+        this.onTouched();
     });
   }
 
@@ -99,4 +101,4 @@ class TextValueAccessor extends ValueAccessor {
   }
 }
 
-exports = {ValueAccessor, TextValueAccessor};
+exports = {ValueAccessor, DefaultValueAccessor};
