@@ -7,7 +7,7 @@ const Disposable = goog.require('goog.Disposable');
 /**
  * @abstract
  */
-class ValueAccessor extends Disposable {
+class AbstractValueAccessor extends Disposable {
   /**
    * @param {Element} element
    */
@@ -69,7 +69,7 @@ class ValueAccessor extends Disposable {
   }
 }
 
-class DefaultValueAccessor extends ValueAccessor {
+class DefaultValueAccessor extends AbstractValueAccessor {
   constructor (element) {
     super(element);
 
@@ -115,4 +115,4 @@ class DefaultValueAccessor extends ValueAccessor {
   }
 }
 
-exports = {ValueAccessor, DefaultValueAccessor};
+exports = {AbstractValueAccessor, DefaultValueAccessor};
