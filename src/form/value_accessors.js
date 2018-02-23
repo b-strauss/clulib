@@ -55,6 +55,13 @@ class ValueAccessor extends Disposable {
   }
 
   /**
+   * @param {*} value
+   * @abstract
+   */
+  writeValue (value) {
+  }
+
+  /**
    * @param {boolean} isDisabled
    * @abstract
    */
@@ -71,7 +78,7 @@ class DefaultValueAccessor extends ValueAccessor {
      */
     this.inputKey_ = listen(this.element, EventType.INPUT, () => {
       if (this.onChange != null)
-        this.onChange((/** @type {HTMLInputElement} */ (element)).value);
+        this.onChange((/** @type {HTMLInputElement} */ (this.element)).value);
     });
 
     /**
@@ -87,7 +94,7 @@ class DefaultValueAccessor extends ValueAccessor {
    * @param {boolean} isDisabled
    */
   setDisabledState (isDisabled) {
-    (/** @type {HTMLInputElement} */ (element)).disabled = isDisabled;
+    (/** @type {HTMLInputElement} */ (this.element)).disabled = isDisabled;
   }
 
   /**
@@ -98,6 +105,13 @@ class DefaultValueAccessor extends ValueAccessor {
     unlistenByKey(this.blurKey_);
 
     super.disposeInternal();
+  }
+
+  /**
+   * @param {*} value
+   */
+  writeValue (value) {
+    (/** @type {HTMLInputElement} */ (this.element)).value = value;
   }
 }
 
