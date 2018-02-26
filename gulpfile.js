@@ -80,7 +80,7 @@ function compile () {
       'checkDebuggerStatement',
       'checkRegExp',
       'deprecatedAnnotations',
-      // 'deprecated',
+      'deprecated',
       'extraRequire'
     ],
     hide_warnings_for: 'node_modules/google-closure-library/closure/goog',

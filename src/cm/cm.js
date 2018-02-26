@@ -371,7 +371,6 @@ class ComponentManager {
    *
    * @param {string} type
    * @param {ComponentType} constructor
-   * @deprecated Use `addClass`.
    */
   addComponent (type, constructor) {
     this.addComponent_(type, constructor);
@@ -416,7 +415,6 @@ class ComponentManager {
    * Registers a Map of keys to component constructors with this ComponentManager.
    *
    * @param {!Object<string, ComponentType>} obj
-   * @deprecated Use `addClasses`.
    */
   addComponentMap (obj) {
     Object.keys(obj).forEach(key => {
