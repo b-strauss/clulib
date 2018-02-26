@@ -404,6 +404,8 @@ class ComponentManager {
   }
 
   /**
+   * Registers an array of component classes with this ComponentManager.
+   *
    * @param {Array<ComponentType>} classes
    */
   addClasses (classes) {
