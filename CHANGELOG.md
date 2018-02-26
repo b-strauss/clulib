@@ -1,3 +1,11 @@
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/b-strauss/clulib/compare/3.4.0...3.4.1) (2018-02-26)
+
+### Bug Fixes
+
+* remove(cm): deprecated annotations for addComponent and addComponentMap ([3c1d5e6](https://github.com/b-strauss/clulib/commit/3c1d5e6))
+
+
 <a name="3.4.0"></a>
 ## [3.4.0](https://github.com/b-strauss/clulib/compare/3.3.0...3.4.0) (2018-02-15)
 
