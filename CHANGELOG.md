@@ -1,3 +1,11 @@
+<a name="3.5.0"></a>
+## [3.5.0](https://github.com/b-strauss/clulib/compare/3.4.1...3.5.0) (2018-03-04)
+
+### Features
+
+* feat(cm): ComponentManager.prototype.dispose ([2d5cb5e](https://github.com/b-strauss/clulib/commit/2d5cb5e))
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/b-strauss/clulib/compare/3.4.0...3.4.1) (2018-02-26)
 
