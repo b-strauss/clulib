@@ -4,6 +4,7 @@ const {removeHoles, asyncForEachRight} = goog.require('clulib.array');
 const Completer = goog.require('clulib.async.Completer');
 const {closest, matches} = goog.require('clulib.dom');
 
+const {removeDuplicates} = goog.require('goog.array');
 const GoogComponent = goog.require('goog.ui.Component');
 const {assert} = goog.require('goog.asserts');
 const {getParentElement, isElement} = goog.require('goog.dom');
@@ -435,6 +436,15 @@ class ComponentManager {
   }
 
   /**
+   * Disposes all components inside the provided rootElement and on the rootElement itself if present.
+   *
+   * @param {Element} rootElement
+   */
+  dispose (rootElement) {
+    this.nodeTree_.dispose(rootElement);
+  }
+
+  /**
    * Disposes all components managed by this ComponentManager.
    */
   disposeAll () {
@@ -752,6 +762,53 @@ class NodeTree {
     const node = this.collection_.get(id);
     node.dispose();
     this.collection_.delete(id);
+  }
+
+  /**
+   * @param {Element} rootElement
+   */
+  dispose (rootElement) {
+    // If the rootElement is itself a component, just call dispose on it and return
+    if (rootElement.hasAttribute(this.manager_.getTypeAttribute())
+      && rootElement.hasAttribute(this.manager_.getIdAttribute())) {
+      const id = rootElement.getAttribute(this.manager_.getIdAttribute());
+      const node = this.collection_.get(id);
+      if (node != null) {
+        node.getComponent().dispose();
+        return;
+      }
+    }
+
+    // Find all decorated elements
+    const selector = `[${this.manager_.getTypeAttribute()}][${this.manager_.getIdAttribute()}]`;
+    /**
+     * @type {Array<Element>}
+     */
+    const componentElements = Array.from(rootElement.querySelectorAll(selector));
+
+    // Find all topmost component ids inside the rootElement
+    const topMostComponentsIds = [];
+    componentElements.forEach(element => {
+      let highestComponentElement = element;
+      while (getParentElement(element) !== rootElement) {
+        const parent = getParentElement(element);
+        if (parent.hasAttribute(this.manager_.getTypeAttribute()) &&
+            parent.hasAttribute(this.manager_.getIdAttribute()))
+          highestComponentElement = parent;
+        element = parent;
+      }
+      topMostComponentsIds.push(highestComponentElement.getAttribute(this.manager_.getIdAttribute()));
+    });
+
+    // Remove duplicate ids
+    removeDuplicates(topMostComponentsIds, null, x => x);
+
+    // Call dispose for each topmost component
+    topMostComponentsIds.forEach(id => {
+      const node = this.collection_.get(id);
+      if (node != null)
+        node.getComponent().dispose();
+    });
   }
 
   disposeAll () {

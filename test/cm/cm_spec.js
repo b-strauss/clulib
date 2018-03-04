@@ -368,13 +368,89 @@ exports = function () {
       expect(has(container.querySelector('.outer'), 'cmpId')).toBe(false);
       expect(has(container.querySelector('.inner'), 'cmpId')).toBe(false);
     });
+
+    it('should dispose components inside an element', async () => {
+      const container = document.createElement('main');
+      container.innerHTML = `
+        <section>
+          <div data-cmp="outside"></div>
+        </section>
+        <section class="target">
+          <div data-cmp="outer_one">
+              <div data-cmp="inner_one"></div>
+          </div>
+          <div data-cmp="outer_two">
+              <div data-cmp="inner_two"></div>
+          </div>
+        </section>
+      `;
+      appendChild(document.body, container);
+
+      let outsideInit = false;
+      let outerOneInit = false;
+      let innerOneInit = false;
+      let outerTwoInit = false;
+      let innerTwoInit = false;
+
+      let result = [];
+
+      const manager = new ComponentManager();
+      manager.addComponentMap({
+        'outside': createDummyComponent(null, () => (outsideInit = true), () => (result.push('outside'))),
+        'outer_one': createDummyComponent(null, () => (outerOneInit = true), () => (result.push('outer_one'))),
+        'inner_one': createDummyComponent(null, () => (innerOneInit = true), () => (result.push('inner_one'))),
+        'outer_two': createDummyComponent(null, () => (outerTwoInit = true), () => (result.push('outer_two'))),
+        'inner_two': createDummyComponent(null, () => (innerTwoInit = true), () => (result.push('inner_two')))
+      });
+
+      await manager.decorate(container);
+
+      expect(outsideInit).toBe(true);
+      expect(outerOneInit).toBe(true);
+      expect(innerOneInit).toBe(true);
+      expect(outerTwoInit).toBe(true);
+      expect(innerTwoInit).toBe(true);
+
+      manager.dispose(container.querySelector('.target'));
+
+      expect(result.join(',')).toBe('outer_one,inner_one,outer_two,inner_two');
+
+      manager.disposeAll();
+      removeNode(container);
+    });
+
+    it('should dispose the component on the element itself', async () => {
+      const container = document.createElement('main');
+      container.innerHTML = `
+        <section class="target" data-cmp="cmp"></section>
+      `;
+      appendChild(document.body, container);
+
+      let init = false;
+      let dispose = false;
+
+      const manager = new ComponentManager();
+      manager.addComponent('cmp', createDummyComponent(null, () => (init = true), () => (dispose = true)));
+
+      await manager.decorate(container);
+
+      expect(init).toBe(true);
+      expect(dispose).toBe(false);
+
+      manager.dispose(container.querySelector('.target'));
+
+      expect(dispose).toBe(true);
+
+      manager.disposeAll();
+      removeNode(container);
+    });
   });
 };
 
 /**
- * @param {(function(Component=):void|null)=} constructorFn
- * @param {(function(Component=):void|null)=} onInitFn
- * @param {(function(Component=):void|null)=} onDisposeFn
+ * @param {(function(Component=):?|null|undefined)=} constructorFn
+ * @param {(function(Component=):?|null|undefined)=} onInitFn
+ * @param {(function(Component=):?|null|undefined)=} onDisposeFn
  * @param {(function():Promise|null)=} waitForFn
  * @param {(?clulib.cm.ComponentMetadata)=} metadata
  * @returns {clulib.cm.ComponentType}
