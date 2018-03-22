@@ -1,8 +1,8 @@
 goog.module('test.clulib.dom');
 
-const {matches, closest} = goog.require('clulib.dom');
+const {matches, closest, isElementVisible} = goog.require('clulib.dom');
 
-const {appendChild, removeNode} = goog.require('goog.dom');
+const {appendChild, removeNode, getViewportSize} = goog.require('goog.dom');
 
 exports = function () {
   describe('clulib.dom', () => {
@@ -84,6 +84,77 @@ exports = function () {
         expect(foundObject).toBe(null);
 
         removeNode(container);
+      });
+    });
+
+    describe('isElementVisible', () => {
+      /**
+       * @type {goog.math.Size}
+       */
+      const viewportSize = getViewportSize();
+
+      const fakeFullyVisible = {
+        ['getBoundingClientRect'] () {
+          return {
+            'left': viewportSize.width / 4,
+            'top': viewportSize.height / 4,
+            'width': viewportSize.width / 2,
+            'height': viewportSize.height / 2
+          };
+        }
+      };
+
+      const fakeQuarterVisible = {
+        ['getBoundingClientRect'] () {
+          return {
+            'left': viewportSize.width / 2,
+            'top': viewportSize.height / 2,
+            'width': viewportSize.width,
+            'height': viewportSize.height
+          };
+        }
+      };
+
+      const fakeNotVisible = {
+        ['getBoundingClientRect'] () {
+          return {
+            'left': 0,
+            'top': viewportSize.height * 2,
+            'width': viewportSize.width,
+            'height': viewportSize.height
+          };
+        }
+      };
+
+      const fakeNotVisibleOnEdge = {
+        ['getBoundingClientRect'] () {
+          return {
+            'left': 0,
+            'top': viewportSize.height,
+            'width': viewportSize.width,
+            'height': viewportSize.height
+          };
+        }
+      };
+
+      it('should detect fully visible elements', () => {
+        expect(isElementVisible(/** @type {?} */ (fakeFullyVisible))).toBe(true);
+        expect(isElementVisible(/** @type {?} */ (fakeFullyVisible), 1)).toBe(true);
+      });
+
+      it('should detect partially visible elements', () => {
+        expect(isElementVisible(/** @type {?} */ (fakeQuarterVisible))).toBe(true);
+        expect(isElementVisible(/** @type {?} */ (fakeQuarterVisible), .23)).toBe(true);
+        expect(isElementVisible(/** @type {?} */ (fakeQuarterVisible), .25)).toBe(true);
+        expect(isElementVisible(/** @type {?} */ (fakeQuarterVisible), .26)).toBe(false);
+      });
+
+      it('should not detect non visible elements', () => {
+        expect(isElementVisible(/** @type {?} */ (fakeNotVisible))).toBe(false);
+      });
+
+      it('should not detect non visible elements on edge', () => {
+        expect(isElementVisible(/** @type {?} */ (fakeNotVisibleOnEdge))).toBe(false);
       });
     });
   });

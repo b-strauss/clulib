@@ -3,6 +3,8 @@ goog.module('test.clulib.animation.rendering');
 const {RenderLoop, RenderLoopEventType} = goog.require('clulib.animation.rendering');
 const {waitFor} = goog.require('testing.async');
 
+const {listen} = goog.require('goog.events');
+
 exports = function () {
   describe('clulib.animation.rendering', () => {
     describe('RenderLoop', () => {
@@ -13,17 +15,17 @@ exports = function () {
         let ended = false;
         let elapsedTime = 0;
 
-        loop.addEventListener(RenderLoopEventType.START, () => {
+        listen(loop, RenderLoopEventType.START, () => {
           started = true;
         });
 
-        loop.addEventListener(RenderLoopEventType.TICK, event => {
+        listen(loop, RenderLoopEventType.TICK, event => {
           ticked = true;
           elapsedTime = event.elapsedTime;
           loop.stop();
         });
 
-        loop.addEventListener(RenderLoopEventType.END, () => {
+        listen(loop, RenderLoopEventType.END, () => {
           ended = true;
         });
 
