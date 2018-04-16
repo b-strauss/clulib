@@ -1,3 +1,11 @@
+<a name="3.6.0"></a>
+## [3.6.0](https://github.com/b-strauss/clulib/compare/3.5.0...3.6.0) (2018-04-16)
+
+### Features
+
+* feat(dom): isElementVisible ([024ed9a](https://github.com/b-strauss/clulib/commit/024ed9a))
+
+
 <a name="3.5.0"></a>
 ## [3.5.0](https://github.com/b-strauss/clulib/compare/3.4.1...3.5.0) (2018-03-04)
 
