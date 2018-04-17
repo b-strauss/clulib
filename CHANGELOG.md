@@ -1,3 +1,11 @@
+<a name="3.7.0"></a>
+## [3.7.0](https://github.com/b-strauss/clulib/compare/3.6.0...3.7.0) (2018-04-17)
+
+### Features
+
+* feat(math): rectangleIntersects ([2444212](https://github.com/b-strauss/clulib/commit/2444212))
+
+
 <a name="3.6.0"></a>
 ## [3.6.0](https://github.com/b-strauss/clulib/compare/3.5.0...3.6.0) (2018-04-16)
 
