@@ -1,7 +1,8 @@
 goog.module('test.clulib.array');
 
-const {removeHoles, asyncForEach, asyncForEachRight} = goog.require('clulib.array');
 const {clone} = goog.require('goog.array');
+
+const {removeHoles, asyncForEach, asyncForEachRight} = goog.require('clulib.array');
 
 exports = function () {
   describe('clulib.array', () => {

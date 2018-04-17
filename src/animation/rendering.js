@@ -1,7 +1,7 @@
 goog.module('clulib.animation.rendering');
 
-const EventTarget = goog.require('goog.events.EventTarget');
 const Event = goog.require('goog.events.Event');
+const EventTarget = goog.require('goog.events.EventTarget');
 
 /**
  * A render loop which runs on requestAnimationFrame.

@@ -1,10 +1,11 @@
 goog.module('clulib.net.http_request');
 
-const Completer = goog.require('clulib.async.Completer');
 const events = goog.require('goog.events');
-const XhrIo = goog.require('goog.net.XhrIo');
 const EventType = goog.require('goog.net.EventType');
+const XhrIo = goog.require('goog.net.XhrIo');
 const ResponseType = goog.require('goog.net.XhrIo.ResponseType');
+
+const Completer = goog.require('clulib.async.Completer');
 
 /**
  * @typedef {{

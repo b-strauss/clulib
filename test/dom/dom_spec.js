@@ -1,8 +1,8 @@
 goog.module('test.clulib.dom');
 
-const {matches, closest, isElementVisible} = goog.require('clulib.dom');
-
 const {appendChild, removeNode, getViewportSize} = goog.require('goog.dom');
+
+const {matches, closest, isElementVisible} = goog.require('clulib.dom');
 
 exports = function () {
   describe('clulib.dom', () => {

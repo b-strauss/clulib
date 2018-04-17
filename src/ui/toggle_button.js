@@ -1,10 +1,10 @@
 goog.module('clulib.ui.ToggleButton');
 
-const {Component} = goog.require('clulib.cm');
-
-const {contains, enable} = goog.require('goog.dom.classlist');
 const GoogEvent = goog.require('goog.events.Event');
 const GoogEventType = goog.require('goog.events.EventType');
+const {contains, enable} = goog.require('goog.dom.classlist');
+
+const {Component} = goog.require('clulib.cm');
 
 /**
  * @enum {string}

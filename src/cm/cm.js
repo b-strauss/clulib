@@ -1,13 +1,13 @@
 goog.module('clulib.cm');
 
+const {removeDuplicates} = goog.require('goog.array');
+const {assert} = goog.require('goog.asserts');
+const {getParentElement, isElement} = goog.require('goog.dom');
+const GoogComponent = goog.require('goog.ui.Component');
+
 const {removeHoles, asyncForEachRight} = goog.require('clulib.array');
 const Completer = goog.require('clulib.async.Completer');
 const {closest, matches} = goog.require('clulib.dom');
-
-const {removeDuplicates} = goog.require('goog.array');
-const GoogComponent = goog.require('goog.ui.Component');
-const {assert} = goog.require('goog.asserts');
-const {getParentElement, isElement} = goog.require('goog.dom');
 
 /**
  * Component metadata.
@@ -793,7 +793,7 @@ class NodeTree {
       while (getParentElement(element) !== rootElement) {
         const parent = getParentElement(element);
         if (parent.hasAttribute(this.manager_.getTypeAttribute()) &&
-            parent.hasAttribute(this.manager_.getIdAttribute()))
+          parent.hasAttribute(this.manager_.getIdAttribute()))
           highestComponentElement = parent;
         element = parent;
       }

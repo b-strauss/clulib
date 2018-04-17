@@ -1,10 +1,10 @@
 goog.module('test.clulib.cm');
 
-const {ComponentManager, Component} = goog.require('clulib.cm');
-
-const {appendChild, removeNode, getFirstElementChild} = goog.require('goog.dom');
 const {contains} = goog.require('goog.dom.classlist');
 const {has} = goog.require('goog.dom.dataset');
+const {appendChild, removeNode, getFirstElementChild} = goog.require('goog.dom');
+
+const {ComponentManager, Component} = goog.require('clulib.cm');
 
 exports = function () {
   describe('clulib.cm.ComponentManager', () => {

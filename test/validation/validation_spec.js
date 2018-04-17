@@ -2,9 +2,10 @@ goog.module('test.clulib.validation');
 
 const ResponseType = goog.require('goog.net.XhrIo.ResponseType');
 
-const validation = goog.require('clulib.validation');
-const {basePath} = goog.require('testing.environment');
 const http = goog.require('clulib.net.http_request');
+const validation = goog.require('clulib.validation');
+
+const {basePath} = goog.require('testing.environment');
 
 /**
  * @returns {Promise<Blob>}

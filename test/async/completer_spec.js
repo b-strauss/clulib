@@ -1,7 +1,8 @@
 goog.module('test.clulib.async.Completer');
 
-const Completer = goog.require('clulib.async.Completer');
 const AssertionError = goog.require('goog.asserts.AssertionError');
+
+const Completer = goog.require('clulib.async.Completer');
 
 exports = function () {
   describe('clulib.async.Completer', () => {

@@ -1,8 +1,10 @@
 goog.module('test.clulib.net.http_request');
 
-const env = goog.require('testing.environment');
-const http = goog.require('clulib.net.http_request');
 const ErrorType = goog.require('goog.net.EventType');
+
+const http = goog.require('clulib.net.http_request');
+
+const env = goog.require('testing.environment');
 
 const jsonFile = `${env.basePath}/test-assets/json/dummy.json`;
 const jsonString = 'Hello, world!';

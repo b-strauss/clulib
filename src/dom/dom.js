@@ -3,6 +3,8 @@ goog.module('clulib.dom');
 const {getAncestor, isElement, getViewportSize} = goog.require('goog.dom');
 const Rect = goog.require('goog.math.Rect');
 
+const {rectangleIntersects} = goog.require('clulib.math');
+
 /**
  * Returns true if the element would be selected by the specified
  * selector string, false otherwise.
@@ -72,25 +74,7 @@ function isElementVisible (element, factor = null) {
    */
   const elementRect = new Rect(boundingRect.left, boundingRect.top, boundingRect.width, boundingRect.height);
 
-  /**
-   * @type {goog.math.Rect}
-   */
-  const intersectionRect = Rect.intersection(viewportRect, elementRect);
-
-  // If no intersection exists or the area is zero, return false
-  if (intersectionRect == null || intersectionRect.getSize().area() === 0)
-    return false;
-
-  // If no percentage calculation is needed, return true
-  if (factor == null)
-    return true;
-
-  const elementArea = elementRect.getSize().area();
-  const intersectionArea = intersectionRect.getSize().area();
-
-  const visibleFactor = intersectionArea / elementArea;
-
-  return visibleFactor >= factor;
+  return rectangleIntersects(viewportRect, elementRect, factor);
 }
 
 exports = {matches, closest, isElementVisible};

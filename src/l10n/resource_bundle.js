@@ -1,8 +1,8 @@
 goog.module('clulib.l10n.ResourceBundle');
 
-const {httpGetJson} = goog.require('clulib.net.http_request');
 const {objectToMap} = goog.require('clulib.collections');
 const {cacheAsyncValue} = goog.require('clulib.functions');
+const {httpGetJson} = goog.require('clulib.net.http_request');
 
 /**
  * A resource bundle containing localized messages.

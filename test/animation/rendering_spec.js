@@ -1,9 +1,10 @@
 goog.module('test.clulib.animation.rendering');
 
-const {RenderLoop, RenderLoopEventType} = goog.require('clulib.animation.rendering');
-const {waitFor} = goog.require('testing.async');
-
 const {listen} = goog.require('goog.events');
+
+const {RenderLoop, RenderLoopEventType} = goog.require('clulib.animation.rendering');
+
+const {waitFor} = goog.require('testing.async');
 
 exports = function () {
   describe('clulib.animation.rendering', () => {

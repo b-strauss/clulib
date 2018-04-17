@@ -1,6 +1,7 @@
 goog.module('test.clulib.l10n.ResourceManager');
 
 const ResourceManager = goog.require('clulib.l10n.ResourceManager');
+
 const env = goog.require('testing.environment');
 
 const base = `${env.basePath}/test-assets/l10n`;
