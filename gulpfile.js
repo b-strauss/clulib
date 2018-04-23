@@ -84,6 +84,7 @@ function compile () {
       'extraRequire'
     ],
     hide_warnings_for: 'node_modules/google-closure-library/closure/goog',
+    jscomp_off: [],
     output_wrapper: '(function(){%output%}).call(this);',
     js_output_file: 'test.min.js'
   };

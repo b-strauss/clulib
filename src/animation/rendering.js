@@ -95,4 +95,46 @@ const RenderLoopEventType = {
   END: 'end'
 };
 
-exports = {RenderLoop, RenderLoopEvent, RenderLoopEventType};
+/**
+ * Returns a Promise that resolves after a specified number of browser repaints.
+ *
+ * @param {number=} frames The frames to wait for
+ * @returns {Promise}
+ */
+function waitForFrames (frames = 1) {
+  return new Promise(resolve => {
+    let frameCount = 0;
+
+    function onTick () {
+      if (++frameCount === frames)
+        resolve();
+      else
+        window.requestAnimationFrame(onTick);
+    }
+
+    window.requestAnimationFrame(onTick);
+  });
+}
+
+/**
+ * Throttles a function to be only called on repaint.
+ *
+ * Arguments are passed down.
+ *
+ * @param {Function} func
+ * @returns {Function}
+ */
+function throttle (func) {
+  let isRunning = false;
+  return function (...args) {
+    if (isRunning)
+      return;
+    isRunning = true;
+    window.requestAnimationFrame(() => {
+      func(...args);
+      isRunning = false;
+    });
+  };
+}
+
+exports = {RenderLoop, RenderLoopEvent, RenderLoopEventType, waitForFrames, throttle};
