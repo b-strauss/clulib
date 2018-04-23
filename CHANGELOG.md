@@ -1,3 +1,11 @@
+<a name="3.8.0"></a>
+## [3.8.0](https://github.com/b-strauss/clulib/compare/3.7.0...3.8.0) (2018-04-23)
+
+### Features
+
+* feat(animation.rendering): waitForFrames, throttle ([ea7e144](https://github.com/b-strauss/clulib/commit/ea7e144))
+
+
 <a name="3.7.0"></a>
 ## [3.7.0](https://github.com/b-strauss/clulib/compare/3.6.0...3.7.0) (2018-04-17)
 
