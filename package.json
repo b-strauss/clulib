@@ -23,7 +23,6 @@
     "create-package": "./node_modules/.bin/gulp create-package",
     "compile": "./node_modules/.bin/gulp compile",
     "compile-debug": "./node_modules/.bin/gulp compile --debug",
-    "compile-nti": "./node_modules/.bin/gulp compile --nti",
     "deps": "./node_modules/.bin/gulp deps",
     "lint": "./node_modules/.bin/eslint \"./src/**\" \"./test/**\" \"./testing/**\" browsers.conf.js gulpfile.js karma.conf.js",
     "test": "./node_modules/.bin/karma start karma.conf.js"
@@ -32,21 +31,21 @@
     "lint"
   ],
   "devDependencies": {
-    "eslint": "4.5.0",
-    "fs-extra": "4.0.2",
-    "google-closure-compiler": "20180101.0.0",
-    "google-closure-library": "20171203.0.0",
+    "eslint": "5.3.0",
+    "fs-extra": "7.0.0",
+    "google-closure-compiler": "20180716.0.1",
+    "google-closure-library": "20180716.0.0",
     "gulp": "3.9.1",
-    "gulp-sourcemaps": "2.6.1",
+    "gulp-sourcemaps": "2.6.4",
     "gulp-util": "3.0.8",
-    "jasmine": "2.8.0",
-    "jasmine-core": "2.8.0",
-    "karma": "1.7.0",
+    "jasmine": "3.1.0",
+    "jasmine-core": "3.1.0",
+    "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
-    "karma-jasmine": "1.1.0",
+    "karma-jasmine": "1.1.2",
     "karma-sauce-launcher": "1.2.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-spec-reporter": "0.0.31",
+    "karma-spec-reporter": "0.0.32",
     "pre-commit": "1.2.2"
   }
 }
